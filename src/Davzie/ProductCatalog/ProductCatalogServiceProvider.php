@@ -18,7 +18,8 @@ class ProductCatalogServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('davzie/product-catalog');
+		$this->package('Davzie/ProductCatalog');
+		include __DIR__.'/../../routes.php'; // Do some routing here specific to this package
 	}
 
 	/**
