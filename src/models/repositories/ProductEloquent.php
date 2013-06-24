@@ -16,13 +16,13 @@ class ProductEloquent extends Eloquent implements ProductRepository {
      * These are the mass-assignable keys
      * @var array
      */
-    protected $fillable = array();
+    protected $fillable = [];
 
     /**
      * Get all the products in the system
      * @return Eloquent
      */
-    public function getAllProducts(){
+    public function getAll(){
         return $this->all();
     }
 
@@ -41,6 +41,15 @@ class ProductEloquent extends Eloquent implements ProductRepository {
      */
     public function getFullPrice(){
         return $this->price;
+    }
+
+    /**
+     * Get a product by its SKU
+     * @param  string $sku The Product SKU
+     * @return Eloquent    The product found
+     */
+    public function getBySku( $sku ){
+        return $this->where('sku','=',$sku)->first();
     }
 
 }

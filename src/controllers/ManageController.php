@@ -1,5 +1,5 @@
 <?php
-namespace Davzie\ProductCatalog;
+namespace Davzie\ProductCatalog\Controllers;
 use Illuminate\Support\MessageBag;
 use View;
 use Auth;
@@ -12,10 +12,10 @@ use Davzie\ProductCatalog\Models\ProductEloquent;
 class ManageController extends ManageBaseController {
 
     /**
-     * The user object
-     * @var UserRepository
+     * The products object
+     * @var ProductEloquent
      */
-    protected $user;
+    protected $products;
 
     /**
      * Let's whitelist all the methods we want to allow guests to visit!

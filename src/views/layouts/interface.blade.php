@@ -3,8 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="David Thorpe <davzie@davzie.com>">
 
     @section('css')
         <link rel="stylesheet" href="{{ asset('packages/Davzie/ProductCatalog/css/bootstrap.min.css') }}">
@@ -14,7 +13,7 @@
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-      <script src="../assets/js/html5shiv.js"></script>
+      <script src="{{ asset('packages/Davzie/ProductCatalog/js/html5shiv.js') }}"></script>
     <![endif]-->
 
     <!-- Fav and touch icons -->
@@ -30,14 +29,14 @@
           <a class="brand" href="{{ url('manage') }}">{{ Config::get('ProductCatalog::app.name') }}</a>
           <div class="nav-collapse collapse visible-desktop">
             <ul class="nav">
-              <li class="{{ Request::is('manage/products') ? 'active' : '' }}"><a href="{{ url('manage/customers') }}">Products</a></li>
-              <li class="{{ Request::is('manage/categories') ? 'active' : '' }}"><a href="{{ url('manage/transactions') }}">Categories</a></li>
-              <li class="{{ Request::is('manage/attributes') ? 'active' : '' }}"><a href="{{ url('manage/lessons') }}">Attributes</a></li>
+              <li class="{{ Request::is('manage/products*') ? 'active' : '' }}"><a href="{{ url('manage/customers') }}">Products</a></li>
+              <li class="{{ Request::is('manage/categories*') ? 'active' : '' }}"><a href="{{ url('manage/transactions') }}">Categories</a></li>
+              <li class="{{ Request::is('manage/attributes*') ? 'active' : '' }}"><a href="{{ url('manage/lessons') }}">Attributes</a></li>
             </ul>
           </div><!--/.nav-collapse -->
 
           <form class="navbar-search pull-right">
-            <input type="text" class="search-query" placeholder="Search products...">
+            <input type="text" class="search-query" placeholder="Search products, sku etc...">
           </form>
           <p class="navbar-text pull-right visible-desktop">
             Logged in as {{ $user->getFullName() }} <small>( <a href="{{ url('/manage/logout') }}" class="navbar-link">logout</a> )</small><span class="icon-bar"></span>
@@ -55,18 +54,18 @@
                 <a href="{{ url('manage') }}"><span class="icon-home"></span> Dashboard</a>
               </li>
               <li class="nav-header">Site Content</li>
-              <li class="{{ Request::is('manage/products') ? 'active' : '' }}">
+              <li class="{{ Request::is('manage/products*') ? 'active' : '' }}">
                 <a href="{{ url('manage/products') }}"><span class="icon-th-large"></span> Product Manager</a>
               </li>
-              <li class="{{ Request::is('manage/categories') ? 'active' : '' }}">
+              <li class="{{ Request::is('manage/categories*') ? 'active' : '' }}">
                 <a href="{{ url('manage/categories') }}"><span class="icon-book"></span> Category Manager</a>
               </li>
               <li class="nav-header">Attributes</li>
-              <li class="{{ Request::is('manage/customers') ? 'active' : '' }}">
-                <a href="{{ url('manage/customers') }}"><span class="icon-certificate"></span> Attributes</a>
+              <li class="{{ Request::is('manage/attributes*') ? 'active' : '' }}">
+                <a href="{{ url('manage/attributes') }}"><span class="icon-certificate"></span> Attributes</a>
               </li>
-              <li class="{{ Request::is('manage/plans') ? 'active' : '' }}">
-                <a href="{{ url('manage/plans') }}"><span class="icon-th-list"></span> Attribute Sets</a>
+              <li class="{{ Request::is('manage/attribute-sets*') ? 'active' : '' }}">
+                <a href="{{ url('manage/attribute-sets') }}"><span class="icon-th-list"></span> Attribute Sets</a>
               </li>
               <li class="nav-header">Management</li>
               <li class="{{ Request::is('manage/users') ? 'active' : '' }}">
@@ -94,7 +93,7 @@
     @section('scripts')
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="{{ asset('packages/Davzie/ProductCatalog/js/jquery.js') }}"><\/script>')</script>
-        <script src="{{ asset('packages/Davzie/ProductCatalog/js/bootstra.min.js') }}"></script>
+        <script src="{{ asset('packages/Davzie/ProductCatalog/js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('packages/Davzie/ProductCatalog/js/less.js') }}"></script>
     @show
 

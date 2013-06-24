@@ -1,8 +1,9 @@
 <?php
-namespace Davzie\ProductCatalog;
+namespace Davzie\ProductCatalog\Controllers;
+use \Illuminate\Routing\Controllers\Controller;
 use View;
 
-class ManageBaseController extends \Illuminate\Routing\Controllers\Controller{
+class ManageBaseController extends Controller{
 
     protected $whitelist = array();
 

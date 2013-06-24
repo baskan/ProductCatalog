@@ -10,7 +10,7 @@ interface ProductRepository {
      * Get all the products in the system
      * @return Eloquent
      */
-    public function getAllProducts();
+    public function getAll();
 
     /**
      * Get the active products
@@ -24,5 +24,12 @@ interface ProductRepository {
      * @return string
      */
     public function getFullPrice();
+
+    /**
+     * Get a product by its SKU
+     * @param  string $sku The Product SKU
+     * @return Eloquent    The product found
+     */
+    public function getBySku( $sku );
 
 }

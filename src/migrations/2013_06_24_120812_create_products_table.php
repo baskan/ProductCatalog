@@ -27,6 +27,8 @@ class CreateProductsTable extends Migration {
 			    $table->string('url',255);
 			    $table->boolean('enabled')->default(true);
 			    $table->timestamps();
+			    $table->unique('sku');
+			    $table->unique('url');
 
 			});
 		}
