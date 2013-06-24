@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This configuration file is used to setup the initial user and seed to the database
  */
