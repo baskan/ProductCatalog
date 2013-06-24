@@ -20,7 +20,7 @@
 </head>
 <body class="login-form">
     <section id="sign-in">
-        <h1>Sign In</h1>
+        <img id="login-logo" src="{{ asset('packages/Davzie/ProductCatalog/img/eastwest-150-150.png') }}" />
         {{ Form::open( [ 'url'=>'manage/login', 'class'=>'form-inline' ] ) }}
             {{ Form::token() }}
             @include('ProductCatalog::partials.messaging')
