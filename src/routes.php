@@ -1,4 +1,4 @@
 <?php
     
     // Routing specific to the catalog system
-    Route::controller( 'manage' , 'Davzie\ProductCatalog\ManageController' );
+    Route::controller( Config::get('ProductCatalog::app.route') , 'Davzie\ProductCatalog\ManageController' );
