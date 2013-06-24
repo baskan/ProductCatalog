@@ -14,7 +14,7 @@ class ManageBaseController extends \Illuminate\Routing\Controllers\Controller{
      */
     public function __construct()
     {
-        $this->beforeFilter('adminFilter', array('except' => $this->whitelist));
+        $this->beforeFilter('pageFilter', array('except' => $this->whitelist));
         $composed_views = [
             'ProductCatalog::*'
         ];
