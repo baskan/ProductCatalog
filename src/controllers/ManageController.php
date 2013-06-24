@@ -1,10 +1,11 @@
 <?php
 namespace Davzie\ProductCatalog;
+use View;
 class ManageController extends ManageBaseController {
 
     public function getIndex()
     {
-        echo 'awesome';
+        return View::make('ProductCatalog::login');
     }
 
 }
