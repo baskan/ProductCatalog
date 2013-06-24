@@ -7,7 +7,7 @@ use Redirect;
 use Validator;
 use Session;
 use Input;
-use Davzie\ProductCatalog\Models\Interfaces\UserRepository;
+use Davzie\ProductCatalog\Models\ProductEloquent;
 
 class ManageController extends ManageBaseController {
 
@@ -32,8 +32,8 @@ class ManageController extends ManageBaseController {
     /**
      * Construct shit
      */
-    public function __construct( UserRepository $user ){
-        $this->user = $user;
+    public function __construct( ProductEloquent $products ){
+        $this->products = $products;
         parent::__construct();
     }
 
@@ -45,7 +45,7 @@ class ManageController extends ManageBaseController {
      */
     public function getIndex()
     {
-        return View::make( 'ProductCatalog::dashboard' )->with('product_count', $this->user->activeCustomers()->count() );
+        return View::make( 'ProductCatalog::dashboard' )->with('product_count', $this->products->activeProducts()->count() );
     }
 
     /**

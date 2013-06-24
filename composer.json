@@ -18,6 +18,8 @@
             "src/Filters",
             "src/Seeds",
             "src/models",
+            "src/models/repositories",
+            "src/models/interfaces",
             "src/Composers"
         ],
         "psr-0": {
