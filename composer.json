@@ -17,6 +17,9 @@
             "src/controllers",
             "src/Filters",
             "src/Seeds",
+            "src/models",
+            "src/models/interfaces",
+            "src/models/repositories",
             "src/Composers"
         ],
         "psr-0": {
