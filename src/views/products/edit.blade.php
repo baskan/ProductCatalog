@@ -11,12 +11,12 @@
       <li class="active">Editing {{ $product->sku }}</li>
     </ul>
 
-    <h1>{{ $product->title }} <small>({{ $product->sku }})</small></h1>
+    <h1>{{ $product->title }} <small>( {{ $product->sku }} )</small></h1>
     
 @stop
 
 @section('sidebar')
-    
+
     <div class="well well-small">
         <h4>More Information</h4>
         <p><strong>SKU: </strong>SKU's must be unique to the product catalog.</p>

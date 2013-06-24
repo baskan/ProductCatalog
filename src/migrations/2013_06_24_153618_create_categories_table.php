@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductsTable extends Migration {
+class CreateCategoriesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -11,23 +11,20 @@ class CreateProductsTable extends Migration {
 	 */
 	public function up()
 	{
-		if ( !Schema::hasTable('products') )
+		if ( !Schema::hasTable('categories') )
 		{
-			Schema::create('products', function($table)
+			Schema::create('categories', function($table)
 			{
 
 				$table->engine = 'InnoDB';
 			    $table->increments('id');
 
-			    $table->string('title',255);
-			    $table->string('slug',255);
-			    $table->string('sku',255);
+			    $table->string('name' , 255);
+			    $table->string('slug' , 255);
 			    $table->text('description');
-			    $table->decimal('price',7,2);
-			    $table->string('url',255);
+			    $table->string('url' , 255);
 			    $table->boolean('enabled')->default(true);
 			    $table->timestamps();
-			    $table->unique('sku');
 			    $table->unique('url');
 			    $table->unique('slug');
 
@@ -42,7 +39,7 @@ class CreateProductsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('products');
+		Schema::drop('categories');
 	}
 
 }
