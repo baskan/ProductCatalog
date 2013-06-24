@@ -1,7 +1,6 @@
 <?php
 namespace Davzie\ProductCatalog\Seeds;
 use Illuminate\Database\Seeder;
-use Page;
 use DB;
 use Config;
 use Hash;

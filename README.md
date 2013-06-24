@@ -9,7 +9,7 @@ Once Laravel 4 is installed, navigate to the folder it is installed in and ensur
 
     git clone git@github.com:davzie/ProductCatalog.git ./Davzie/ProductCatalog/
     php artisan migrate --package="Davzie/ProductCatalog"
-    php artisan db:seed --class="Davzie\\ProductCatalog\\Seeds\\UserTable" 
+    php artisan db:seed --class="Davzie\\ProductCatalog\\Seeds\\DatabaseSeeder" 
     php artisan asset:publish 'Davzie/ProductCatalog'
     
 Those commands will:
@@ -17,5 +17,5 @@ Those commands will:
 * Setup your local vendor directory with a version controlled version of the backend system
 * Setup your system to load all required libraries and routings
 * Migrate your database setup to match what the backend system expects (see `app/config/database` for database setup first)
-* Seed the user table that was just migrated to allow for instant login based on the config/setup.php
+* Seed the required tables that were just migrated to allow for default data to be entered
 * Publish the assets required (css, javascript etc) to the public directory of your application
