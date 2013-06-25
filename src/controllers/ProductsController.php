@@ -58,4 +58,21 @@ class ProductsController extends ManageBaseController {
                     ->with( 'product' , $product );
     }
 
+    /**
+     * The new product page
+     * @access public
+     * @return View
+     */
+    public function getNew(){
+        return View::make('ProductCatalog::products.new');
+    }
+
+    /**
+     * Accept the input from the new product page
+     * @return Redirect
+     */
+    public function postNew(){
+        return $_POST;
+    }
+
 }

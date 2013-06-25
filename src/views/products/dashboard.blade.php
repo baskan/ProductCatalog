@@ -7,6 +7,8 @@
 @section('content')
     <h1>Product Management</h1>
     
+    <a class="add-new-object-button btn btn-primary pull-right" href="{{ url('manage/products/new') }}"><span class="icon-plus icon-white"></span> New Product</a>
+    
     @if( !$products->isEmpty() )
         <table class="table table-condensed">
             <thead>

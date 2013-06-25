@@ -11,8 +11,8 @@
         <table class="table table-condensed">
             <thead>
                 <tr>
-                    <th>Slug</th>
                     <th>Title</th>
+                    <th>Slug</th>
                     <th>Products</th>
                     <th>Active</th>
                 </tr>
@@ -21,10 +21,10 @@
                 @foreach($categories as $category)
                     <tr>
                         <td>
-                            <a href="{{ url('manage/categories/edit/'.$category->slug) }}">{{ $category->slug }}</a>
+                            <a href="{{ url('manage/categories/edit/'.$category->slug) }}">{{ $category->name }}</a>
                         </td>
                         <td>
-                            <a href="{{ url('manage/categories/edit/'.$category->slug) }}">{{ $category->name }}</a>
+                            <a href="{{ url('manage/categories/edit/'.$category->slug) }}">{{ $category->slug }}</a>
                         </td>
                         <td>
                             <a href="{{ url('manage/categories/edit/'.$category->slug) }}">0</a>
