@@ -33,6 +33,12 @@ class Base {
     protected $insertId;
 
     /**
+     * We may want to specify fixed stuff to throw into the database, do so here.
+     * @var array
+     */
+    protected static $defaultData = [];
+
+    /**
      * Construct stuff
      */
     public function __construct(){
@@ -63,9 +69,13 @@ class Base {
      */
     public function hydrate(){
         $data = [];
-        foreach( static::$rules as $field=>$val ){
+
+        foreach( static::$defaultData as $field=>$val )
+            $data[$field] = $val;
+        
+        foreach( static::$rules as $field=>$val )
             $data[$field] = Input::get($field);
-        }
+        
         $model = App::make(static::$model);
         return $this->insertId = $model->insertGetId( $data );
     }
