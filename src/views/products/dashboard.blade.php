@@ -23,16 +23,16 @@
                 @foreach($products as $product)
                     <tr>
                         <td>
-                            <a href="{{ url('manage/products/edit/'.$product->sku) }}">{{ $product->sku }}</a>
+                            <a href="{{ url('manage/products/edit/'.$product->id) }}">{{ $product->sku }}</a>
                         </td>
                         <td>
-                            <a href="{{ url('manage/products/edit/'.$product->sku) }}">{{ $product->title }}</a>
+                            <a href="{{ url('manage/products/edit/'.$product->id) }}">{{ $product->title }}</a>
                         </td>
                         <td>
-                            <a href="{{ url('manage/products/edit/'.$product->sku) }}">&pound;{{ $product->price }}</a>
+                            <a href="{{ url('manage/products/edit/'.$product->id) }}">&pound;{{ $product->price }}</a>
                         </td>
                         <td>
-                            <a href="{{ url('manage/products/edit/'.$product->sku) }}">categories</a>
+                            <a href="{{ url('manage/products/edit/'.$product->id) }}">categories</a>
                         </td>
                     </tr>
                 @endforeach

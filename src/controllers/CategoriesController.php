@@ -5,13 +5,13 @@ use View;
 use Redirect;
 use Validator;
 use Input;
-use Davzie\ProductCatalog\Models\CategoryEloquent;
+use Davzie\ProductCatalog\Models\Interfaces\CategoryRepository;
 
 class CategoriesController extends ManageBaseController {
 
     /**
      * The categories object
-     * @var CategoryEloquent
+     * @var CategoryRepository
      */
     protected $categories;
 
@@ -26,7 +26,7 @@ class CategoriesController extends ManageBaseController {
     /**
      * Construct shit
      */
-    public function __construct( CategoryEloquent $categories ){
+    public function __construct( CategoryRepository $categories ){
         $this->categories = $categories;
         parent::__construct();
     }

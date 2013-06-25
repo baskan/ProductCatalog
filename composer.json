@@ -16,6 +16,7 @@
             "src/migrations",
             "src/Controllers",
             "src/Filters",
+            "src/entities",
             "src/Seeds",
             "src/models",
             "src/models/repositories",

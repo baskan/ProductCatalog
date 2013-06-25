@@ -5,7 +5,8 @@ use View;
 use Redirect;
 use Validator;
 use Input;
-use Davzie\ProductCatalog\Models\ProductEloquent;
+use Davzie\ProductCatalog\Models\Interfaces\ProductRepository;
+use Davzie\ProductCatalog\Entities\ProductNew;
 
 class ProductsController extends ManageBaseController {
 
@@ -26,7 +27,7 @@ class ProductsController extends ManageBaseController {
     /**
      * Construct shit
      */
-    public function __construct( ProductEloquent $products ){
+    public function __construct( ProductRepository $products ){
         $this->products = $products;
         parent::__construct();
     }
@@ -49,8 +50,8 @@ class ProductsController extends ManageBaseController {
      * @access      public
      * @return      View
      */
-    public function getEdit( $sku = null ){
-        $product = $this->products->getBySku($sku);
+    public function getEdit( $id = null ){
+        $product = $this->products->find($id);
         if( !$product )
             return Redirect::to('manage/products');
 
@@ -72,7 +73,14 @@ class ProductsController extends ManageBaseController {
      * @return Redirect
      */
     public function postNew(){
-        return $_POST;
+        $entity = new ProductNew();
+        
+        if ( $entity->isValid() === false )
+            return Redirect::to('manage/products/new')->withInput()->with( 'errors' , $entity->errors() );
+        
+        // Hydrate it with data from the POST
+        $id = $entity->hydrate();
+        return Redirect::to( 'manage/products/edit/'.$id )->with('success','<strong>Product Added</strong> More information is required before you can activate the product.');
     }
 
 }
