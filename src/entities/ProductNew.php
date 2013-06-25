@@ -11,7 +11,7 @@ class ProductNew extends Base {
      * @var array
      */
     protected static $defaultData = [
-        'enabled'=>0
+        'enabled'=>0,
     ];
 
     protected static $rules = [

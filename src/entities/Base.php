@@ -33,6 +33,12 @@ class Base {
     protected $insertId;
 
     /**
+     * Determine whether to input timestamps or not
+     * @var boolean
+     */
+    protected static $timestamps = true;
+
+    /**
      * We may want to specify fixed stuff to throw into the database, do so here.
      * @var array
      */
@@ -68,16 +74,26 @@ class Base {
      * @return null
      */
     public function hydrate(){
+        // Create our data array and some solid defaults
         $data = [];
 
+        // Check to see if we actually want timestamps, they might not be valid for this model for example
+        if( static::$timestamps === true ){
+            $now = date('Y-m-d H:i:s');
+            $data['created_at'] = $now;
+            $data['updated_at'] = $now;
+        }
+
+        // Add our default data that isn't post related from our static
         foreach( static::$defaultData as $field=>$val )
             $data[$field] = $val;
         
+        // Go through and add our post data into the data array too
         foreach( static::$rules as $field=>$val )
             $data[$field] = Input::get($field);
         
-        $model = App::make(static::$model);
-        return $this->insertId = $model->insertGetId( $data );
+        // Save the Insert ID and return it from the insertion
+        return $this->insertId = App::make( static::$model )->insertGetId( $data );
     }
 
     /**
