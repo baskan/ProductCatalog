@@ -7,6 +7,7 @@ use Validator;
 use Input;
 use Davzie\ProductCatalog\Models\Interfaces\CategoryRepository;
 use Davzie\ProductCatalog\Entities\CategoryNew;
+use Davzie\ProductCatalog\Entities\CategoryEdit;
 
 class CategoriesController extends ManageBaseController {
 
@@ -50,8 +51,8 @@ class CategoriesController extends ManageBaseController {
      * @access      public
      * @return      View
      */
-    public function getEdit( $slug = null ){
-        $category = $this->categories->getBySlug($slug);
+    public function getEdit( $id = null ){
+        $category = $this->categories->find($id);
         if( !$category )
             return Redirect::to('manage/categories');
 
@@ -83,5 +84,19 @@ class CategoriesController extends ManageBaseController {
         return View::make('ProductCatalog::categories.new');
     }
 
+    /**
+     * Edit the product, dayum this rocks
+     * @return Redirect
+     */
+    public function postEdit( $id ){
+        $entity = new CategoryEdit( $id );
+        
+        if ( $entity->isValid() === false )
+            return Redirect::to('manage/categories/edit/'.$id)->withInput()->with( 'errors' , $entity->errors() );
+        
+        // Hydrate it with data from the POST
+        $entity->hydrate();
+        return Redirect::to( 'manage/categories/' )->with('success','Category Updated.');
+    }
 
 }

@@ -18,7 +18,7 @@ class CategoryNew extends Base {
 
     protected static $rules = [
         'name'  => 'required|max:255',
-        'url'   =>  'required|alpha_dash|unique:products,url',
+        'url'   =>  'required|alpha_dash|unique:categories,url',
     ];
 
     public function __construct(){

@@ -6,9 +6,13 @@
 
 @section('content')
     <h1>Category Management</h1>
-    
+
+    <!-- Our Messaging Partial -->
+    @include('ProductCatalog::partials.messaging')
+
     <a class="add-new-object-button btn btn-primary pull-right" href="{{ url('manage/categories/new') }}"><span class="icon-plus icon-white"></span> New Category</a>
 
+    <!-- If we have data then lets create a table and loop through that data to build it -->
     @if( !$categories->isEmpty() )
         <table class="table table-condensed">
             <thead>
@@ -20,22 +24,24 @@
                 </tr>
             </thead>
             <tbody>
+                <!-- Start That Loopin' -->
                 @foreach($categories as $category)
                     <tr>
                         <td>
-                            <a href="{{ url('manage/categories/edit/'.$category->slug) }}">{{ $category->name }}</a>
+                            <a href="{{ url('manage/categories/edit/'.$category->id) }}">{{ $category->name }}</a>
                         </td>
                         <td>
-                            <a href="{{ url('manage/categories/edit/'.$category->slug) }}">{{ $category->slug }}</a>
+                            <a href="{{ url('manage/categories/edit/'.$category->id) }}">{{ $category->slug }}</a>
                         </td>
                         <td>
-                            <a href="{{ url('manage/categories/edit/'.$category->slug) }}">0</a>
+                            <a href="{{ url('manage/categories/edit/'.$category->id) }}">0</a>
                         </td>
                         <td>
-                            <a href="{{ url('manage/categories/edit/'.$category->slug) }}">{{ $category->enabled }}</a>
+                            <a href="{{ url('manage/categories/edit/'.$category->id) }}">{{ $category->enabled }}</a>
                         </td>
                     </tr>
                 @endforeach
+                
             </tbody>
         </table>
     @endif
