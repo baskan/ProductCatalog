@@ -45,10 +45,25 @@ class Base {
     protected static $defaultData = [];
 
     /**
+     * The ID of the record you're currently UPDATING
+     * If null we will insert records
+     * @var integer
+     */
+    protected $currentId;
+
+    /**
      * Construct stuff
      */
     public function __construct(){
         $this->errors = new MessageBag();
+    }
+
+    /**
+     * Set the current ID that we're working with
+     * @param integer $id The ID of the record
+     */
+    public function setCurrentId( $id ){
+        $this->currentId = $id;
     }
 
     /**
@@ -74,6 +89,11 @@ class Base {
      * @return null
      */
     public function hydrate(){
+
+        // If this evalutes to true then we are editing an existing record so we use a different method
+        if( null !== $this->currentId )
+            return $this->save();
+
         // Create our data array and some solid defaults
         $data = [];
 
@@ -94,6 +114,28 @@ class Base {
         
         // Save the Insert ID and return it from the insertion
         return $this->insertId = App::make( static::$model )->insertGetId( $data );
+    }
+
+    /**
+     * Save any existing data into an existing record
+     * @return boolean
+     */
+    private function save(){
+        $product = App::make( static::$model )->find( $this->currentId );
+
+        // Check to see we actually got a product here
+        if( !$product )
+            return false;
+
+        // Add our default data that isn't post related from our static
+        foreach( static::$defaultData as $field=>$val )
+            $product->$field = $val;
+        
+        // Go through and add our post data into the data array too
+        foreach( static::$rules as $field=>$val )
+            $product->$field =  Input::get($field);
+
+        return $product->save();
     }
 
     /**
