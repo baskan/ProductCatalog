@@ -7,6 +7,7 @@ use Validator;
 use Input;
 use Davzie\ProductCatalog\Models\Interfaces\ProductRepository;
 use Davzie\ProductCatalog\Entities\ProductNew;
+use Davzie\ProductCatalog\Entities\ProductEdit;
 
 class ProductsController extends ManageBaseController {
 
@@ -81,6 +82,21 @@ class ProductsController extends ManageBaseController {
         // Hydrate it with data from the POST
         $id = $entity->hydrate();
         return Redirect::to( 'manage/products/edit/'.$id )->with('success','<strong>Product Added</strong> More information is required before you can activate the product.');
+    }
+
+    /**
+     * Edit the product, dayum this rocks
+     * @return Redirect
+     */
+    public function postEdit( $id ){
+        $entity = new ProductEdit( $id );
+        
+        if ( $entity->isValid() === false )
+            return Redirect::to('manage/products/edit/'.$id)->withInput()->with( 'errors' , $entity->errors() );
+        
+        // Hydrate it with data from the POST
+        $id = $entity->hydrate();
+        return Redirect::to( 'manage/products/edit/'.$id )->with('success','Product Updated.');
     }
 
 }

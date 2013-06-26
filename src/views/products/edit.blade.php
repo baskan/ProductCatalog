@@ -14,6 +14,7 @@
     <h1>{{ $product->title }} <small>( {{ $product->sku }} )</small></h1>
     @include('ProductCatalog::partials.messaging')
     {{ Form::open( [ 'url' => 'manage/products/edit/'.$product->id , 'class' => 'form-horizontal' ] ) }}
+        {{ Form::hidden('id', $product->id) }}
         <fieldset>
             <legend>Basic Information</legend>
 
