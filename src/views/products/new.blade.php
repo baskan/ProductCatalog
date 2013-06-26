@@ -39,17 +39,12 @@
                     <span class="help-block"><strong>Note:</strong> This must be unique.</span>
                 </div>
             </div>
-        </fieldset>
-        <fieldset>
-            <legend>Categorisation</legend>
             <div class="control-group">
                 <div class="controls">
                     <button type="submit" class="btn btn-primary"><span class="icon-plus icon-white"></span> Add New Product</button>
                 </div>
             </div>
-
         </fieldset>
-
     {{ Form::close() }}
 
 @stop
