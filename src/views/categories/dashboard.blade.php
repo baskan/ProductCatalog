@@ -7,6 +7,8 @@
 @section('content')
     <h1>Category Management</h1>
     
+    <a class="add-new-object-button btn btn-primary pull-right" href="{{ url('manage/categories/new') }}"><span class="icon-plus icon-white"></span> New Category</a>
+
     @if( !$categories->isEmpty() )
         <table class="table table-condensed">
             <thead>

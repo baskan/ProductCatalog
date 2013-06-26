@@ -13,40 +13,58 @@
 
     <h1>{{ $product->title }} <small>( {{ $product->sku }} )</small></h1>
     @include('ProductCatalog::partials.messaging')
-    {{ Form::open( [ 'url' => 'manage/products/edit/'.$product->id , 'class' => 'form-horizontal' ] ) }}
+    {{ Form::open( [ 'url' => 'manage/products/edit/'.$product->id , 'class' => 'form-horizontal' , 'files'=>true ] ) }}
         {{ Form::hidden('id', $product->id) }}
         <fieldset>
             <legend>Basic Information</legend>
 
+            <!-- Title -->
             <div class="control-group">
                 <label class="control-label" for="inputTitle">Title</label>
                 <div class="controls">
-                    <input type="text" id="inputTitle" name="title" placeholder="Product Title" value="{{ Input::old('title') ? Input::old('title') : $product->title }}" >
+                    {{ Form::text('title', ( Input::old('title') ? Input::old('title') : $product->title) , [ 'placeholder'=>'Product Title' ] ) }}
                 </div>
             </div>
+
+            <!-- SKU -->
             <div class="control-group">
                 <label class="control-label" for="inputSKU">SKU</label>
                 <div class="controls">
-                    <input type="text" id="inputSKU" name="sku" placeholder="Product SKU" value="{{ Input::old('sku') ? Input::old('sku') : $product->sku }}" >
+                    {{ Form::text('sku', ( Input::old('sku') ? Input::old('sku') : $product->sku) , [ 'placeholder'=>'Product SKU' ] ) }}
                     <span class="help-block"><strong>Note:</strong> This must be unique.</span>
                 </div>
             </div>
+
+            <!-- URL -->
             <div class="control-group">
                 <label class="control-label" for="inputURL">URL</label>
                 <div class="controls">
-                    <input type="text" id="inputURL" name="url" placeholder="Product URL" value="{{ Input::old('url') ? Input::old('url') : $product->url }}" >
-                    <span class="help-block"><strong>Note:</strong> This must be unique.</span>
+                    {{ Form::text('url', ( Input::old('url') ? Input::old('url') : $product->url) , [ 'placeholder'=>'Product URL' ] ) }}
+                    <span class="help-block"><strong>Note:</strong> This must be unique, will be used as a product URL.</span>
                 </div>
             </div>
+
+
+            <div class="control-group">
+                <div class="controls">
+                    <label class="checkbox">
+                        {{ Form::checkbox('enabled', '1', ( Input::old('enabled') ? Input::old('enabled') : $product->enabled ) ); }}
+                        Enabled
+                    </label>
+                </div>
+            </div>
+
         </fieldset>
         <fieldset>
             <legend>Pricing</legend>
+
+            <!-- Price Excluding VAT -->
             <div class="control-group">
                 <label class="control-label" for="inputPrice">Price (exc VAT)</label>
                 <div class="controls">
                     <div class="input-prepend">
                         <span class="add-on">&pound;</span>
-                        <input type="text" id="inputPrice" name="price" placeholder="Price" value="{{ Input::old('price') ? Input::old('price') : $product->price }}" >
+                        {{ Form::text('price', ( Input::old('price') ? Input::old('price') : $product->price) , [ 'placeholder'=>'Product Price' ] ) }}
                     </div>
                 </div>
             </div>
@@ -54,80 +72,29 @@
         </fieldset>
         <fieldset>
             <legend>Media</legend>
-            <ul class="thumbnails">
-                <li class="span3">
-                    <div class="thumbnail">
-                        <div class="image-container">
-                            <img src="http://placekitten.com/300/200" alt="">
-                        </div>
-                        <div class="gallery-options">
-                            <label class="radio">
-                                <input type="radio" name="mainImage" value="1" checked>
-                                Main Image
-                            </label>
-                            <label class="radio">
-                                <input type="radio" name="thumbnailImage" value="1" checked>
-                                Thumbnail Image
-                            </label>
-                            <label class="checkbox">
-                                <input type="checkbox" value="1">
-                                Show In Gallery
-                            </label>
-                        </div>
-                    </div>
-                </li>
-                <li class="span3">
-                    <div class="thumbnail">
-                        <div class="image-container">
-                            <img src="http://placekitten.com/300/400" alt="">
-                        </div>
-                        <div class="gallery-options">
-                            <label class="radio">
-                                <input type="radio" name="mainImage" value="2">
-                                Main Image
-                            </label>
-                            <label class="radio">
-                                <input type="radio" name="thumbnailImage" value="2">
-                                Thumbnail Image
-                            </label>
-                            <label class="checkbox">
-                                <input type="checkbox" value="2">
-                                Show In Gallery
-                            </label>
-                        </div>
-                    </div>
-                </li>
-                <li class="span3">
-                    <div class="thumbnail">
-                        <div class="image-container">
-                            <img src="http://placekitten.com/300/600" alt="">
-                        </div>
-                        <div class="gallery-options">
-                            <label class="radio">
-                                <input type="radio" name="mainImage" value="3">
-                                Main Image
-                            </label>
-                            <label class="radio">
-                                <input type="radio" name="thumbnailImage" value="3">
-                                Thumbnail Image
-                            </label>
-                            <label class="checkbox">
-                                <input type="checkbox" value="3">
-                                Show In Gallery
-                            </label>
-                        </div>
-                    </div>
-                </li>        
-            </ul>
+            @include('ProductCatalog::products.partials.existing-media')
             <div class="well well-small">
                 <h3>Upload files here</h3>
-
             </div>
             
         </fieldset>
         <fieldset>
             <legend>Categories</legend>
-            <p>cats</p>
+            <div class="control-group">
+                <label class="control-label">Product Category</label>
+                <div class="controls">
+                    <div class="well well-small">
+                        @foreach( $categories as $category )
+                            <label class="checkbox">
+                                {{ Form::checkbox('categories',  $category->id ); }}
+                                {{ $category->name }}
+                            </label>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+
+
         </fieldset>
         <fieldset>
             <div class="control-group">

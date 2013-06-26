@@ -6,6 +6,7 @@ use Redirect;
 use Validator;
 use Input;
 use Davzie\ProductCatalog\Models\Interfaces\ProductRepository;
+use Davzie\ProductCatalog\Models\Interfaces\CategoryRepository;
 use Davzie\ProductCatalog\Entities\ProductNew;
 use Davzie\ProductCatalog\Entities\ProductEdit;
 
@@ -18,6 +19,12 @@ class ProductsController extends ManageBaseController {
     protected $products;
 
     /**
+     * The categories object
+     * @var CategoryRepository
+     */
+    protected $categories;
+
+    /**
      * Let's whitelist all the methods we want to allow guests to visit!
      *
      * @access   protected
@@ -28,8 +35,9 @@ class ProductsController extends ManageBaseController {
     /**
      * Construct shit
      */
-    public function __construct( ProductRepository $products ){
+    public function __construct( ProductRepository $products , CategoryRepository $categories ){
         $this->products = $products;
+        $this->categories = $categories;
         parent::__construct();
     }
 
@@ -53,11 +61,13 @@ class ProductsController extends ManageBaseController {
      */
     public function getEdit( $id = null ){
         $product = $this->products->find($id);
+        $categories = $this->categories->getAll();
         if( !$product )
             return Redirect::to('manage/products');
 
         return View::make('ProductCatalog::products.edit')
-                    ->with( 'product' , $product );
+                    ->with( 'product' , $product )
+                    ->with( 'categories' , $categories );
     }
 
     /**
@@ -95,7 +105,7 @@ class ProductsController extends ManageBaseController {
             return Redirect::to('manage/products/edit/'.$id)->withInput()->with( 'errors' , $entity->errors() );
         
         // Hydrate it with data from the POST
-        $id = $entity->hydrate();
+        $entity->hydrate();
         return Redirect::to( 'manage/products/edit/'.$id )->with('success','Product Updated.');
     }
 
