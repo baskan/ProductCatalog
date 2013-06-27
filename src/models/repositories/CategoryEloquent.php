@@ -72,8 +72,16 @@ class CategoryEloquent extends Eloquent implements CategoryRepository {
      * Get categories that do not have a parent category, ie. top level
      * @return Eloquent
      */
-    public function getTopLevel(){
-        return $this->whereNull('parent_id')->get();
+    public function getTopLevel( $id = null ){
+        if( null === $id ){
+            return $this->whereNull('parent_id')->get();
+        }else{
+            // Lets convert this ID to an array, because it clearly isn't. If we pass an array in we can exclude other top level categories too
+            if( !is_array($id) )
+                $id = array($id);
+
+            return $this->whereNull('parent_id')->whereNotIn('id',$id)->get();
+        }
     }
 
 }

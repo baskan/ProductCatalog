@@ -37,6 +37,14 @@
                 </div>
             </div>
 
+            <!-- Parent Category -->
+            <div class="control-group">
+            <label class="control-label">Parent Category</label>
+                <div class="controls">
+                    {{ Form::select('parent_id', $top_level_categories, Input::old('parent_id') ) }}
+                </div>
+            </div>
+
             <!-- Submit -->
             <div class="control-group">
                 <div class="controls">

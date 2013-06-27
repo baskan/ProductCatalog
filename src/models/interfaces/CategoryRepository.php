@@ -47,6 +47,6 @@ interface CategoryRepository {
      * Get categories that do not have a parent category, ie. top level
      * @return Eloquent
      */
-    public function getTopLevel();
+    public function getTopLevel( $id );
 
 }

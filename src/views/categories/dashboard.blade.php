@@ -26,7 +26,7 @@
             <tbody>
                 <!-- Start That Loopin' -->
                 @foreach($categories as $category)
-                    <tr>
+                    <tr class='highlighted'>
                         <td>
                             <a href="{{ url('manage/categories/edit/'.$category->id) }}">{{ $category->name }}</a>
                         </td>
@@ -40,6 +40,24 @@
                             <a href="{{ url('manage/categories/edit/'.$category->id) }}">{{ $category->enabled }}</a>
                         </td>
                     </tr>
+                    @if ( $category->children()->count() > 0 )
+                        @foreach( $category->children()->get() as $child )
+                            <tr>
+                                <td>
+                                    <a href="{{ url('manage/categories/edit/'.$child->id) }}">{{ $child->name }}</a>
+                                </td>
+                                <td>
+                                    <a href="{{ url('manage/categories/edit/'.$child->id) }}">{{ $child->url }}</a>
+                                </td>
+                                <td>
+                                    <a href="{{ url('manage/categories/edit/'.$child->id) }}">{{ $child->products()->count() }}</a>
+                                </td>
+                                <td>
+                                    <a href="{{ url('manage/categories/edit/'.$child->id) }}">{{ $child->enabled }}</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
                 @endforeach
                 
             </tbody>

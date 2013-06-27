@@ -42,7 +42,7 @@ class CategoriesController extends ManageBaseController {
     public function getIndex()
     {
         return View::make( 'ProductCatalog::categories.dashboard' )
-                ->with( 'categories' , $this->categories->getAll() );
+                ->with( 'categories' , $this->categories->getTopLevel() );
     }
 
     /**
@@ -56,8 +56,14 @@ class CategoriesController extends ManageBaseController {
         if( !$category )
             return Redirect::to('manage/categories');
 
+        // Determine if the category parent should be disabled or not
+        $parentCatAttributes = ( $category->children()->count() > 0 ? array('disabled'=>true) : array() );
+        $top_level_categories = ['0'=>'Choose A Parent Category'] + $this->categories->getTopLevel( $id )->lists('name','id');
+
         return View::make('ProductCatalog::categories.edit')
-                    ->with( 'category' , $category );
+                    ->with( 'category' , $category )
+                    ->with( 'top_level_categories' , $top_level_categories )
+                    ->with( 'parentCatAttributes' , $parentCatAttributes );
     }
 
     /**
@@ -81,7 +87,10 @@ class CategoriesController extends ManageBaseController {
      * @return View
      */
     public function getNew(){
-        return View::make('ProductCatalog::categories.new');
+        $top_level_categories = ['0'=>'Choose A Parent Category'] + $this->categories->getTopLevel()->lists('name','id');
+
+        return View::make('ProductCatalog::categories.new')
+                    ->with( 'top_level_categories' , $top_level_categories );
     }
 
     /**
