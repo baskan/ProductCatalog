@@ -18,7 +18,7 @@
             <thead>
                 <tr>
                     <th>Title</th>
-                    <th>Slug</th>
+                    <th>URL</th>
                     <th>Products</th>
                     <th>Active</th>
                 </tr>
@@ -31,10 +31,10 @@
                             <a href="{{ url('manage/categories/edit/'.$category->id) }}">{{ $category->name }}</a>
                         </td>
                         <td>
-                            <a href="{{ url('manage/categories/edit/'.$category->id) }}">{{ $category->slug }}</a>
+                            <a href="{{ url('manage/categories/edit/'.$category->id) }}">{{ $category->url }}</a>
                         </td>
                         <td>
-                            <a href="{{ url('manage/categories/edit/'.$category->id) }}">0</a>
+                            <a href="{{ url('manage/categories/edit/'.$category->id) }}">{{ $category->products()->count() }}</a>
                         </td>
                         <td>
                             <a href="{{ url('manage/categories/edit/'.$category->id) }}">{{ $category->enabled }}</a>
