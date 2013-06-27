@@ -106,6 +106,7 @@ class ProductsController extends ManageBaseController {
         
         // Hydrate it with data from the POST
         $entity->hydrate();
+
         return Redirect::to( 'manage/products/edit/'.$id )->with('success','Product Updated.');
     }
 

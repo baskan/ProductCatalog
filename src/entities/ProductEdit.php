@@ -1,7 +1,7 @@
 <?php
 namespace Davzie\ProductCatalog\Entities;
 use App;
-
+use Input;
 class ProductEdit extends Base {
 
     protected static $model = 'Davzie\ProductCatalog\Models\Interfaces\ProductRepository';
@@ -21,6 +21,17 @@ class ProductEdit extends Base {
         static::$rules['url'] = 'required|alpha_dash|unique:products,url,'.$currentId;
 
         parent::__construct();
+    }
+
+    /**
+     * Run our own hydration stuffs
+     * @return boolean
+     */
+    public function hydrate(){
+        parent::hydrate();
+        $model = App::make( static::$model )->find( $this->currentId );
+        $model->categories()->sync( Input::get('categories') );
+        return true;
     }
 
 }
