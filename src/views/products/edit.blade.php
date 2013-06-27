@@ -11,12 +11,15 @@
       <li class="active">Editing {{ $product->sku }}</li>
     </ul>
 
-    
+
     <h1>{{ $product->title }} <small>( {{ $product->sku }} )</small></h1>
     @include('ProductCatalog::partials.messaging')
     {{ Form::open( [ 'url' => 'manage/products/edit/'.$product->id , 'class' => 'form-horizontal' , 'files'=>true ] ) }}
+
+        <!-- Used To Validate Against -->
         {{ Form::hidden('id', $product->id) }}
 
+        <!-- Tab Navigation Elements -->
         <ul class="nav nav-tabs">
           <li class="active"><a href="#basics" data-toggle="tab">Basic Information</a></li>
           <li><a href="#pricing" data-toggle="tab">Pricing</a></li>

@@ -99,7 +99,7 @@ class CategoriesController extends ManageBaseController {
      */
     public function postEdit( $id ){
         $entity = new CategoryEdit( $id );
-        
+
         if ( $entity->isValid() === false )
             return Redirect::to('manage/categories/edit/'.$id)->withInput()->with( 'errors' , $entity->errors() );
         
