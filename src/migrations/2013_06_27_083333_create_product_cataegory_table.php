@@ -20,7 +20,6 @@ class CreateProductCataegoryTable extends Migration {
 				$table->increments('id');
 			    $table->integer('product_id')->unsigned();
 			    $table->integer('category_id')->unsigned();
-			    $table->timestamps();
 
 				$table->foreign('product_id')
 					->references('id')->on('products')
