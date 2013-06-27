@@ -85,12 +85,16 @@
                 <label class="control-label">Product Category</label>
                 <div class="controls">
                     <div class="well well-small">
+
+                        <!-- Loop The Categories And Tick Em' If Appropriate -->
                         @foreach( $categories as $category )
                             <label class="checkbox">
-                                {{ Form::checkbox('categories',  $category->id , ( $product->categories()->where('categories.id','=',$category->id)->count() > 0 ? true : false ) ); }}
+                                <?php $checkedArray = Input::old('categories', array( ($product->categories()->where('categories.id','=',$category->id)->count() ? $category->id : null) ) ); ?>
+                                {{ Form::checkbox('categories['.$category->id.']',  $category->id , in_array( $category->id, $checkedArray ) ); }}
                                 {{ $category->name }}
                             </label>
                         @endforeach
+
                     </div>
                 </div>
             </div>
