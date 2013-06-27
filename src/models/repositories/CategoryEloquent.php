@@ -49,7 +49,15 @@ class CategoryEloquent extends Eloquent implements CategoryRepository {
      * @return Eloquent
      */
     public function parent(){
-        return $this->hasOne( 'Davzie\ProductCatalog\Models\CategoryRepository' , 'parent_id' );
+        return $this->belongsTo( 'Davzie\ProductCatalog\Models\CategoryEloquent' , 'parent_id' );
+    }
+
+    /**
+     * Get the child categories if they exists
+     * @return Eloquent
+     */
+    public function children(){
+        return $this->hasMany( 'Davzie\ProductCatalog\Models\CategoryEloquent' , 'parent_id' );
     }
 
     /**
@@ -58,6 +66,14 @@ class CategoryEloquent extends Eloquent implements CategoryRepository {
      */
     public function products(){
         return $this->belongsToMany( 'Davzie\ProductCatalog\Models\ProductEloquent' , 'product_categories' , 'category_id' , 'product_id' );
+    }
+
+    /**
+     * Get categories that do not have a parent category, ie. top level
+     * @return Eloquent
+     */
+    public function getTopLevel(){
+        return $this->whereNull('parent_id')->get();
     }
 
 }

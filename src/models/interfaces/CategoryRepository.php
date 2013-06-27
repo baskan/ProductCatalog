@@ -32,9 +32,21 @@ interface CategoryRepository {
     public function parent();
 
     /**
+     * Get the child categories if they exists
+     * @return Eloquent
+     */
+    public function children();
+
+    /**
      * The products available in this category
      * @return Eloquent
      */
     public function products();
+
+    /**
+     * Get categories that do not have a parent category, ie. top level
+     * @return Eloquent
+     */
+    public function getTopLevel();
 
 }
