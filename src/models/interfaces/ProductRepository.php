@@ -32,4 +32,10 @@ interface ProductRepository {
      */
     public function getBySku( $sku );
 
+    /**
+     * The categories available in this product
+     * @return Eloquent
+     */
+    public function categories();
+
 }

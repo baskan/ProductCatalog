@@ -60,7 +60,7 @@ class ProductsController extends ManageBaseController {
      * @return      View
      */
     public function getEdit( $id = null ){
-        $product = $this->products->find($id);
+        $product = $this->products->with('categories')->find($id);
         $categories = $this->categories->getAll();
         if( !$product )
             return Redirect::to('manage/products');

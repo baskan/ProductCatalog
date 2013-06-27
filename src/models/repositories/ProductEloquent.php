@@ -52,4 +52,12 @@ class ProductEloquent extends Eloquent implements ProductRepository {
         return $this->where('sku','=',$sku)->first();
     }
 
+    /**
+     * The categories available in this product
+     * @return Eloquent
+     */
+    public function categories(){
+        return $this->belongsToMany( 'Davzie\ProductCatalog\Models\CategoryEloquent' , 'product_categories' , 'product_id' , 'category_id' );
+    }
+
 }

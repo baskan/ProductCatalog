@@ -80,13 +80,14 @@
         </fieldset>
         <fieldset>
             <legend>Categories</legend>
+            
             <div class="control-group">
                 <label class="control-label">Product Category</label>
                 <div class="controls">
                     <div class="well well-small">
                         @foreach( $categories as $category )
                             <label class="checkbox">
-                                {{ Form::checkbox('categories',  $category->id ); }}
+                                {{ Form::checkbox('categories',  $category->id , ( $product->categories()->where('categories.id','=',$category->id)->count() > 0 ? true : false ) ); }}
                                 {{ $category->name }}
                             </label>
                         @endforeach
