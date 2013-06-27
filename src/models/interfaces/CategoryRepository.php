@@ -25,4 +25,16 @@ interface CategoryRepository {
      */
     public function getBySlug( $slug );
 
+    /**
+     * Get the parent category if it exists
+     * @return Eloquent
+     */
+    public function parent();
+
+    /**
+     * The products available in this category
+     * @return Eloquent
+     */
+    public function products();
+
 }

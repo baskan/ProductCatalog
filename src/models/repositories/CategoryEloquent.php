@@ -44,5 +44,20 @@ class CategoryEloquent extends Eloquent implements CategoryRepository {
         return $this->where('slug','=',$slug)->first();
     }
 
+    /**
+     * Get the parent category if it exists
+     * @return Eloquent
+     */
+    public function parent(){
+        return $this->hasOne( 'Davzie\ProductCatalog\Models\CategoryRepository' , 'parent_id' );
+    }
+
+    /**
+     * The products available in this category
+     * @return Eloquent
+     */
+    public function products(){
+        return $this->belongsToMany( 'Davzie\ProductCatalog\Models\ProductEloquent' , 'product_categories' , 'category_id' , 'product_id' );
+    }
 
 }
