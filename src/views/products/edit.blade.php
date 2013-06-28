@@ -92,7 +92,7 @@
                     // which saves all changes and then gets us back to the edit page
                     this.on("complete", function(file){
 
-                        if( this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0 && this.getRejectedFiles().length === 0 ){
+                        if( this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0 ){
                             // Submit dat form
                             $('#productEditForm').submit();
                         }
