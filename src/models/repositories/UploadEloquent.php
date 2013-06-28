@@ -1,6 +1,7 @@
 <?php
 namespace Davzie\ProductCatalog\Models;
 use Eloquent;
+use Config;
 use Davzie\ProductCatalog\Models\Interfaces\UploadRepository;
 
 class UploadEloquent extends Eloquent implements UploadRepository {
@@ -28,11 +29,11 @@ class UploadEloquent extends Eloquent implements UploadRepository {
     }
 
     /**
-     * The relationship that links this back to the product
+     * The relationship that links to this upload...
      * @return Eloquent
      */
-    public function product(){
-        return $this->belongsTo( 'Davzie\ProductCatalog\Models\ProductEloquent' );
+    public function link(){
+        return $this->morphTo();
     }
 
     /**
@@ -57,6 +58,24 @@ class UploadEloquent extends Eloquent implements UploadRepository {
      */
     public function galleryImages(){
         return $this->where( 'gallery' , '=' , true )->get();
+    }
+
+    /**
+     * Get the usable src (public path and filename)
+     * @return string
+     */
+    public function getSrc(){
+        $base_path = Config::get('ProductCatalog::app.upload_base_path');
+        return url( $base_path.$this->path.'/'.$this->link_id.'/'.$this->filename );
+    }
+
+    /**
+     * Get the absolute usable src ( /var/www/vhosts/domain.com/public/uploads/products/filename.jpg etc )
+     * @return string
+     */
+    public function getAbsoluteSrc(){
+        $base_path = Config::get('ProductCatalog::app.upload_base_path');
+        return public_path().$base_path.'/'.$this->path.'/'.$this->link_id.'/'.$this->filename;
     }
 
 }

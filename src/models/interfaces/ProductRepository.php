@@ -38,4 +38,10 @@ interface ProductRepository {
      */
     public function categories();
 
+    /**
+     * The media object to get the uploads available
+     * @return Eloquent
+     */
+    public function media();
+
 }

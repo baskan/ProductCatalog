@@ -19,4 +19,11 @@ class ProductUpload extends BaseUpload {
      */
     protected static $type = 'products';
 
+    /**
+     * The name of the model, this is required as it creates the relation between the upload and the model in question
+     * NOTE: This cannot be the interface that would usually be resolved through IoC
+     * @var string
+     */
+    protected static $model = 'Davzie\ProductCatalog\Models\ProductEloquent';
+
 }

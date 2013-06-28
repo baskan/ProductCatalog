@@ -13,10 +13,10 @@ interface UploadRepository {
     public function getAll();
 
     /**
-     * The relationship that links this back to the product
+     * The relationship that links to this upload...
      * @return Eloquent
      */
-    public function product();
+    public function link();
 
     /**
      * Get the thumbnail image
@@ -35,5 +35,17 @@ interface UploadRepository {
      * @return Collection
      */
     public function galleryImages();
+
+    /**
+     * Get the usable src (public path and filename)
+     * @return string
+     */
+    public function getSrc();
+
+    /**
+     * Get the absolute usable src ( /var/www/vhosts/domain.com/public/uploads/products/filename.jpg etc )
+     * @return string
+     */
+    public function getAbsoluteSrc();
 
 }

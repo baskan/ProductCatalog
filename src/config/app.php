@@ -13,6 +13,11 @@ return array(
     /**
      * The email address associated with support enquires on a technical basis
      */
-    'support_email' => 'davzie@davzie.com'
+    'support_email' => 'davzie@davzie.com',
+
+    /**
+     * The base path to put uploads into
+     */
+    'upload_base_path'=>'uploads/'
 
 );

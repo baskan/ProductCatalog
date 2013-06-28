@@ -63,7 +63,7 @@
         <h4>Upload Product Images</h4>
         <p>Drag and drop images into the box below or simply click it to select files to upload</p>
         <p><strong>Note: </strong>This will also save and refresh this product page.</p>
-        {{ Form::open( [ 'url' => 'manage/products/upload/'.$product->id , 'class' => 'dropzone' , 'id'=>'imageUploads' , 'files'=>true ] ) }}
+        {{ Form::open( [ 'url' => 'manage/products/upload/'.$product->id , 'class' => 'dropzone square' , 'id'=>'imageUploads' , 'files'=>true ] ) }}
             <div class="fallback">
                 <input name="file" type="file" multiple />
             </div>
@@ -97,6 +97,9 @@
                             $('#productEditForm').submit();
                         }
 
+                    });
+                    this.on('sending',function(){
+                        $('div.dz-default.dz-message').remove();
                     });
 
                 }

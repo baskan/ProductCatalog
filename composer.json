@@ -14,14 +14,15 @@
     "autoload": {
         "classmap": [
             "src/migrations",
-            "src/Controllers",
-            "src/Filters",
+            "src/controllers",
+            "src/filters",
             "src/entities",
-            "src/Seeds",
+            "src/libraries",
+            "src/seeds",
             "src/models",
             "src/models/repositories",
             "src/models/interfaces",
-            "src/Composers"
+            "src/composers"
         ],
         "psr-0": {
             "Davzie\\ProductCatalog": "src/"

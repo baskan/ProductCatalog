@@ -60,4 +60,12 @@ class ProductEloquent extends Eloquent implements ProductRepository {
         return $this->belongsToMany( 'Davzie\ProductCatalog\Models\CategoryEloquent' , 'product_categories' , 'product_id' , 'category_id' );
     }
 
+    /**
+     * The media object to get the uploads available
+     * @return Eloquent
+     */
+    public function media(){
+        return $this->morphMany( 'Davzie\ProductCatalog\Models\UploadEloquent' , 'link');
+    }
+
 }
