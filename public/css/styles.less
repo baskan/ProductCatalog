@@ -34,8 +34,16 @@ body.interface {
     }
     .gallery-options{
         padding:10px;
+        label, input, button, select, textarea { font-size:12px; }
     }
 }
+
+li.thumbfix.span12 + li { margin-left : 0px; }
+li.thumbfix.span6:nth-child(2n + 3) { margin-left : 0px; }
+li.thumbfix.span4:nth-child(3n + 4) { margin-left : 0px; }
+li.thumbfix.span3:nth-child(4n + 5) { margin-left : 0px; }
+li.thumbfix.span2:nth-child(6n + 7) { margin-left : 0px; }
+li.thumbfix.span1:nth-child(12n + 13) { margin-left : 0px; }
 
 // Used In The Admin Areas For Category / Other Tickbox Indentation
 .checkbox-indented{

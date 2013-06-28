@@ -42,7 +42,6 @@ class ImgHelper {
      * @return string           The sized up stored resulting image
      */
     public function get(){
-
         // Check to see if we're cached already, if not we need to resize the image accordingly
         if( $this->isCached() === false )
             $this->resize();
@@ -69,11 +68,20 @@ class ImgHelper {
         $filename = $this->uploadObject->getAbsoluteSrc();
         $extension = $this->uploadObject->extension;
 
+        // Does the original file exist? If not return false
+        if( !File::exists( $filename ) )
+            return false;
+
+        // Check to see our directory for caching exists, if it doesn't recursively create it
         if( !File::isDirectory( $this->getPath() ) )
-            File::makeDirectory( $this->getPath() );
+            File::makeDirectory( $this->getPath() , 0777 , true );
 
         $img = Image::make($filename);
-        $img->resize( $this->width , $this->height )->save( $this->getPathFilename() );
+        if( $this->crop )
+            $img->grab( $this->width , $this->height )->save( $this->getPathFilename() );
+        else
+            $img->resize( $this->width , $this->height , false , true )->save( $this->getPathFilename() );
+
         return true;
     }
 

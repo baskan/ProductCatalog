@@ -1,10 +1,10 @@
 @if($product->media()->count() > 0)
 <ul class="thumbnails">
     @foreach($product->media()->get() as $upload)
-        <li class="span3">
+        <li class="span3 thumbfix">
             <div class="thumbnail">
                 <div class="image-container">
-                    <img src="{{ $upload->sizeImg( 245 , 150 ) }}" alt="">
+                    <img src="{{ $upload->sizeImg( 200 , 150 ) }}" alt="">
                 </div>
                 <div class="gallery-options">
                     <label class="radio">
@@ -16,8 +16,12 @@
                         Thumbnail Image
                     </label>
                     <label class="checkbox">
-                        <input type="checkbox" value="{{ $upload->id }}">
+                        <input type="checkbox" name="showInGallery[]" value="{{ $upload->id }}">
                         Show In Gallery
+                    </label>
+                    <label class="checkbox">
+                        <input type="checkbox" name="deleteImage[]" value="{{ $upload->id }}">
+                        Delete Image
                     </label>
                 </div>
             </div>

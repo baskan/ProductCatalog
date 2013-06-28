@@ -2,6 +2,7 @@
 namespace Davzie\ProductCatalog\Models;
 use Eloquent;
 use Config;
+use Exception;
 use Davzie\ProductCatalog\Models\Interfaces\UploadRepository;
 use Davzie\ProductCatalog\Libraries\ImgHelper;
 class UploadEloquent extends Eloquent implements UploadRepository {
@@ -94,7 +95,6 @@ class UploadEloquent extends Eloquent implements UploadRepository {
      * @return string           The sized up stored resulting image
      */
     public function sizeImg( $width , $height , $crop = true ){
-
         // Get our image helper, pass in requirements and get our new image filename
         $helper = new ImgHelper( $this );
         $helper->width = $width;
