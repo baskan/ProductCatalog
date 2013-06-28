@@ -6,11 +6,13 @@ use Redirect;
 use Validator;
 use Input;
 use File;
+use Request;
 use Response;
 use Davzie\ProductCatalog\Models\Interfaces\ProductRepository;
 use Davzie\ProductCatalog\Models\Interfaces\CategoryRepository;
 use Davzie\ProductCatalog\Entities\ProductNew;
 use Davzie\ProductCatalog\Entities\ProductEdit;
+use Davzie\ProductCatalog\Entities\ProductUpload;
 
 class ProductsController extends ManageBaseController {
 
