@@ -117,21 +117,19 @@ class ProductsController extends ManageBaseController {
      * @return Redirect
      */
     public function postUpload( $id ){
-        $validation = Validator::make( Input::all() , [ 'file' => 'image|max:3000' ] );
+        // This should only be accessible via AJAX you know...
+        if( !Request::ajax() )
+            Response::json('error', 400);
 
-        if ($validation->fails())
-            return Response::make( $validation->errors->first() , 400 );
+        $entity = new ProductUpload( $id );
 
-        // Tidy grouped method for getting new file name
-        $getNewFileName = function( $fileObj ){
-            $randomKey = sha1( time() . microtime() );
-            $extension = $fileObj->getClientOriginalExtension();
-            return $randomKey.'.'.$extension;
-        };
+        if ( $entity->isValid() === false )
+            return Response::make( $entity->errors() , 400 );
 
-        $upload_success = Input::file('file')->move( public_path().'/products/'.$id , $getNewFileName( Input::file('file') ) );
+        // Hydrate it with data from the POST
+        $success = $entity->hydrate();
 
-        if( $upload_success )
+        if( $success )
             return Response::json('success', 200);
         else
             return Response::json('error', 400);
