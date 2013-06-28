@@ -48,4 +48,25 @@ interface UploadRepository {
      */
     public function getAbsoluteSrc();
 
+    /**
+     * Get the path of the upload (public one)
+     * @return string
+     */
+    public function getPath();
+
+    /**
+     * Get the absolute path to the server for the upload
+     * @return string
+     */
+    public function getAbsolutePath();
+
+    /**
+     * Size up the current record and return the resulting filename
+     * @param  integer  $width  The width of the resulting image
+     * @param  integer  $height The height of the resulting image
+     * @param  boolean  $crop   Decide whether to crop the image or not
+     * @return string           The sized up stored resulting image
+     */
+    public function sizeImg( $width , $height , $crop = true );
+
 }

@@ -3,7 +3,7 @@ namespace Davzie\ProductCatalog\Models;
 use Eloquent;
 use Config;
 use Davzie\ProductCatalog\Models\Interfaces\UploadRepository;
-
+use Davzie\ProductCatalog\Libraries\ImgHelper;
 class UploadEloquent extends Eloquent implements UploadRepository {
 
     /**
@@ -65,8 +65,7 @@ class UploadEloquent extends Eloquent implements UploadRepository {
      * @return string
      */
     public function getSrc(){
-        $base_path = Config::get('ProductCatalog::app.upload_base_path');
-        return url( $base_path.$this->path.'/'.$this->link_id.'/'.$this->filename );
+        return $this->getPath().$this->filename;
     }
 
     /**
@@ -74,8 +73,35 @@ class UploadEloquent extends Eloquent implements UploadRepository {
      * @return string
      */
     public function getAbsoluteSrc(){
+        return $this->getAbsolutePath().$this->filename;
+    }
+
+    public function getAbsolutePath(){
         $base_path = Config::get('ProductCatalog::app.upload_base_path');
-        return public_path().$base_path.'/'.$this->path.'/'.$this->link_id.'/'.$this->filename;
+        return public_path().'/'.$base_path.$this->path.'/'.$this->link_id.'/';
+    }
+
+    public function getPath(){
+        $base_path = Config::get('ProductCatalog::app.upload_base_path');
+        return url( $base_path.$this->path.'/'.$this->link_id.'/' );
+    }
+
+    /**
+     * Size up the current record and return the resulting filename
+     * @param  integer  $width  The width of the resulting image
+     * @param  integer  $height The height of the resulting image
+     * @param  boolean  $crop   Decide whether to crop the image or not
+     * @return string           The sized up stored resulting image
+     */
+    public function sizeImg( $width , $height , $crop = true ){
+
+        // Get our image helper, pass in requirements and get our new image filename
+        $helper = new ImgHelper( $this );
+        $helper->width = $width;
+        $helper->height = $height;
+        $helper->crop = $crop;
+
+        return $helper->get();
     }
 
 }

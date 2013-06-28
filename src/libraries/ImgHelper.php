@@ -1,13 +1,53 @@
 <?php
 namespace Davzie\ProductCatalog\Libraries;
+use Davzie\ProductCatalog\Models\Interfaces\UploadRepository;
+use File;
+use Intervention\Image\Facades\Image;
 
 class ImgHelper {
-    
+
+    /**
+     * The upload object to work with
+     * @var UploadRepository
+     */
+    protected $uploadObject;
+
+    /**
+     * The width of the image
+     * @var integer
+     */
+    public $width;
+
+    /**
+     * The height of the image
+     * @var integer
+     */
+    public $height;
+
+    /**
+     * Crop the image?
+     * @var boolean
+     */
+    public $crop = true;
+
     /** 
      * Construct something man!
      */
-    public function __construct(){
+    public function __construct( UploadRepository $uploadObject ){
+        $this->uploadObject = $uploadObject;
+    }
 
+    /**
+     * Size up the current record and return the resulting filename
+     * @return string           The sized up stored resulting image
+     */
+    public function get(){
+
+        // Check to see if we're cached already, if not we need to resize the image accordingly
+        if( $this->isCached() === false )
+            $this->resize();
+
+        return $this->getPublicPathFilename();
     }
 
     /**
@@ -15,7 +55,78 @@ class ImgHelper {
      * @return boolean True if there is a cached version of this image available
      */
     private function isCached(){
+        if( File::exists( $this->getPathFilename() ) )
+            return true;
 
+        return false;
+    }
+
+    /**
+     * Resize the image
+     * @return boolean
+     */
+    private function resize(){
+        $filename = $this->uploadObject->getAbsoluteSrc();
+        $extension = $this->uploadObject->extension;
+
+        if( !File::isDirectory( $this->getPath() ) )
+            File::makeDirectory( $this->getPath() );
+
+        $img = Image::make($filename);
+        $img->resize( $this->width , $this->height )->save( $this->getPathFilename() );
+        return true;
+    }
+
+    /**
+     * Strip the extensions from the filename and just return the filename, we need this to append stuff
+     * @param  string $filename The filename to strip
+     * @return string
+     */
+    private function stripExtensions( $filename ){
+        return preg_replace("/\\.[^.\\s]{3,4}$/", "", $filename);
+    }
+
+    /**
+     * Return the exact place we should either find or put the image
+     * @return string
+     */
+    private function getPathFilename(){
+        return $this->getPath().$this->getFilename();
+    }
+
+    /**
+     * Get the resulting path that we want to send back to the users
+     * @return string
+     */
+    private function getPublicPathFilename(){
+        return $this->getPublicPath().$this->getFilename();
+    }
+
+    /**
+     * Get just the path to the cached area
+     * @return string
+     */
+    private function getPath(){
+        return $this->uploadObject->getAbsolutePath().'cached/';
+    }
+
+    /**
+     * Get the public path for the user
+     * @return string
+     */
+    private function getPublicPath(){
+        return $this->uploadObject->getPath().'/cached/';
+    }
+
+    /**
+     * Get the filename that we should have
+     * @return string
+     */
+    private function getFilename(){
+        $filename = $this->stripExtensions( $this->uploadObject->filename );
+        $extension = $this->uploadObject->extension;
+        $crop = $this->crop === true ? '_crop' : '';
+        return $filename.'_'.$this->width.'_'.$this->height.$crop.'.'.$extension;
     }
 
 }

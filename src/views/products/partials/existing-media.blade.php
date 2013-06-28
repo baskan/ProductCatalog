@@ -4,7 +4,7 @@
         <li class="span3">
             <div class="thumbnail">
                 <div class="image-container">
-                    <img src="{{ $upload->getSrc() }}" alt="">
+                    <img src="{{ $upload->sizeImg( 245 , 150 ) }}" alt="">
                 </div>
                 <div class="gallery-options">
                     <label class="radio">
