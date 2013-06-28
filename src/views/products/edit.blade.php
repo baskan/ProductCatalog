@@ -14,7 +14,7 @@
 
     <h1>{{ $product->title }} <small>( {{ $product->sku }} )</small></h1>
     @include('ProductCatalog::partials.messaging')
-    {{ Form::open( [ 'url' => 'manage/products/edit/'.$product->id , 'class' => 'form-horizontal' , 'files'=>true ] ) }}
+    {{ Form::open( [ 'url' => 'manage/products/edit/'.$product->id , 'class' => 'form-horizontal' , 'id'=>'productEditForm' , 'files'=>true ] ) }}
 
         <!-- Used To Validate Against -->
         {{ Form::hidden('id', $product->id) }}
@@ -60,9 +60,46 @@
 @section('sidebar')
 
     <div class="well well-small">
-        <h4>More Information</h4>
-        <p><strong>SKU: </strong>SKU's must be unique to the product catalog.</p>
-        <p><strong>Price: </strong>Prices should be specified without VAT or delivery costs (this will be added where required).</p>
+        <h4>Upload Product Images</h4>
+        <p>Drag and drop images into the box below or simply click it to select files to upload</p>
+        <p><strong>Note: </strong>This will also save and refresh this product page.</p>
+        {{ Form::open( [ 'url' => 'manage/products/upload/'.$product->id , 'class' => 'dropzone' , 'id'=>'imageUploads' , 'files'=>true ] ) }}
+            <div class="fallback">
+                <input name="file" type="file" multiple />
+            </div>
+        {{ Form::close() }}
     </div>
 
+@stop
+
+@section('css')
+    @parent
+    <link rel="stylesheet" href="{{ asset('packages/Davzie/ProductCatalog/js/dropzone/css/dropzone.css') }}">
+@stop
+
+@section('scripts')
+    @parent
+    <script src="{{ asset('packages/Davzie/ProductCatalog/js/dropzone/dropzone.min.js') }}"></script>
+    <script>
+        $(document).ready(function(){
+
+            // Setup some options for our Dropzone
+            Dropzone.options.imageUploads = {
+                maxFilesize: 3,
+                init: function(){
+                    
+                    // When a file has completed uploading, check to see if others are queueing, if not then submit the form
+                    // which saves all changes and then gets us back to the edit page
+                    this.on("complete", function(file){
+                        if( this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0 ){
+                            // Submit dat form
+                            $('#productEditForm').submit();
+                        }
+                    });
+
+                }
+            };
+
+        });
+    </script>
 @stop
