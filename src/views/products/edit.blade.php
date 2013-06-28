@@ -87,14 +87,16 @@
             Dropzone.options.imageUploads = {
                 maxFilesize: 3,
                 init: function(){
-                    
+
                     // When a file has completed uploading, check to see if others are queueing, if not then submit the form
                     // which saves all changes and then gets us back to the edit page
                     this.on("complete", function(file){
+
                         if( this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0 ){
                             // Submit dat form
                             $('#productEditForm').submit();
                         }
+                        
                     });
 
                 }
