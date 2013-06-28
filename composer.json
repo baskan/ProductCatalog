@@ -17,6 +17,7 @@
             "src/migrations",
             "src/controllers",
             "src/filters",
+            "src/commands",
             "src/entities",
             "src/libraries",
             "src/seeds",
