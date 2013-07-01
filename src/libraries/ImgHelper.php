@@ -80,7 +80,7 @@ class ImgHelper {
         if( $this->crop )
             $img->grab( $this->width , $this->height )->save( $this->getPathFilename() );
         else
-            $img->resize( $this->width , $this->height , false , true )->save( $this->getPathFilename() );
+            $img->resize( $this->width , $this->height , true , true )->resizeCanvas( $this->width , $this->height , null , false , 'ffffff' )->save( $this->getPathFilename() );
 
         return true;
     }
