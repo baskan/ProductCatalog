@@ -65,6 +65,22 @@ class UploadEloquent extends Eloquent implements UploadRepository {
     }
 
     /**
+     * Delete an upload by it's type and link ID
+     * @param  integer     $id     The link record ID
+     * @param  integer     $type   The link type
+     * @return boolean             True if deleted
+     */
+    public function deleteByIdType( $id , $type ){
+        // Delete the images directory for these types / links
+        $base_path = Config::get('ProductCatalog::app.upload_base_path');
+        $toDelete  = public_path().'/'.$base_path.$type.'/'.$id;
+        File::deleteDirectory( $toDelete );
+
+        // Now return the result of deleting all the records that match
+        return $this->where('path','=',$type)->where('link_id','=',$id)->delete();
+    }
+
+    /**
      * Physically delete all files related to the uploads collection passed in
      * @return boolean
      */

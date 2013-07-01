@@ -83,4 +83,11 @@ interface ProductRepository {
      */
     public function setGalleryImages( $uploadIds );
 
+    /**
+     * Delete a product by its product ID
+     * @param  integer $id The Product ID
+     * @return boolean
+     */
+    public function deleteById( $id );
+
 }

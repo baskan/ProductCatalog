@@ -1,6 +1,7 @@
 <?php
 namespace Davzie\ProductCatalog\Models;
 use Eloquent;
+use App;
 use Davzie\ProductCatalog\Models\Interfaces\ProductRepository;
 
 class ProductEloquent extends Eloquent implements ProductRepository {
@@ -123,6 +124,21 @@ class ProductEloquent extends Eloquent implements ProductRepository {
 
         $this->media()->update( [ 'gallery' => true ] );
         $this->media()->whereIn('id',$uploadIds )->update( [ 'gallery' => false ] );
+    }
+
+    /**
+     * Delete a product by its product ID
+     * @param  integer $id The Product ID
+     * @return boolean
+     */
+    public function deleteById( $id ){
+        $product = $this->find($id);
+        // Ensure that the product images that need to be deleted get deleted
+        $uploadModel = App::make('Davzie\ProductCatalog\Models\Interfaces\UploadRepository');
+        $uploadModel->deleteByIdType( $product->id , 'products' );
+
+        $product->delete();
+        return true;
     }
 
 }

@@ -50,6 +50,14 @@ interface UploadRepository {
     public function deleteById( $id );
 
     /**
+     * Delete an upload by it's type and link ID
+     * @param  integer     $id     The link record ID
+     * @param  integer     $type   The link type
+     * @return boolean             True if deleted
+     */
+    public function deleteByIdType( $id , $type );
+
+    /**
      * Size up the current record and return the resulting filename
      * @param  integer  $width  The width of the resulting image
      * @param  integer  $height The height of the resulting image

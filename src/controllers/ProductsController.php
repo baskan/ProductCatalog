@@ -103,6 +103,16 @@ class ProductsController extends ManageBaseController {
     }
 
     /**
+     * Delete a category based on the ID passed in
+     * @param  integer $id The category ID
+     * @return Redirect
+     */
+    public function getDelete( $id ){
+        $this->products->deleteById($id);
+        return Redirect::to('manage/products')->with('success','<strong>Product Deleted</strong> The product was properly removed.');
+    }
+
+    /**
      * Accept the input from the new product page
      * @return Redirect
      */
