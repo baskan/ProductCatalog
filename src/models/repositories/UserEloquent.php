@@ -28,11 +28,11 @@ class UserEloquent extends Eloquent implements UserInterface, RemindableInterfac
 	protected $fillable = array('first_name', 'last_name', 'email');
 
 	/**
-	 * Determine if the user is just a customer
-	 * @return boolean True if the user is a customer
+	 * Get all users in the system
+	 * @return Eloquent
 	 */
-	public function isCustomer(){
-		return !$this->is_admin;
+	public function getAll(){
+		return $this->all();
 	}
 
 	/**
@@ -79,14 +79,6 @@ class UserEloquent extends Eloquent implements UserInterface, RemindableInterfac
 	public function getReminderEmail()
 	{
 		return $this->email;
-	}
-
-	/**
-	 * The transactions for the user
-	 * @return [type] [description]
-	 */
-	public function transactions(){
-		return $this->hasMany('Transaction\Eloquent','user_id');
 	}
 
 }

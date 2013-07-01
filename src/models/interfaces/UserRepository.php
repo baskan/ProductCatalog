@@ -7,22 +7,21 @@ namespace Davzie\ProductCatalog\Models\Interfaces;
 interface UserRepository {
 
     /**
-     * Determine if the user is just a customer
-     * @return boolean True if the user is a customer
-     */
-    public function isCustomer();
-
-    /**
      * Get the amount of active customers
      * @return Eloquent
      */
     public function scopeactiveCustomers($query);
-
 
     /**
      * Get the full name of the user
      * @return string
      */
     public function getFullName();
+
+    /**
+     * Get all users from the system
+     * @return Eloquent
+     */
+    public function getAll();
 
 }

@@ -15,9 +15,6 @@ class Page {
         if ( Auth::guest() )
             return Redirect::guest('manage/login');
 
-        if ( Auth::user()->isCustomer() )
-            return Redirect::to('/');
-
     }
 
 }
