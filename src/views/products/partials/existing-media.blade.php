@@ -4,7 +4,7 @@
         <li class="span3 thumbfix" upload-id="{{ $upload->id }}">
             <div class="thumbnail">
                 <div class="image-container">
-                    <img src="{{ $upload->sizeImg( 200 , 150 ) }}" alt="">
+                    <img src="{{ $upload->sizeImg( 200 , 150 , false ) }}" alt="">
                 </div>
                 <div class="gallery-options">
                     <label class="radio">

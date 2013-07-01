@@ -13,7 +13,7 @@
 
     <div class="clearfix">
         @if( $product->getMainImage() )
-            <img class="pull-right product-edit-main-image" src="{{ $product->getMainImage()->sizeImg( 250 , 150 ) }}" />
+            <img class="pull-right product-edit-main-image" src="{{ $product->getMainImage()->sizeImg( 250 , 150 , false ) }}" />
         @endif
 
         <h1>{{ $product->title }}<br /><small>( {{ $product->sku }} )</small></h1>
