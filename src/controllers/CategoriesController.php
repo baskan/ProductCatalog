@@ -34,6 +34,17 @@ class CategoriesController extends ManageBaseController {
     }
 
     /**
+     * Delete a category based on the ID passed in
+     * @param  integer $id The category ID
+     * @return Redirect
+     */
+    public function getDelete( $id ){
+        $this->categories->where('id','=',$id)->delete();
+        
+        return Redirect::to('manage/categories')->with('success','<strong>Category Deleted</strong> The category was properly removed.');
+    }
+
+    /**
      * Main users page.
      *
      * @access   public
@@ -57,12 +68,14 @@ class CategoriesController extends ManageBaseController {
             return Redirect::to('manage/categories');
 
         // Determine if the category parent should be disabled or not
-        $parentCatAttributes = ( $category->children()->count() > 0 ? array('disabled'=>true) : array() );
-        $top_level_categories = ['0'=>'Choose A Parent Category'] + $this->categories->getTopLevel( $id )->lists('name','id');
+        $hasSubCategories = $category->hasChildren();
+        $parentCatAttributes = ( $hasSubCategories ? array('disabled'=>true) : array() );
+        $top_level_categories = [ 0 => 'None (Top Level)' ] + $this->categories->getTopLevel( $id )->lists('name','id');
 
         return View::make('ProductCatalog::categories.edit')
                     ->with( 'category' , $category )
                     ->with( 'top_level_categories' , $top_level_categories )
+                    ->with( 'hasSubCategories' , $hasSubCategories )
                     ->with( 'parentCatAttributes' , $parentCatAttributes );
     }
 

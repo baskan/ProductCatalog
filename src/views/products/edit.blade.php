@@ -73,6 +73,10 @@
                 <input name="file" type="file" multiple />
             </div>
         {{ Form::close() }}
+        <h4>Delete Product</h4>
+        <p>Deleting this product cannot be undone, please be absolutely sure you want to do this before proceeding.</p>
+        <a href="#" class="btn btn-danger"><span class="icon-remove icon-white"></span> Delete Product</a>
+
     </div>
 
 @stop

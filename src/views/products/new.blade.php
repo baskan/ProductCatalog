@@ -1,4 +1,4 @@
-@extends('ProductCatalog::layouts.interface-double')
+@extends('ProductCatalog::layouts.interface-single')
 
 @section('title')
     Create New Product

@@ -49,4 +49,10 @@ interface CategoryRepository {
      */
     public function getTopLevel( $id );
 
+    /**
+     * Determine whether or not the category in question has children / sub categories
+     * @return boolean True if it does, false if it doesn't
+     */
+    public function hasChildren();
+
 }

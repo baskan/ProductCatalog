@@ -1,4 +1,4 @@
-@extends('ProductCatalog::layouts.interface-double')
+@extends('ProductCatalog::layouts.interface-single')
 
 @section('title')
     Edit {{ $category->name }}
@@ -76,13 +76,7 @@
 @section('sidebar')
 
     <div class="well well-small">
-        <h4>Delete Category</h4>
-        @if($hasSubCategories)
-            <p>Deleting this category is not possible until you have removed all sub-categories associated with it.</p>
-        @else
-            <p>Deleting this category will remove any category assocations with products (your products won't be deleted).</p>
-            <a href="{{ url('manage/categories/delete/'.$category->id) }}" class="btn btn-danger"><span class="icon-remove icon-white"></span> Delete Category</a>
-        @endif
+        <h4>More Information</h4>
     </div>
 
 @stop
