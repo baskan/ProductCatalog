@@ -65,7 +65,7 @@ class ProductEloquent extends Eloquent implements ProductRepository {
      * @return Eloquent
      */
     public function media(){
-        return $this->morphMany( 'Davzie\ProductCatalog\Models\UploadEloquent' , 'link');
+        return $this->morphMany( 'Davzie\ProductCatalog\Models\UploadEloquent' , 'link')->orderBy('order','asc');
     }
 
     /**

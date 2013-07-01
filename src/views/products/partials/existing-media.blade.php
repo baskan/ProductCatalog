@@ -1,6 +1,6 @@
-@if($product->media()->count() > 0)
+@if($product->media)
 <ul class="thumbnails" id="product-media">
-    @foreach($product->media()->orderBy('order','asc')->get() as $upload)
+    @foreach($product->media as $upload)
         <li class="span3 thumbfix" upload-id="{{ $upload->id }}">
             <div class="thumbnail">
                 <div class="image-container">
