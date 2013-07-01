@@ -62,4 +62,25 @@ interface ProductRepository {
      */
     public function getGalleryImages();
 
+    /**
+     * Set the main image for this product to the upload ID passed in
+     * @param   integer $uploadId The upload ID
+     * @return  boolean
+     */
+    public function setMainImage( $uploadId );
+
+    /**
+     * Set the thumbnail image for this product to the upload ID passed in
+     * @param   integer $uploadId The upload ID
+     * @return  boolean
+     */
+    public function setThumbnailImage( $uploadId );
+
+    /**
+     * Set the images that should NOT be in the gallery for the array of ID's passed in
+     * @param   mixed[integer|array] $uploadId The upload ID
+     * @return  boolean
+     */
+    public function setGalleryImages( $uploadIds );
+
 }

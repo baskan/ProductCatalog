@@ -1,7 +1,8 @@
 <?php
 namespace Davzie\ProductCatalog\Entities;
 use App;
-
+use Str;
+use Input;
 class ProductNew extends Base {
 
     protected static $model = 'Davzie\ProductCatalog\Models\Interfaces\ProductRepository';
@@ -19,5 +20,11 @@ class ProductNew extends Base {
         'price' => 'required|numeric',
         'sku' => 'required|alpha_dash|unique:products,sku'
     ];
+
+    public function __construct(){
+        parent::__construct();
+        // Default Data
+        static::$defaultData['slug'] = Str::slug( Input::get('title') , '-' );
+    }
 
 }

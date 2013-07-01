@@ -10,9 +10,10 @@
     <a class="add-new-object-button btn btn-primary pull-right" href="{{ url('manage/products/new') }}"><span class="icon-plus icon-white"></span> New Product</a>
     
     @if( !$products->isEmpty() )
-        <table class="table table-condensed">
+        <table class="table table-condensed item-listing-table">
             <thead>
                 <tr>
+                    <th>Thumb</th>
                     <th>SKU</th>
                     <th>Title</th>
                     <th>Price</th>
@@ -22,6 +23,11 @@
             <tbody>
                 @foreach($products as $product)
                     <tr>
+                        <td>
+                            @if( $product->getThumbnailImage() )
+                                <img src="{{ $product->getThumbnailImage()->sizeImg( 100 , 60 ) }}" />
+                            @endif
+                        </td>
                         <td>
                             <a href="{{ url('manage/products/edit/'.$product->id) }}">{{ $product->sku }}</a>
                         </td>

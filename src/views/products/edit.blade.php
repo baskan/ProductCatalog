@@ -11,8 +11,13 @@
       <li class="active">Editing {{ $product->sku }}</li>
     </ul>
 
+    <div class="clearfix">
+        @if( $product->getMainImage() )
+            <img class="pull-right product-edit-main-image" src="{{ $product->getMainImage()->sizeImg( 250 , 150 ) }}" />
+        @endif
 
-    <h1>{{ $product->title }} <small>( {{ $product->sku }} )</small></h1>
+        <h1>{{ $product->title }}<br /><small>( {{ $product->sku }} )</small></h1>
+    </div>
     @include('ProductCatalog::partials.messaging')
     {{ Form::open( [ 'url' => 'manage/products/edit/'.$product->id , 'class' => 'form-horizontal' , 'id'=>'productEditForm' , 'files'=>true ] ) }}
 
@@ -79,6 +84,7 @@
 
 @section('scripts')
     @parent
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <script src="{{ asset('packages/Davzie/ProductCatalog/js/dropzone/dropzone.min.js') }}"></script>
     <script>
         $(document).ready(function(){
@@ -104,6 +110,9 @@
 
                 }
             };
+
+            $( "#product-media" ).sortable();
+            $( "#product-media" ).disableSelection();
 
         });
     </script>

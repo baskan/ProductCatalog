@@ -1,5 +1,5 @@
 @if($product->media()->count() > 0)
-<ul class="thumbnails">
+<ul class="thumbnails" id="product-media">
     @foreach($product->media()->get() as $upload)
         <li class="span3 thumbfix">
             <div class="thumbnail">
@@ -16,12 +16,12 @@
                         Thumbnail Image
                     </label>
                     <label class="checkbox">
-                        <?php $checkedArray = Input::old('hideFromGallery', ( !$upload->gallery ? array( $upload->id ) : array()  ) ); ?>
+                        <?php $checkedArray = Input::old('hideFromGallery['.$upload->id.']', ( $upload->gallery === 1 ? [] : [ $upload->id ]  ) ); ?>
                         {{ Form::checkbox('hideFromGallery['.$upload->id.']', $upload->id, in_array( $upload->id, $checkedArray ) ) }}
                         Hide From Gallery
                     </label>
                     <label class="checkbox">
-                        <?php $checkedArray = Input::old('deleteImage', array() ); ?>
+                        <?php $checkedArray = Input::old('deleteImage', [] ); ?>
                         {{ Form::checkbox('deleteImage['.$upload->id.']', $upload->id, in_array( $upload->id, $checkedArray ) ) }}
                         Delete Image
                     </label>

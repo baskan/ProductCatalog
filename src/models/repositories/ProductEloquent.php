@@ -92,4 +92,37 @@ class ProductEloquent extends Eloquent implements ProductRepository {
         return $this->media()->where('gallery' , '=' , true)->get();
     }
 
+    /**
+     * Set the main image for this product to the upload ID passed in
+     * @param   integer $uploadId The upload ID
+     * @return  boolean
+     */
+    public function setMainImage( $uploadId ){
+        $this->media()->update( [ 'main_image' => false ] );
+        $this->media()->where('id','=',$uploadId)->update( [ 'main_image' => true ] );
+    }
+
+    /**
+     * Set the thumbnail image for this product to the upload ID passed in
+     * @param   integer $uploadId The upload ID
+     * @return  boolean
+     */
+    public function setThumbnailImage( $uploadId ){
+        $this->media()->update( [ 'thumbnail_image' => false ] );
+        $this->media()->where('id','=',$uploadId)->update( [ 'thumbnail_image' => true ] );
+    }
+
+    /**
+     * Set the images that should NOT be in the gallery for the array of ID's passed in
+     * @param   mixed[integer|array] $uploadId The upload ID
+     * @return  boolean
+     */
+    public function setGalleryImages( $uploadIds ){
+        if( !is_array($uploadIds) )
+            $uploadIds = [ $uploadIds ];
+
+        $this->media()->update( [ 'gallery' => true ] );
+        $this->media()->whereIn('id',$uploadIds )->update( [ 'gallery' => false ] );
+    }
+
 }

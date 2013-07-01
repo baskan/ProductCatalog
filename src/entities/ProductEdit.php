@@ -2,6 +2,7 @@
 namespace Davzie\ProductCatalog\Entities;
 use App;
 use Input;
+use Str;
 class ProductEdit extends Base {
 
     protected static $model = 'Davzie\ProductCatalog\Models\Interfaces\ProductRepository';
@@ -20,6 +21,9 @@ class ProductEdit extends Base {
         static::$rules['sku'] = 'required|alpha_dash|unique:products,sku,'.$currentId;
         static::$rules['url'] = 'required|alpha_dash|unique:products,url,'.$currentId;
 
+        // Default Data
+        static::$defaultData['slug'] = Str::slug( Input::get('title') , '-' );
+
         parent::__construct();
     }
 
@@ -31,7 +35,10 @@ class ProductEdit extends Base {
         parent::hydrate();
         $productModel = App::make( static::$model )->find( $this->currentId );
         
-        $productModel->categories()->sync( Input::get('categories') );
+        $productModel->categories()->sync( Input::get('categories', []) );
+        $productModel->setMainImage( Input::get('mainImage') );
+        $productModel->setThumbnailImage( Input::get('thumbnailImage') );
+        $productModel->setGalleryImages( Input::get('hideFromGallery') );
 
         // Ensure that the product images that need to be deleted get deleted
         $uploadModel = App::make('Davzie\ProductCatalog\Models\Interfaces\UploadRepository');
