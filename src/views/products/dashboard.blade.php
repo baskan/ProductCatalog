@@ -26,7 +26,7 @@
                         <td>
                             @if( $product->getThumbnailImage() )
                                 <a href="{{ url('manage/products/edit/'.$product->id) }}">
-                                    <img src="{{ $product->getThumbnailImage()->sizeImg( 100 , 60 ) }}" />
+                                    <img src="{{ $product->getThumbnailImage()->sizeImg( 100 , 60 , false ) }}" />
                                 </a>
                             @endif
                         </td>
