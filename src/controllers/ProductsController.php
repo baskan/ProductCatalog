@@ -8,6 +8,7 @@ use Input;
 use File;
 use Request;
 use Response;
+use App;
 use Davzie\ProductCatalog\Models\Interfaces\ProductRepository;
 use Davzie\ProductCatalog\Models\Interfaces\CategoryRepository;
 use Davzie\ProductCatalog\Entities\ProductNew;
@@ -134,7 +135,7 @@ class ProductsController extends ManageBaseController {
 
     /**
      * Upload an image for this product ID
-     * @return Redirect
+     * @return Response
      */
     public function postUpload( $id ){
         // This should only be accessible via AJAX you know...
@@ -154,6 +155,22 @@ class ProductsController extends ManageBaseController {
         else
             return Response::json('error', 400);
 
+    }
+
+    /**
+     * Set the order of the images
+     * @return Response
+     */
+    public function postOrderImages(){
+        // This should only be accessible via AJAX you know...
+        if( !Request::ajax() )
+            Response::json('error', 400);
+
+        // Ensure that the product images that need to be deleted get deleted
+        $uploadModel = App::make('Davzie\ProductCatalog\Models\Interfaces\UploadRepository');
+        $uploadModel->setOrder( Input::get('data') );
+
+        return Response::json('success', 200);
     }
 
 }
