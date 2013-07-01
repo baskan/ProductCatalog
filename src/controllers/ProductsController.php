@@ -65,12 +65,30 @@ class ProductsController extends ManageBaseController {
      */
     public function getEdit( $id = null ){
         $product = $this->products->with('categories')->find($id);
-        $categories = $this->categories->getTopLevel();
+
+        // Redirect all requests where the product doesn't exist back to the main products dashboard
         if( !$product )
             return Redirect::to('manage/products');
 
+        // Get the top level categories only, we nest from the view itself
+        $categories = $this->categories->getTopLevel();
+
+        // Setup the old data so it's easy to find
+        $mainImage = Input::old('mainImage',false);
+        if( $mainImage === false )
+            if( $product->getMainImage() )
+                $mainImage = $product->getMainImage()->id;
+
+        // Setup the old data so it's easy to find
+        $thumbnailImage = Input::old('thumbnailImage',false);
+        if( $thumbnailImage === false )
+            if( $product->getThumbnailImage() )
+                $thumbnailImage = $product->getThumbnailImage()->id;
+
         return View::make('ProductCatalog::products.edit')
                     ->with( 'product' , $product )
+                    ->with( 'mainImageId' , $mainImage )
+                    ->with( 'thumbnailImageId' , $thumbnailImage )
                     ->with( 'categories' , $categories );
     }
 

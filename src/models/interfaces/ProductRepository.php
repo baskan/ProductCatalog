@@ -44,4 +44,22 @@ interface ProductRepository {
      */
     public function media();
 
+    /**
+     * Get the image to be used as a thumbnail for this product
+     * @return Eloquent
+     */
+    public function getThumbnailImage();
+
+    /**
+     * Get the main image that will be used (usually the first image / hero image)
+     * @return Eloquent
+     */
+    public function getMainImage();
+
+    /**
+     * Get the images that can be used in the gallery
+     * @return Eloquent
+     */
+    public function getGalleryImages();
+
 }

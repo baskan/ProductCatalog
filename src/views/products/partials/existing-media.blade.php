@@ -8,19 +8,21 @@
                 </div>
                 <div class="gallery-options">
                     <label class="radio">
-                        <input type="radio" name="mainImage" value="{{ $upload->id }}" checked>
+                        {{ Form::radio('mainImage', $upload->id, ( $mainImageId == $upload->id ? true : false ) ); }}
                         Main Image
                     </label>
                     <label class="radio">
-                        <input type="radio" name="thumbnailImage" value="{{ $upload->id }}" checked>
+                        {{ Form::radio('thumbnailImage', $upload->id, ( $thumbnailImageId == $upload->id ? true : false ) ); }}
                         Thumbnail Image
                     </label>
                     <label class="checkbox">
-                        <input type="checkbox" name="showInGallery[]" value="{{ $upload->id }}">
-                        Show In Gallery
+                        <?php $checkedArray = Input::old('hideFromGallery', ( !$upload->gallery ? array( $upload->id ) : array()  ) ); ?>
+                        {{ Form::checkbox('hideFromGallery['.$upload->id.']', $upload->id, in_array( $upload->id, $checkedArray ) ) }}
+                        Hide From Gallery
                     </label>
                     <label class="checkbox">
-                        <input type="checkbox" name="deleteImage[]" value="{{ $upload->id }}">
+                        <?php $checkedArray = Input::old('deleteImage', array() ); ?>
+                        {{ Form::checkbox('deleteImage['.$upload->id.']', $upload->id, in_array( $upload->id, $checkedArray ) ) }}
                         Delete Image
                     </label>
                 </div>

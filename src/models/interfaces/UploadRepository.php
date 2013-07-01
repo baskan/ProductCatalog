@@ -19,24 +19,6 @@ interface UploadRepository {
     public function link();
 
     /**
-     * Get the thumbnail image
-     * @return Eloquent
-     */
-    public function thumbnailImage();
-
-    /**
-     * Get the thumbnail image
-     * @return Eloquent
-     */
-    public function mainImage();
-
-    /**
-     * Get the images that are eligible to be showin in a gallery
-     * @return Collection
-     */
-    public function galleryImages();
-
-    /**
      * Get the usable src (public path and filename)
      * @return string
      */
@@ -59,6 +41,13 @@ interface UploadRepository {
      * @return string
      */
     public function getAbsolutePath();
+
+    /**
+     * Delete an upload by it's database ID
+     * @param  mixed[integer|array]     $id     The database ID
+     * @return boolean                          True if deleted
+     */
+    public function deleteById( $id );
 
     /**
      * Size up the current record and return the resulting filename
