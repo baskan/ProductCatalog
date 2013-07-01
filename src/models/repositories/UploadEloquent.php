@@ -2,6 +2,7 @@
 namespace Davzie\ProductCatalog\Models;
 use Eloquent;
 use Config;
+use File;
 use Exception;
 use Davzie\ProductCatalog\Models\Interfaces\UploadRepository;
 use Davzie\ProductCatalog\Libraries\ImgHelper;
@@ -38,35 +39,75 @@ class UploadEloquent extends Eloquent implements UploadRepository {
     }
 
     /**
-     * Get the thumbnail image
-     * @return Eloquent
-     */
-    public function thumbnailImage(){
-        return $this->where( 'thumbnail' , '=' , true )->first();
-    }
-
-    /**
-     * Get the thumbnail image
-     * @return Eloquent
-     */
-    public function mainImage(){
-        return $this->where( 'main' , '=' , true )->first();
-    }
-
-    /**
-     * Get the images that are eligible to be showin in a gallery
-     * @return Collection
-     */
-    public function galleryImages(){
-        return $this->where( 'gallery' , '=' , true )->get();
-    }
-
-    /**
      * Get the usable src (public path and filename)
      * @return string
      */
     public function getSrc(){
         return $this->getPath().$this->filename;
+    }
+
+    /**
+     * Delete an upload by it's database ID
+     * @param  mixed[integer|array]     $id     The database ID
+     * @return boolean                          True if deleted
+     */
+    public function deleteById( $id ){
+        if( !is_array($id) )
+            $id = array( $id );
+
+        // Delete The Items From The File Store
+        $this->physicallyDelete( $this->whereIn( 'id' , $id )->get() );
+
+        // Now delete the items from the database
+        $this->whereIn( 'id' , $id )->delete();
+
+        return true;
+    }
+
+    /**
+     * Physically delete all files related to the uploads collection passed in
+     * @return boolean
+     */
+    private function physicallyDelete( $uploads ){
+
+        // Return false if we have no uploads passed in
+        if( !$uploads )
+            return false;
+
+        // Loop through each upload object
+        foreach($uploads as $upload){
+            // If the original file actually exists that is specified in the DB, then lets delete if
+            if( File::isFile( $upload->getAbsoluteSrc() ) )
+                File::delete( $upload->getAbsoluteSrc() );
+
+            // Setup the caching path
+            $cache = $upload->getAbsolutePath().'/cached/';
+
+            if( File::isDirectory( $cache ) ){
+                // Loop through each item in the cache for this particular product ID
+                foreach( File::files($cache) as $cacheItem ){
+                    // We want to remove the extension and the . to see if the thing exists
+                    $filename = $this->stripExtensions( $upload->filename );
+
+                    // If the path we have actually contains the filename we can remove it, given
+                    // that the path is always a unique SHA1 checksum we shouldn't have any conflicts,
+                    // but if we did it wouldn't matter beacuse it's just a cache
+                    if( str_contains( $cacheItem , $filename ) )
+                        File::delete($cacheItem);
+                }
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Strip the extensions from the filename and just return the filename, we need this to append stuff
+     * @param  string $filename The filename to strip
+     * @return string
+     */
+    private function stripExtensions( $filename ){
+        return preg_replace("/\\.[^.\\s]{3,4}$/", "", $filename);
     }
 
     /**

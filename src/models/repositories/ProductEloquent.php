@@ -68,4 +68,28 @@ class ProductEloquent extends Eloquent implements ProductRepository {
         return $this->morphMany( 'Davzie\ProductCatalog\Models\UploadEloquent' , 'link');
     }
 
+    /**
+     * Get the image to be used as a thumbnail for this product
+     * @return Eloquent
+     */
+    public function getThumbnailImage(){
+        return $this->media()->where('thumbnail_image' , '=' , true)->first();
+    }
+
+    /**
+     * Get the main image that will be used (usually the first image / hero image)
+     * @return Eloquent
+     */
+    public function getMainImage(){
+        return $this->media()->where('main_image' , '=' , true)->first();
+    }
+
+    /**
+     * Get the images that can be used in the gallery
+     * @return Eloquent
+     */
+    public function getGalleryImages(){
+        return $this->media()->where('gallery' , '=' , true)->get();
+    }
+
 }

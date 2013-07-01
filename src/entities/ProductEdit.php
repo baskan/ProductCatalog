@@ -29,8 +29,14 @@ class ProductEdit extends Base {
      */
     public function hydrate(){
         parent::hydrate();
-        $model = App::make( static::$model )->find( $this->currentId );
-        $model->categories()->sync( Input::get('categories') );
+        $productModel = App::make( static::$model )->find( $this->currentId );
+        
+        $productModel->categories()->sync( Input::get('categories') );
+
+        // Ensure that the product images that need to be deleted get deleted
+        $uploadModel = App::make('Davzie\ProductCatalog\Models\Interfaces\UploadRepository');
+        $uploadModel->deleteById( Input::get('deleteImage') );
+
         return true;
     }
 
