@@ -3,6 +3,7 @@ namespace Davzie\ProductCatalog\Models;
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
 use Eloquent;
+use Hash;
 use Davzie\ProductCatalog\Models\Interfaces\UserRepository;
 
 class UserEloquent extends Eloquent implements UserInterface, RemindableInterface, UserRepository {
@@ -80,5 +81,13 @@ class UserEloquent extends Eloquent implements UserInterface, RemindableInterfac
 	{
 		return $this->email;
 	}
+
+   /**
+     * A mutator to ensure that when password's get set, they are actually hashed
+     * @param string $value The new password
+     */
+    public function setPasswordAttribute($value){
+    	$this->attributes['password'] = Hash::make( $value );
+    }
 
 }

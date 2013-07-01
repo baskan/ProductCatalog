@@ -91,7 +91,7 @@ class CategoriesController extends ManageBaseController {
         
         // Hydrate it with data from the POST
         $id = $entity->hydrate();
-        return Redirect::to( 'manage/categories/edit/'.$id )->with('success','<strong>Category Added</strong> Fill out the description field to show category specific data on category pages.');
+        return Redirect::to( 'manage/categories/' )->with('success','<strong>Category Added</strong> Fill out the description field to show category specific data on category pages.');
     }
 
     /**

@@ -24,4 +24,10 @@ interface UserRepository {
      */
     public function getAll();
 
+    /**
+     * A mutator to ensure that when password's get set, they are actually hashed
+     * @param string $value The new password
+     */
+    public function setPasswordAttribute($value);
+
 }

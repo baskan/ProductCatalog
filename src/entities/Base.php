@@ -54,7 +54,10 @@ class Base {
     /**
      * Construct stuff
      */
-    public function __construct(){
+    public function __construct( $currentId = null ){
+        if( $currentId !== null )
+            $this->setCurrentId( $currentId );
+        
         $this->errors = new MessageBag();
     }
 

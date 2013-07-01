@@ -1,6 +1,9 @@
 <?php
 namespace Davzie\ProductCatalog\Controllers;
 use Davzie\ProductCatalog\Models\Interfaces\UserRepository;
+use Davzie\ProductCatalog\Entities\UserNew;
+use Davzie\ProductCatalog\Entities\UserEdit;
+use Redirect;
 use View;
 class UsersController extends ManageBaseController {
 
@@ -44,7 +47,7 @@ class UsersController extends ManageBaseController {
      * @access      public
      * @return      View
      */
-    public function getEdit( $id = null ){
+    public function getEdit( $id ){
         $user = $this->users->find($id);
 
         // Redirect all requests where the product doesn't exist back to the main products dashboard
@@ -52,7 +55,7 @@ class UsersController extends ManageBaseController {
             return Redirect::to('manage/users');
 
         return View::make('ProductCatalog::users.edit')
-                    ->with( 'user' , $user );
+                    ->with( 'editing_user' , $user );
     }
 
     /**
@@ -69,14 +72,14 @@ class UsersController extends ManageBaseController {
      * @return Redirect
      */
     public function postNew(){
-        $entity = new ProductNew();
+        $entity = new UserNew();
         
         if ( $entity->isValid() === false )
-            return Redirect::to('manage/products/new')->withInput()->with( 'errors' , $entity->errors() );
+            return Redirect::to('manage/users/new')->withInput()->with( 'errors' , $entity->errors() );
         
         // Hydrate it with data from the POST
         $id = $entity->hydrate();
-        return Redirect::to( 'manage/products/edit/'.$id )->with('success','<strong>Product Added</strong> More information is required before you can activate the product.');
+        return Redirect::to( 'manage/users/' )->with('success','<strong>User Added</strong> Congratulations, a user has been added.');
     }
 
     /**
@@ -84,15 +87,15 @@ class UsersController extends ManageBaseController {
      * @return Redirect
      */
     public function postEdit( $id ){
-        $entity = new ProductEdit( $id );
+        $entity = new UserEdit( $id );
         
         if ( $entity->isValid() === false )
-            return Redirect::to('manage/products/edit/'.$id)->withInput()->with( 'errors' , $entity->errors() );
+            return Redirect::to('manage/users/edit/'.$id)->withInput()->with( 'errors' , $entity->errors() );
         
         // Hydrate it with data from the POST
         $entity->hydrate();
 
-        return Redirect::to( 'manage/products/edit/'.$id )->with('success','Product Updated.');
+        return Redirect::to( 'manage/users/' )->with('success','User Updated.');
     }
 
 }
