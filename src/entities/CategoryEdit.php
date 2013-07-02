@@ -22,7 +22,6 @@ class CategoryEdit extends Base {
         static::$rules['url'] = 'required|alpha_dash|unique:categories,url,'.$currentId;
 
         // If we have a 0 through on parent ID then we can assume the user has not chosen anything
-        // If we have a 0 through on parent ID then we can assume the user has not chosen anything
         if( Input::get('parent_id') == 0 ){
             unset( static::$rules['parent_id'] );
             static::$defaultData['parent_id'] = null;

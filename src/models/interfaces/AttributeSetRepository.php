@@ -12,4 +12,10 @@ interface AttributeSetRepository {
      */
     public function getAll();
 
+    /**
+     * The reverse product relationship
+     * @return Eloquent
+     */
+    public function products();
+
 }

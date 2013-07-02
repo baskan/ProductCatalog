@@ -1,10 +1,7 @@
 <?php
 namespace Davzie\ProductCatalog\Controllers;
-use Illuminate\Support\MessageBag;
 use View;
 use Redirect;
-use Validator;
-use Input;
 use Davzie\ProductCatalog\Models\Interfaces\CategoryRepository;
 use Davzie\ProductCatalog\Entities\CategoryNew;
 use Davzie\ProductCatalog\Entities\CategoryEdit;

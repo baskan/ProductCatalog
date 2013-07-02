@@ -27,4 +27,12 @@ class AttributeSetEloquent extends Eloquent implements AttributeSetRepository {
         return $this->orderBy('name','asc')->get();
     }
 
+    /**
+     * The reverse product relationship
+     * @return Eloquent
+     */
+    public function products(){
+        return $this->hasMany( 'Davzie\ProductCatalog\Models\ProductEloquent' , 'attribute_set_id' );
+    }
+
 }

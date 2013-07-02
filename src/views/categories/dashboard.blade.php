@@ -64,11 +64,3 @@
         </table>
     @endif
 @stop
-
-@section('sidebar')
-    
-    <div class="well well-small">
-        <h4>More Information</h4>
-    </div>
-
-@stop
