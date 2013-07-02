@@ -11,6 +11,7 @@ use Response;
 use App;
 use Davzie\ProductCatalog\Models\Interfaces\ProductRepository;
 use Davzie\ProductCatalog\Models\Interfaces\CategoryRepository;
+use Davzie\ProductCatalog\Models\Interfaces\AttributeSetRepository;
 use Davzie\ProductCatalog\Entities\ProductNew;
 use Davzie\ProductCatalog\Entities\ProductEdit;
 use Davzie\ProductCatalog\Entities\ProductUpload;
@@ -30,6 +31,12 @@ class ProductsController extends ManageBaseController {
     protected $categories;
 
     /**
+     * The attribute sets object
+     * @var AttributeSetRepository
+     */
+    protected $attribute_sets;
+
+    /**
      * Let's whitelist all the methods we want to allow guests to visit!
      *
      * @access   protected
@@ -40,9 +47,10 @@ class ProductsController extends ManageBaseController {
     /**
      * Construct shit
      */
-    public function __construct( ProductRepository $products , CategoryRepository $categories ){
+    public function __construct( ProductRepository $products , CategoryRepository $categories , AttributeSetRepository $attribute_sets ){
         $this->products = $products;
         $this->categories = $categories;
+        $this->attribute_sets = $attribute_sets;
         parent::__construct();
     }
 
@@ -65,7 +73,7 @@ class ProductsController extends ManageBaseController {
      * @return      View
      */
     public function getEdit( $id = null ){
-        $product = $this->products->with('categories')->find($id);
+        $product = $this->products->with('categories')->with('attributeSet')->find($id);
 
         // Redirect all requests where the product doesn't exist back to the main products dashboard
         if( !$product )
@@ -73,6 +81,7 @@ class ProductsController extends ManageBaseController {
 
         // Get the top level categories only, we nest from the view itself
         $categories = $this->categories->getTopLevel();
+        $attribute_sets = [ 0 => 'None' ] + $this->attribute_sets->getAll()->lists('name','id');
 
         // Setup the old data so it's easy to find
         $mainImage = Input::old('mainImage',false);
@@ -86,9 +95,12 @@ class ProductsController extends ManageBaseController {
             if( $product->getThumbnailImage() )
                 $thumbnailImage = $product->getThumbnailImage()->id;
 
+
+
         return View::make('ProductCatalog::products.edit')
                     ->with( 'product' , $product )
                     ->with( 'mainImageId' , $mainImage )
+                    ->with( 'attribute_sets' , $attribute_sets )
                     ->with( 'thumbnailImageId' , $thumbnailImage )
                     ->with( 'categories' , $categories );
     }

@@ -94,6 +94,6 @@ interface ProductRepository {
      * Get the attribute set associated with this product
      * @return Eloquent
      */
-    public function attribute_set();
+    public function attributeSet();
 
 }

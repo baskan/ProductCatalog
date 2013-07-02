@@ -30,6 +30,7 @@
           <li><a href="#pricing" data-toggle="tab">Pricing</a></li>
           <li><a href="#media" data-toggle="tab">Media</a></li>
           <li><a href="#categories" data-toggle="tab">Categories</a></li>
+          <li id="attributesNavTab"><a href="#attributes" data-toggle="tab">Attributes</a></li>
         </ul>
 
         <!-- Start Our Tabs -->
@@ -53,6 +54,11 @@
             <!-- Category Assignment -->
             <fieldset class="tab-pane" id="categories">
                 @include('ProductCatalog::products.partials.categories')
+            </fieldset>
+
+            <!-- Attribute Sets / Values -->
+            <fieldset class="tab-pane" id="attributes">
+                @include('ProductCatalog::products.partials.attributes')
             </fieldset>
         </div>
 
@@ -114,21 +120,6 @@
 
                 }
             };
-
-            $( "#product-media" ).sortable({
-                stop: function(){
-                    var items = new Array();
-                    // Get all of the items in the array and add the key and element to the items thing
-                    $('#product-media li').each(function( key , elem ){
-                        items[key] = $(elem).attr('upload-id');
-                    });
-
-                    // Post the new ordering off to the order-images functionality
-                    $.post("{{ url('manage/products/order-images') }}", { data:items });
-
-                }
-            });
-            $( "#product-media" ).disableSelection();
 
         });
     </script>

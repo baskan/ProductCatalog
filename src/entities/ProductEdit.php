@@ -8,10 +8,11 @@ class ProductEdit extends Base {
     protected static $model = 'Davzie\ProductCatalog\Models\Interfaces\ProductRepository';
 
     protected static $rules = [
-        'id'        => 'required|integer|exists:products,id',
-        'title'     => 'required|max:255',
-        'price'     => 'required|numeric',
-        'enabled'   => 'integer',
+        'id'                    => 'required|integer|exists:products,id',
+        'title'                 => 'required|max:255',
+        'price'                 => 'required|numeric',
+        'attribute_set_id'      => 'integer|exists:attribute_sets,id',
+        'enabled'               => 'integer',
     ];
 
     public function __construct( $currentId ){
@@ -23,6 +24,13 @@ class ProductEdit extends Base {
 
         // Default Data
         static::$defaultData['slug'] = Str::slug( Input::get('title') , '-' );
+
+
+        // If we have a 0 through on attribute set ID then we can assume the user has not chosen anything
+        if( Input::get('attribute_set_id') == 0 ){
+            unset( static::$rules['attribute_set_id'] );
+            static::$defaultData['attribute_set_id'] = null;
+        }
 
         parent::__construct();
     }

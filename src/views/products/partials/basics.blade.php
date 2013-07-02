@@ -24,6 +24,14 @@
     </div>
 </div>
 
+<!-- Attribute Set -->
+<div class="control-group">
+    <label class="control-label">Attribute Set</label>
+    <div class="controls">
+        {{ Form::select('attribute_set_id', $attribute_sets, Input::old('attribute_set_id' , $product->attribute_set_id ) , [ 'id'=>'attributeSetDropdown' ] ) }}
+        <span class="help-block hidden alert alert-warning" id="attributeSetHelpLabel"><strong>Note:</strong> You need to save the product in order to see the new attribute set changes.</span>
+    </div>
+</div>
 
 <div class="control-group">
     <div class="controls">
@@ -33,3 +41,15 @@
         </label>
     </div>
 </div>
+
+@section('scripts')
+    @parent
+    <script>
+        $(document).ready(function(){
+            $('#attributeSetDropdown').on('change',function(){
+                $('#attributeSetHelpLabel').removeClass('hidden');
+                $('#attributesNavTab').addClass('hidden');
+            });
+        });
+    </script>
+@stop

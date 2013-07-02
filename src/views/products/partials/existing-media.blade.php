@@ -31,3 +31,25 @@
     @endforeach
 </ul>
 @endif
+
+@section('scripts')
+    @parent
+    <script>
+        $(document).ready(function(){
+            $( "#product-media" ).sortable({
+                stop: function(){
+                    var items = new Array();
+                    // Get all of the items in the array and add the key and element to the items thing
+                    $('#product-media li').each(function( key , elem ){
+                        items[key] = $(elem).attr('upload-id');
+                    });
+
+                    // Post the new ordering off to the order-images functionality
+                    $.post("{{ url('manage/products/order-images') }}", { data:items });
+
+                }
+            });
+            $( "#product-media" ).disableSelection();
+        });
+    </script>
+@stop
