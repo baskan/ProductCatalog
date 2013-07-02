@@ -103,7 +103,7 @@ class AttributeSetsController extends ManageBaseController {
 
         if ( $entity->isValid() === false )
             return Redirect::to('manage/attribute-sets/edit/'.$id)->withInput()->with( 'errors' , $entity->errors() );
-        
+
         // Hydrate it with data from the POST
         $entity->hydrate();
         return Redirect::to( 'manage/attribute-sets/' )->with('success','Attribute Set Updated.');
