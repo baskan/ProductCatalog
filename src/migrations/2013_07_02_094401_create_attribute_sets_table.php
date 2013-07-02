@@ -20,7 +20,12 @@ class CreateAttributeSetsTable extends Migration {
 		});
 		Schema::table( 'products' , function( $table )
 		{
-		    $table->integer( 'attribute_set' );
+		    $table->integer( 'attribute_set' )->unsigned()->nullable();
+
+			$table->foreign('attribute_set')
+			      ->references('id')->on('attribute_sets')
+			      ->onDelete('SET NULL'); // Set the attirbute set ID to null on the product if the attribute set is deleted
+
 		});
 	}
 
@@ -31,11 +36,12 @@ class CreateAttributeSetsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop( 'attribute_sets' );
 		Schema::table( 'products' , function( $table )
 		{
+			$table->dropForeign('products_attribute_set_foreign');
 			$table->dropColumn( 'attribute_set' );
 		});
+		Schema::drop( 'attribute_sets' );
 	}
 
 }

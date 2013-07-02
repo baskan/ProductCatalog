@@ -141,4 +141,12 @@ class ProductEloquent extends Eloquent implements ProductRepository {
         return true;
     }
 
+    /**
+     * Get the attribute set associated with this product
+     * @return Eloquent
+     */
+    public function attribute_set(){
+        return $this->belongsTo( 'Davzie\ProductCatalog\Models\AttributeSetEloquent' , 'attribute_set' );
+    }
+
 }

@@ -90,4 +90,10 @@ interface ProductRepository {
      */
     public function deleteById( $id );
 
+    /**
+     * Get the attribute set associated with this product
+     * @return Eloquent
+     */
+    public function attribute_set();
+
 }
