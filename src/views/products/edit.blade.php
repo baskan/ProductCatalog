@@ -11,15 +11,21 @@
       <li class="active">Editing {{ $product->sku }}</li>
     </ul>
 
+    @include('ProductCatalog::partials.messaging')
+
+    <!-- The Product Title And Accompanying Image -->
     <div class="clearfix">
+
+        <!-- Dynamically Resize The Image And Cache It -->
         @if( $product->getMainImage() )
             <img class="pull-right product-edit-main-image" src="{{ $product->getMainImage()->sizeImg( 250 , 150 , false ) }}" />
         @endif
 
         <h1>{{ $product->title }}<br /><small>( {{ $product->sku }} )</small></h1>
     </div>
-    @include('ProductCatalog::partials.messaging')
-    {{ Form::open( [ 'url' => 'manage/products/edit/'.$product->id , 'class' => 'form-horizontal' , 'id'=>'productEditForm' , 'files'=>true ] ) }}
+
+    <!-- This does not need to be multi-part as our uploads are handled by Dropzone -->
+    {{ Form::open( [ 'url' => 'manage/products/edit/'.$product->id , 'class' => 'form-horizontal' , 'id'=>'productEditForm' ] ) }}
 
         <!-- Used To Validate Against -->
         {{ Form::hidden('id', $product->id) }}
@@ -62,14 +68,17 @@
             </fieldset>
         </div>
 
+        <!-- Submit Dat Form -->
         <fieldset>
             <button type="submit" class="btn btn-primary pull-right"><span class="icon-plus icon-white"></span> Save Product</button>
         </fieldset>
+
     {{ Form::close() }}
 @stop
 
 @section('sidebar')
 
+    <!-- Sidebar Container -->
     <div class="well well-small">
         <h4>Upload Product Images</h4>
         <p>Drag and drop images into the box below or simply click it to select files to upload</p>
@@ -79,6 +88,8 @@
                 <input name="file" type="file" multiple />
             </div>
         {{ Form::close() }}
+
+        <!-- Product Deletion -->
         <h4>Delete Product</h4>
         <p>Deleting this product cannot be undone, please be absolutely sure you want to do this before proceeding.</p>
         <a href="{{ url('manage/products/delete/'.$product->id) }}" class="btn btn-danger"><span class="icon-remove icon-white"></span> Delete Product</a>
