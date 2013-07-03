@@ -11,7 +11,7 @@
     @include('ProductCatalog::partials.messaging')
 
     <!-- Create A New Attribute... Yeah -->
-    <a class="add-new-object-button btn btn-primary pull-right" href="{{ url('manage/attribute-sets/new') }}">
+    <a class="add-new-object-button btn btn-primary pull-right" href="{{ url('manage/attributes/new') }}">
         <span class="icon-plus icon-white"></span> New Attribute
     </a>
 
