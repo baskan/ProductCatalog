@@ -3,6 +3,7 @@ namespace Davzie\ProductCatalog\Controllers;
 use View;
 use Redirect;
 use Davzie\ProductCatalog\Models\Interfaces\AttributeRepository;
+use Davzie\ProductCatalog\Models\Interfaces\AttributeTypeRepository;
 use Davzie\ProductCatalog\Entities\AttributeNew;
 use Davzie\ProductCatalog\Entities\AttributeEdit;
 
@@ -15,6 +16,12 @@ class AttributesController extends ManageBaseController {
     protected $attributes;
 
     /**
+     * The attribute types available
+     * @var AttributeTypeRepository
+     */
+    protected $attribute_types;
+
+    /**
      * Let's whitelist all the methods we want to allow guests to visit!
      *
      * @access   protected
@@ -25,8 +32,9 @@ class AttributesController extends ManageBaseController {
     /**
      * Construct shit
      */
-    public function __construct( AttributeRepository $attributes ){
+    public function __construct( AttributeRepository $attributes , AttributeTypeRepository $attribute_types ){
         $this->attributes = $attributes;
+        $this->attribute_types = $attribute_types;
         parent::__construct();
     }
 
@@ -91,7 +99,7 @@ class AttributesController extends ManageBaseController {
      * @return View
      */
     public function getNew(){
-        $attribute_types = $this->attribute_types->getAll();
+        $attribute_types = $this->attribute_types->getAll()->lists( 'name' , 'id' );
         return View::make('ProductCatalog::attributes.new')
                     ->with( 'attribute_types' , $attribute_types );
     }
