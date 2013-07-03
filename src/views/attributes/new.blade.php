@@ -21,7 +21,23 @@
         <fieldset>
             <legend>Basic Information</legend>
 
-            <!-- Title -->
+            <!-- Type -->
+            <div class="control-group">
+            <label class="control-label">Attribute Type</label>
+                <div class="controls">
+                    {{ Form::select('attribute_type', $attribute_types, Input::old('attribute_type') ) }}
+                </div>
+            </div>
+
+            <!-- Key -->
+            <div class="control-group">
+                <label class="control-label">Key</label>
+                <div class="controls">
+                    {{ Form::text('key', Input::old('key'), [ 'placeholder'=>'Attribute Key ("sofa-color")' ] ) }}
+                </div>
+            </div>
+
+            <!-- Name -->
             <div class="control-group">
                 <label class="control-label">Name</label>
                 <div class="controls">

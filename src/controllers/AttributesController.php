@@ -91,7 +91,9 @@ class AttributesController extends ManageBaseController {
      * @return View
      */
     public function getNew(){
-        return View::make('ProductCatalog::attributes.new');
+        $attribute_types = $this->attribute_types->getAll();
+        return View::make('ProductCatalog::attributes.new')
+                    ->with( 'attribute_types' , $attribute_types );
     }
 
     /**
