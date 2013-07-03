@@ -25,7 +25,7 @@
             <div class="control-group">
             <label class="control-label">Attribute Type</label>
                 <div class="controls">
-                    {{ Form::select('attribute_type_id', $attribute_types, Input::old('attribute_type') ) }}
+                    {{ Form::select('attribute_type_id', $attribute_types, Input::old('attribute_type_id') ) }}
                 </div>
             </div>
 

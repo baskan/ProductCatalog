@@ -33,13 +33,13 @@
                 @foreach($attributes as $attr)
                     <tr>
                         <td>
-                            <a href="{{ url('manage/attribute-sets/edit/'.$attr->id) }}">{{ $attr->key }}</a>
+                            <a href="{{ url('manage/attributes/edit/'.$attr->id) }}">{{ $attr->key }}</a>
                         </td>
                         <td>
-                            <a href="{{ url('manage/attribute-sets/edit/'.$attr->id) }}">{{ $attr->name }}</a>
+                            <a href="{{ url('manage/attributes/edit/'.$attr->id) }}">{{ $attr->name }}</a>
                         </td>
                         <td>
-                            <a href="{{ url('manage/attribute-sets/edit/'.$attr->id) }}">{{ $attr->type }}</a>
+                            <a href="{{ url('manage/attributes/edit/'.$attr->id) }}">{{ $attr->type }}</a>
                         </td>
                     </tr>
                 @endforeach

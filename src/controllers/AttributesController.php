@@ -69,13 +69,16 @@ class AttributesController extends ManageBaseController {
      */
     public function getEdit( $id = null )
     {
-        $set = $this->attributes->find($id);
+        $attribute = $this->attributes->find($id);
 
-        if( !$set )
+        if( !$attribute )
             return Redirect::to('manage/attributes');
 
+        $attribute_types = $this->attribute_types->getAll()->lists( 'name' , 'id' );
+
         return View::make('ProductCatalog::attributes.edit')
-                    ->with( 'set' , $set );
+                    ->with( 'attribute' , $attribute )
+                    ->with( 'attribute_types' , $attribute_types );
     }
 
     /**
