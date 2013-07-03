@@ -26,7 +26,7 @@
         <!-- Tab Navigation Elements -->
         <ul class="nav nav-tabs">
             <li class="active"><a href="#basics" data-toggle="tab">Basic Information</a></li>
-            <li><a href="#attributes" data-toggle="tab">Attributes</a></li>
+            <li><a href="#attributes" data-toggle="tab">Attribute Values</a></li>
         </ul>
 
         <!-- Start Our Tabs -->
@@ -39,7 +39,7 @@
 
             <!-- Attribute Values -->
             <fieldset class="tab-pane active" id="attributes">
-                @include('ProductCatalog::attributes.partials.attributes')
+                {{ $attributeValuesView }}
             </fieldset>
 
         </div>
