@@ -83,7 +83,7 @@ class AttributesController extends ManageBaseController {
      * @return Redirect
      */
     public function postNew(){
-        $entity = new AttributeSetNew();
+        $entity = new AttributeNew();
         
         if ( $entity->isValid() === false )
             return Redirect::to('manage/attributes/new')->withInput()->with( 'errors' , $entity->errors() );
@@ -109,7 +109,7 @@ class AttributesController extends ManageBaseController {
      * @return Redirect
      */
     public function postEdit( $id ){
-        $entity = new AttributeSetEdit( $id );
+        $entity = new AttributeEdit( $id );
 
         if ( $entity->isValid() === false )
             return Redirect::to('manage/attributes/edit/'.$id)->withInput()->with( 'errors' , $entity->errors() );

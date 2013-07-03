@@ -22,9 +22,9 @@
         <table class="table table-condensed">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>Key</th>
                     <th>Name</th>
-                    <th>Number Of Products</th>
+                    <th>Type</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,13 +33,13 @@
                 @foreach($attributes as $attr)
                     <tr>
                         <td>
-                            <a href="{{ url('manage/attribute-sets/edit/'.$attr->id) }}">{{ $attr->id }}</a>
+                            <a href="{{ url('manage/attribute-sets/edit/'.$attr->id) }}">{{ $attr->key }}</a>
                         </td>
                         <td>
                             <a href="{{ url('manage/attribute-sets/edit/'.$attr->id) }}">{{ $attr->name }}</a>
                         </td>
                         <td>
-                            <a href="{{ url('manage/attribute-sets/edit/'.$attr->id) }}">{{ $attr->products()->count() }}</a>
+                            <a href="{{ url('manage/attribute-sets/edit/'.$attr->id) }}">{{ $attr->type }}</a>
                         </td>
                     </tr>
                 @endforeach
