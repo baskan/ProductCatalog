@@ -36,7 +36,9 @@
           <li><a href="#pricing" data-toggle="tab">Pricing</a></li>
           <li><a href="#media" data-toggle="tab">Media</a></li>
           <li><a href="#categories" data-toggle="tab">Categories</a></li>
-          <li id="attributesNavTab"><a href="#attributes" data-toggle="tab">Attributes</a></li>
+          @if( $product->attribute_set_id )
+              <li id="attributesNavTab"><a href="#attributes" data-toggle="tab">Attributes</a></li>
+          @endif
         </ul>
 
         <!-- Start Our Tabs -->
