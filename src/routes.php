@@ -3,6 +3,7 @@
     Route::filter('pageFilter', 'Davzie\ProductCatalog\Filters\Page'); // Used to authenticate admin users
 
     // Routing specific to the catalog system
+    Route::controller( 'manage/attributes' , 'Davzie\ProductCatalog\Controllers\AttributesController' );
     Route::controller( 'manage/attribute-sets' , 'Davzie\ProductCatalog\Controllers\AttributeSetsController' );
     Route::controller( 'manage/users' , 'Davzie\ProductCatalog\Controllers\UsersController' );
     Route::controller( 'manage/categories' , 'Davzie\ProductCatalog\Controllers\CategoriesController' );
