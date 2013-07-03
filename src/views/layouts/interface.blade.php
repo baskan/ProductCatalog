@@ -29,9 +29,9 @@
           <a class="brand" href="{{ url('manage') }}">{{ Config::get('ProductCatalog::app.name') }}</a>
           <div class="nav-collapse collapse visible-desktop">
             <ul class="nav">
-              <li class="{{ Request::is('manage/products*') ? 'active' : '' }}"><a href="{{ url('manage/customers') }}">Products</a></li>
-              <li class="{{ Request::is('manage/categories*') ? 'active' : '' }}"><a href="{{ url('manage/transactions') }}">Categories</a></li>
-              <li class="{{ Request::is('manage/attributes*') ? 'active' : '' }}"><a href="{{ url('manage/lessons') }}">Attributes</a></li>
+              <li class="{{ Request::is('manage/products*') ? 'active' : '' }}"><a href="{{ url('manage/products') }}">Products</a></li>
+              <li class="{{ Request::is('manage/categories*') ? 'active' : '' }}"><a href="{{ url('manage/categories') }}">Categories</a></li>
+              <li class="{{ Request::is('manage/attributes*') ? 'active' : '' }}"><a href="{{ url('manage/attributes') }}">Attributes</a></li>
             </ul>
           </div><!--/.nav-collapse -->
 

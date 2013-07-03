@@ -75,7 +75,8 @@ class AttributesController extends ManageBaseController {
             return Redirect::to('manage/attributes');
 
         $attribute_types = $this->attribute_types->getAll()->lists( 'name' , 'id' );
-        $attributeValuesView = View::make( 'ProductCatalog::attributes.partials.attributes.text' );
+        $attributeValuesView = View::make( 'ProductCatalog::attributes.partials.attributes.text' )
+                                    ->with( 'attribute' , $attribute );
 
         return View::make('ProductCatalog::attributes.edit')
                     ->with( 'attribute' , $attribute )

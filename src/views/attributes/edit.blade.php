@@ -38,7 +38,7 @@
             </fieldset>
 
             <!-- Attribute Values -->
-            <fieldset class="tab-pane active" id="attributes">
+            <fieldset class="tab-pane" id="attributes">
                 {{ $attributeValuesView }}
             </fieldset>
 
