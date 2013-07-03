@@ -30,7 +30,8 @@
             <div class="control-group">
             <label class="control-label">Attribute Type</label>
                 <div class="controls">
-                    {{ Form::select('attribute_type_id', $attribute_types, Input::old('attribute_type_id' , $attribute->attribute_type_id ) ) }}
+                    {{ Form::select('attribute_type_id', $attribute_types, $attribute->attribute_type_id , [ 'disabled'=>'disabled' ] ) }}
+                    <span class="help-block"><strong>Note:</strong> You cannot change the key once it has been set, this is to stop potential conflicts.</span>
                 </div>
             </div>
 
@@ -38,7 +39,8 @@
             <div class="control-group">
                 <label class="control-label">Key</label>
                 <div class="controls">
-                    {{ Form::text('key', Input::old('key' , $attribute->key ), [ 'placeholder'=>'Attribute Key ("sofa-color")' ] ) }}
+                    {{ Form::text('key', $attribute->key, [ 'disabled'=>'disabled' ] ) }}
+                    <span class="help-block"><strong>Note:</strong> You cannot change the key once it has been set, this is to stop potential conflicts.</span>
                 </div>
             </div>
 
