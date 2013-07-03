@@ -1,11 +1,13 @@
 <?php
-namespace Davzie\ProductCatalog\Entities;
-use App;
-use Str;
-use Input;
-class ProductNew extends Base {
+namespace Davzie\ProductCatalog\Products\Entities;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Str;
+use Illuminate\Support\Facades\Input;
+use Davzie\ProductCatalog\Entity;
 
-    protected static $model = 'Davzie\ProductCatalog\Models\Interfaces\ProductRepository';
+class Create extends Entity {
+
+    protected static $model = 'Davzie\ProductCatalog\Product';
 
     /**
      * We may want to specify fixed stuff to throw into the database, do so here.

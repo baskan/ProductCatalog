@@ -65,7 +65,7 @@ class CategoryEloquent extends Eloquent implements CategoryRepository {
      * @return Eloquent
      */
     public function products(){
-        return $this->belongsToMany( 'Davzie\ProductCatalog\Models\ProductEloquent' , 'product_categories' , 'category_id' , 'product_id' );
+        return $this->belongsToMany( 'Davzie\ProductCatalog\Products\Repositories\Eloquent' , 'product_categories' , 'category_id' , 'product_id' );
     }
 
     /**

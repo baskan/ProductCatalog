@@ -1,7 +1,7 @@
 <?php
 namespace Davzie\ProductCatalog\Seeds;
 use Illuminate\Database\Seeder;
-use Eloquent;
+use Illuminate\Support\Facades\Eloquent;
 
 class DatabaseSeeder extends Seeder {
 

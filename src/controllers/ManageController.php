@@ -7,13 +7,13 @@ use Redirect;
 use Validator;
 use Session;
 use Input;
-use Davzie\ProductCatalog\Models\Interfaces\ProductRepository;
+use Davzie\ProductCatalog\Product;
 
 class ManageController extends ManageBaseController {
 
     /**
      * The products object
-     * @var ProductEloquent
+     * @var Product
      */
     protected $products;
 
@@ -32,7 +32,7 @@ class ManageController extends ManageBaseController {
     /**
      * Construct shit
      */
-    public function __construct( ProductRepository $products ){
+    public function __construct( Product $products ){
         $this->products = $products;
         parent::__construct();
     }

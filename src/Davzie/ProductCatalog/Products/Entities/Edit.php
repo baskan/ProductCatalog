@@ -1,11 +1,13 @@
 <?php
-namespace Davzie\ProductCatalog\Entities;
-use App;
-use Input;
+namespace Davzie\ProductCatalog\Products\Entities;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Input;
 use Str;
-class ProductEdit extends Base {
+use Davzie\ProductCatalog\Entity;
 
-    protected static $model = 'Davzie\ProductCatalog\Models\Interfaces\ProductRepository';
+class Edit extends Entity {
+
+    protected static $model = 'Davzie\ProductCatalog\Product';
 
     protected static $rules = [
         'id'                    => 'required|integer|exists:products,id',

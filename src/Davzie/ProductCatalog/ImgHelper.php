@@ -1,7 +1,7 @@
 <?php
-namespace Davzie\ProductCatalog\Libraries;
+namespace Davzie\ProductCatalog;
 use Davzie\ProductCatalog\Models\Interfaces\UploadRepository;
-use File;
+use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 
 class ImgHelper {

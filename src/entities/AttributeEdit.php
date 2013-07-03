@@ -1,7 +1,8 @@
 <?php
 namespace Davzie\ProductCatalog\Entities;
+use Davzie\ProductCatalog\Entity;
 
-class AttributeEdit extends Base {
+class AttributeEdit extends Entity {
 
     protected static $model = 'Davzie\ProductCatalog\Models\Interfaces\AttributeRepository';
 

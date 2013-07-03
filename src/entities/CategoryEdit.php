@@ -1,10 +1,11 @@
 <?php
 namespace Davzie\ProductCatalog\Entities;
+use Davzie\ProductCatalog\Entity;
 use App;
 use Str;
 use Input;
 
-class CategoryEdit extends Base {
+class CategoryEdit extends Entity {
 
     protected static $model = 'Davzie\ProductCatalog\Models\Interfaces\CategoryRepository';
 

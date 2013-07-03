@@ -1,5 +1,5 @@
 <?php
-namespace Davzie\ProductCatalog\Entities;
+namespace Davzie\ProductCatalog;
 use Validator;
 use Input;
 use Illuminate\Support\MessageBag;
@@ -7,7 +7,7 @@ use App;
 use Config;
 use Auth;
 
-class BaseUpload {
+class UploadEntity {
 
     /**
      * The uploads object

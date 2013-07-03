@@ -16,15 +16,10 @@
         "classmap": [
             "src/migrations",
             "src/controllers",
-            "src/filters",
-            "src/commands",
             "src/entities",
-            "src/libraries",
-            "src/seeds",
             "src/models",
             "src/models/repositories",
-            "src/models/interfaces",
-            "src/composers"
+            "src/models/interfaces"
         ],
         "psr-0": {
             "Davzie\\ProductCatalog": "src/"

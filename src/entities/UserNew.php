@@ -1,6 +1,8 @@
 <?php
 namespace Davzie\ProductCatalog\Entities;
-class UserNew extends Base {
+use Davzie\ProductCatalog\Entity;
+
+class UserNew extends Entity {
 
     protected static $model = 'Davzie\ProductCatalog\Models\Interfaces\UserRepository';
 

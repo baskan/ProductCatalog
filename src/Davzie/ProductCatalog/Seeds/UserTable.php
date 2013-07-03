@@ -1,9 +1,9 @@
 <?php
 namespace Davzie\ProductCatalog\Seeds;
 use Illuminate\Database\Seeder;
-use DB;
-use Config;
-use Hash;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Hash;
 
 class UserTable extends Seeder {
 

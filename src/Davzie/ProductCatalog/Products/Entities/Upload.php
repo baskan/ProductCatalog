@@ -1,8 +1,9 @@
 <?php
-namespace Davzie\ProductCatalog\Entities;
-use App;
+namespace Davzie\ProductCatalog\Products\Entities;
+use Illuminate\Support\Facades\App;
+use Davzie\ProductCatalog\UploadEntity;
 
-class ProductUpload extends BaseUpload {
+class Upload extends UploadEntity {
 
     /**
      * The rules to apply to stuffs
@@ -24,6 +25,6 @@ class ProductUpload extends BaseUpload {
      * NOTE: This cannot be the interface that would usually be resolved through IoC
      * @var string
      */
-    protected static $model = 'Davzie\ProductCatalog\Models\ProductEloquent';
+    protected static $model = 'Davzie\ProductCatalog\Products\Repositories\Eloquent';
 
 }

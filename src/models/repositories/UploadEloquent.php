@@ -5,7 +5,7 @@ use Config;
 use File;
 use Exception;
 use Davzie\ProductCatalog\Models\Interfaces\UploadRepository;
-use Davzie\ProductCatalog\Libraries\ImgHelper;
+use Davzie\ProductCatalog\ImgHelper;
 class UploadEloquent extends Eloquent implements UploadRepository {
 
     /**

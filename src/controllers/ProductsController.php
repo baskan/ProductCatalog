@@ -9,12 +9,13 @@ use File;
 use Request;
 use Response;
 use App;
-use Davzie\ProductCatalog\Models\Interfaces\ProductRepository;
+use Davzie\ProductCatalog\Product;
 use Davzie\ProductCatalog\Models\Interfaces\CategoryRepository;
 use Davzie\ProductCatalog\Models\Interfaces\AttributeSetRepository;
-use Davzie\ProductCatalog\Entities\ProductNew;
-use Davzie\ProductCatalog\Entities\ProductEdit;
-use Davzie\ProductCatalog\Entities\ProductUpload;
+use Davzie\ProductCatalog\Products\Entities\Create;
+use Davzie\ProductCatalog\Products\Entities\Edit;
+use Davzie\ProductCatalog\Products\Entities\Upload;
+
 
 class ProductsController extends ManageBaseController {
 
@@ -47,7 +48,7 @@ class ProductsController extends ManageBaseController {
     /**
      * Construct shit
      */
-    public function __construct( ProductRepository $products , CategoryRepository $categories , AttributeSetRepository $attribute_sets ){
+    public function __construct( Product $products , CategoryRepository $categories , AttributeSetRepository $attribute_sets ){
         $this->products = $products;
         $this->categories = $categories;
         $this->attribute_sets = $attribute_sets;
@@ -129,7 +130,7 @@ class ProductsController extends ManageBaseController {
      * @return Redirect
      */
     public function postNew(){
-        $entity = new ProductNew();
+        $entity = new Create();
         
         if ( $entity->isValid() === false )
             return Redirect::to('manage/products/new')->withInput()->with( 'errors' , $entity->errors() );
@@ -144,7 +145,7 @@ class ProductsController extends ManageBaseController {
      * @return Redirect
      */
     public function postEdit( $id ){
-        $entity = new ProductEdit( $id );
+        $entity = new Edit( $id );
         
         if ( $entity->isValid() === false )
             return Redirect::to('manage/products/edit/'.$id)->withInput()->with( 'errors' , $entity->errors() );
@@ -164,7 +165,7 @@ class ProductsController extends ManageBaseController {
         if( !Request::ajax() )
             Response::json('error', 400);
 
-        $entity = new ProductUpload( $id );
+        $entity = new Upload( $id );
 
         if ( $entity->isValid() === false )
             return Response::make( $entity->errors() , 400 );

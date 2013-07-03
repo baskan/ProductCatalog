@@ -1,12 +1,12 @@
 <?php
-namespace Davzie\ProductCatalog\Entities;
-use Validator;
-use Input;
+namespace Davzie\ProductCatalog;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\MessageBag;
 use Exception;
-use App;
+use Illuminate\Support\Facades\App;
 
-class Base {
+abstract class Entity {
 
     /**
      * The rules for the form for validation

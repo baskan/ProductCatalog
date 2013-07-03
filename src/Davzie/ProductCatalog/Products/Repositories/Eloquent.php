@@ -1,10 +1,10 @@
 <?php
-namespace Davzie\ProductCatalog\Models;
-use Eloquent;
-use App;
-use Davzie\ProductCatalog\Models\Interfaces\ProductRepository;
+namespace Davzie\ProductCatalog\Products\Repositories;
+use Eloquent as IEloquent;
+use Illuminate\Support\Facades\App;
+use Davzie\ProductCatalog\Product;
 
-class ProductEloquent extends Eloquent implements ProductRepository {
+class Eloquent extends IEloquent implements Product {
 
     /**
      * The database table used by the model.

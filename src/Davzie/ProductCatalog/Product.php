@@ -1,10 +1,10 @@
 <?php
-namespace Davzie\ProductCatalog\Models\Interfaces;
+namespace Davzie\ProductCatalog;
 
 /**
  * Lets tell our interface what methods we want to ensure are on the class that implements this contract
  */
-interface ProductRepository {
+interface Product {
 
     /**
      * Get all the products in the system
