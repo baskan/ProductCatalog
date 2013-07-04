@@ -2,7 +2,7 @@
 namespace Davzie\ProductCatalog;
 use Davzie\ProductCatalog\Upload;
 use Illuminate\Support\Facades\File;
-use Intervention\Image\Facades\Image;
+use Intervention\Image\Image;
 
 class ImgHelper {
 
