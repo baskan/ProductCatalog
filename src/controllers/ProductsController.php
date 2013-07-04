@@ -10,24 +10,24 @@ use Request;
 use Response;
 use App;
 use Davzie\ProductCatalog\Product;
-use Davzie\ProductCatalog\Models\Interfaces\CategoryRepository;
+use Davzie\ProductCatalog\Category;
 use Davzie\ProductCatalog\Models\Interfaces\AttributeSetRepository;
-use Davzie\ProductCatalog\Products\Entities\Create;
-use Davzie\ProductCatalog\Products\Entities\Edit;
-use Davzie\ProductCatalog\Products\Entities\Upload;
+use Davzie\ProductCatalog\Product\Entities\Create;
+use Davzie\ProductCatalog\Product\Entities\Edit;
+use Davzie\ProductCatalog\Product\Entities\Upload;
 
 
 class ProductsController extends ManageBaseController {
 
     /**
      * The products object
-     * @var ProductEloquent
+     * @var Product
      */
     protected $products;
 
     /**
      * The categories object
-     * @var CategoryRepository
+     * @var Category
      */
     protected $categories;
 
@@ -48,7 +48,7 @@ class ProductsController extends ManageBaseController {
     /**
      * Construct shit
      */
-    public function __construct( Product $products , CategoryRepository $categories , AttributeSetRepository $attribute_sets ){
+    public function __construct( Product $products , Category $categories , AttributeSetRepository $attribute_sets ){
         $this->products = $products;
         $this->categories = $categories;
         $this->attribute_sets = $attribute_sets;

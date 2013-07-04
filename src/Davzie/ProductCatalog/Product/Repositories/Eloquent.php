@@ -1,5 +1,5 @@
 <?php
-namespace Davzie\ProductCatalog\Products\Repositories;
+namespace Davzie\ProductCatalog\Product\Repositories;
 use Eloquent as IEloquent;
 use Illuminate\Support\Facades\App;
 use Davzie\ProductCatalog\Product;
@@ -58,7 +58,7 @@ class Eloquent extends IEloquent implements Product {
      * @return Eloquent
      */
     public function categories(){
-        return $this->belongsToMany( 'Davzie\ProductCatalog\Models\CategoryEloquent' , 'product_categories' , 'product_id' , 'category_id' );
+        return $this->belongsToMany( 'Davzie\ProductCatalog\Category\Repositories\Eloquent' , 'product_categories' , 'product_id' , 'category_id' );
     }
 
     /**

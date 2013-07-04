@@ -1,5 +1,5 @@
 <?php
-namespace Davzie\ProductCatalog\Products\Entities;
+namespace Davzie\ProductCatalog\Product\Entities;
 use Illuminate\Support\Facades\App;
 use Davzie\ProductCatalog\UploadEntity;
 
@@ -25,6 +25,6 @@ class Upload extends UploadEntity {
      * NOTE: This cannot be the interface that would usually be resolved through IoC
      * @var string
      */
-    protected static $model = 'Davzie\ProductCatalog\Products\Repositories\Eloquent';
+    protected static $model = 'Davzie\ProductCatalog\Product\Repositories\Eloquent';
 
 }

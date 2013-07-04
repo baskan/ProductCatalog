@@ -1,9 +1,9 @@
 <?php
-namespace Davzie\ProductCatalog\Models;
-use Eloquent;
-use Davzie\ProductCatalog\Models\Interfaces\CategoryRepository;
+namespace Davzie\ProductCatalog\Category\Repositories;
+use Eloquent as IEloquent;
+use Davzie\ProductCatalog\Category;
 
-class CategoryEloquent extends Eloquent implements CategoryRepository {
+class Eloquent extends IEloquent implements Category {
 
     /**
      * The database table used by the model.
@@ -49,7 +49,7 @@ class CategoryEloquent extends Eloquent implements CategoryRepository {
      * @return Eloquent
      */
     public function parent(){
-        return $this->belongsTo( 'Davzie\ProductCatalog\Models\CategoryEloquent' , 'parent_id' );
+        return $this->belongsTo( 'Davzie\ProductCatalog\Category\Repositories\Eloquent' , 'parent_id' );
     }
 
     /**
@@ -57,7 +57,7 @@ class CategoryEloquent extends Eloquent implements CategoryRepository {
      * @return Eloquent
      */
     public function children(){
-        return $this->hasMany( 'Davzie\ProductCatalog\Models\CategoryEloquent' , 'parent_id' );
+        return $this->hasMany( 'Davzie\ProductCatalog\Category\Repositories\Eloquent' , 'parent_id' );
     }
 
     /**
@@ -65,7 +65,7 @@ class CategoryEloquent extends Eloquent implements CategoryRepository {
      * @return Eloquent
      */
     public function products(){
-        return $this->belongsToMany( 'Davzie\ProductCatalog\Products\Repositories\Eloquent' , 'product_categories' , 'category_id' , 'product_id' );
+        return $this->belongsToMany( 'Davzie\ProductCatalog\Product\Repositories\Eloquent' , 'product_categories' , 'category_id' , 'product_id' );
     }
 
     /**

@@ -1,5 +1,5 @@
 <?php
-namespace Davzie\ProductCatalog\Products\Entities;
+namespace Davzie\ProductCatalog\Product\Entities;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Str;
 use Illuminate\Support\Facades\Input;

@@ -1,12 +1,12 @@
 <?php
-namespace Davzie\ProductCatalog\Models;
+namespace Davzie\ProductCatalog\User\Repositories;
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
-use Eloquent;
+use Davzie\ProductCatalog\User;
+use Eloquent as IEloquent;
 use Hash;
-use Davzie\ProductCatalog\Models\Interfaces\UserRepository;
 
-class UserEloquent extends Eloquent implements UserInterface, RemindableInterface, UserRepository {
+class Eloquent extends IEloquent implements UserInterface, RemindableInterface, User {
 
 	/**
 	 * The database table used by the model.

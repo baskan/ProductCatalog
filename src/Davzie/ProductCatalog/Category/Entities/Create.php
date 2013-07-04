@@ -1,13 +1,13 @@
 <?php
-namespace Davzie\ProductCatalog\Entities;
+namespace Davzie\ProductCatalog\Category\Entities;
 use Davzie\ProductCatalog\Entity;
 use App;
 use Input;
 use Str;
 
-class CategoryNew extends Entity {
+class Create extends Entity {
 
-    protected static $model = 'Davzie\ProductCatalog\Models\Interfaces\CategoryRepository';
+    protected static $model = 'Davzie\ProductCatalog\Category';
 
     /**
      * We may want to specify fixed stuff to throw into the database, do so here.

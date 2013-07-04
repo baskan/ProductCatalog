@@ -2,15 +2,15 @@
 namespace Davzie\ProductCatalog\Controllers;
 use View;
 use Redirect;
-use Davzie\ProductCatalog\Models\Interfaces\CategoryRepository;
-use Davzie\ProductCatalog\Entities\CategoryNew;
-use Davzie\ProductCatalog\Entities\CategoryEdit;
+use Davzie\ProductCatalog\Category;
+use Davzie\ProductCatalog\Category\Entities\Create as CategoryNew;
+use Davzie\ProductCatalog\Category\Entities\Edit as CategoryEdit;
 
 class CategoriesController extends ManageBaseController {
 
     /**
      * The categories object
-     * @var CategoryRepository
+     * @var Category
      */
     protected $categories;
 
@@ -25,7 +25,7 @@ class CategoriesController extends ManageBaseController {
     /**
      * Construct shit
      */
-    public function __construct( CategoryRepository $categories ){
+    public function __construct( Category $categories ){
         $this->categories = $categories;
         parent::__construct();
     }

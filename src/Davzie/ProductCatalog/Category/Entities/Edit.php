@@ -1,13 +1,13 @@
 <?php
-namespace Davzie\ProductCatalog\Entities;
+namespace Davzie\ProductCatalog\Category\Entities;
 use Davzie\ProductCatalog\Entity;
 use App;
 use Str;
 use Input;
 
-class CategoryEdit extends Entity {
+class Edit extends Entity {
 
-    protected static $model = 'Davzie\ProductCatalog\Models\Interfaces\CategoryRepository';
+    protected static $model = 'Davzie\ProductCatalog\Category';
 
     protected static $rules = [
         'id'            =>  'required|integer|exists:categories,id',

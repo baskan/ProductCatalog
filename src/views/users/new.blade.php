@@ -53,7 +53,7 @@
             <div class="control-group">
                 <label class="control-label">Password</label>
                 <div class="controls">
-                    {{ Form::text('password', '' , [ 'placeholder'=>'Enter New Password...' ] ) }}
+                    {{ Form::password('password', '' , [ 'placeholder'=>'Enter New Password...' ] ) }}
                 </div>
             </div>
 
@@ -61,7 +61,7 @@
             <div class="control-group">
                 <label class="control-label">Confirm Password</label>
                 <div class="controls">
-                    {{ Form::text('password_confirmation', '' , [ 'placeholder'=>'Confirm New Password...' ] ) }}
+                    {{ Form::password('password_confirmation', '' , [ 'placeholder'=>'Confirm New Password...' ] ) }}
                 </div>
             </div>
 

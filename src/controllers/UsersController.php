@@ -1,15 +1,16 @@
 <?php
 namespace Davzie\ProductCatalog\Controllers;
-use Davzie\ProductCatalog\Models\Interfaces\UserRepository;
-use Davzie\ProductCatalog\Entities\UserNew;
-use Davzie\ProductCatalog\Entities\UserEdit;
+use Davzie\ProductCatalog\User;
+use Davzie\ProductCatalog\User\Entities\Create as UserNew;
+use Davzie\ProductCatalog\User\Entities\Edit as UserEdit;
 use Redirect;
 use View;
+
 class UsersController extends ManageBaseController {
 
     /**
      * The user object
-     * @var UserRepository
+     * @var User
      */
     protected $users;
 
@@ -24,7 +25,7 @@ class UsersController extends ManageBaseController {
     /**
      * Construct shit
      */
-    public function __construct( UserRepository $users ){
+    public function __construct( User $users ){
         $this->users = $users;
         parent::__construct();
     }

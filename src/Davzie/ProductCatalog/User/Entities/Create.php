@@ -1,10 +1,12 @@
 <?php
-namespace Davzie\ProductCatalog\Entities;
+namespace Davzie\ProductCatalog\User\Entities;
 use Davzie\ProductCatalog\Entity;
+use Input;
+use App;
 
-class UserNew extends Entity {
+class Create extends Entity {
 
-    protected static $model = 'Davzie\ProductCatalog\Models\Interfaces\UserRepository';
+    protected static $model = 'Davzie\ProductCatalog\User';
 
     /**
      * We may want to specify fixed stuff to throw into the database, do so here.

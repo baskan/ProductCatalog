@@ -32,7 +32,7 @@ class AttributeSetEloquent extends Eloquent implements AttributeSetRepository {
      * @return Eloquent
      */
     public function products(){
-        return $this->hasMany( 'Davzie\ProductCatalog\Models\ProductEloquent' , 'attribute_set_id' );
+        return $this->hasMany( 'Davzie\ProductCatalog\Product\Repositories\Eloquent' , 'attribute_set_id' );
     }
 
 }
