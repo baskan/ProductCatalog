@@ -2,6 +2,7 @@
 namespace Davzie\ProductCatalog\Attribute\Repositories;
 use Davzie\ProductCatalog\Attribute;
 use Eloquent as IEloquent;
+use App;
 
 class Eloquent extends IEloquent implements Attribute {
 
@@ -34,6 +35,15 @@ class Eloquent extends IEloquent implements Attribute {
      */
     public function deleteById($id){
         return $this->where('id','=',$id)->delete();
+    }
+
+    /**
+     * Return the type of attribute
+     * @return TypeInterface
+     */
+    public function type(){
+        $typeTransformer = App::make( 'Davzie\ProductCatalog\Attribute\Type' );
+        return $typeTransformer->getType( $this->attribute_type_id );        
     }
 
 }

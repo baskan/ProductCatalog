@@ -69,13 +69,15 @@ class AttributesController extends ManageBaseController {
      */
     public function getEdit( $id = null )
     {
-        $attribute = $this->attributes->find($id);
+        $attribute = $this->attributes->find( $id );
+        $type = $attribute->type();
 
         if( !$attribute )
             return Redirect::to('manage/attributes');
 
         $attribute_types = $this->attribute_types->getAll()->lists( 'name' , 'id' );
-        $attributeValuesView = View::make( 'ProductCatalog::attributes.partials.attributes.text' )
+        $viewName = $type->getViewName(); // Get the filename of the view that we should be showing based on this type
+        $attributeValuesView = View::make( 'ProductCatalog::attributes.partials.attributes.'.$viewName )
                                     ->with( 'attribute' , $attribute );
 
         return View::make('ProductCatalog::attributes.edit')

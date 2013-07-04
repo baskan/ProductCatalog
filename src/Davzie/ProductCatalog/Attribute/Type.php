@@ -12,4 +12,11 @@ interface Type {
      */
     public function getAll();
 
+    /**
+     * Get the type class back based on the ID passed in
+     * @param  integer $typeId The Type ID
+     * @return TypeInterface
+     */
+    public function getType( $typeId );
+
 }

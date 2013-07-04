@@ -2,6 +2,7 @@
 namespace Davzie\ProductCatalog\Attribute\Type\Repositories;
 use Davzie\ProductCatalog\Attribute\Type;
 use Eloquent as IEloquent;
+use App;
 
 class Eloquent extends IEloquent implements Type {
 
@@ -24,6 +25,20 @@ class Eloquent extends IEloquent implements Type {
      */
     public function getAll(){
         return $this->orderBy('id','asc')->get();
+    }
+
+    /**
+     * Get the type class back based on the ID passed in
+     * @param  integer $typeId The Type ID
+     * @return TypeInterface
+     */
+    public function getType( $typeId ){
+        $type = $this->find($typeId);
+
+        if( !$type )
+            throw new UnexpectedValueException($typeId);
+
+        return App::make( 'Davzie\\ProductCatalog\\Attribute\\Type\\'.$type->class );
     }
 
 }

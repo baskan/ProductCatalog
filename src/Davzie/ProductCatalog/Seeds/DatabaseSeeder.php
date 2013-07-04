@@ -1,7 +1,7 @@
 <?php
 namespace Davzie\ProductCatalog\Seeds;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Eloquent;
+use Eloquent;
 
 class DatabaseSeeder extends Seeder {
 
@@ -10,6 +10,7 @@ class DatabaseSeeder extends Seeder {
         Eloquent::unguard();
 
         $this->call('Davzie\ProductCatalog\Seeds\UserTable');
+        $this->call('Davzie\ProductCatalog\Seeds\AttributeTypeSeeder');
         $this->command->info('All Tables Seeded');
     }
 

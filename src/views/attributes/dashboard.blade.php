@@ -39,7 +39,7 @@
                             <a href="{{ url('manage/attributes/edit/'.$attr->id) }}">{{ $attr->name }}</a>
                         </td>
                         <td>
-                            <a href="{{ url('manage/attributes/edit/'.$attr->id) }}">{{ $attr->type }}</a>
+                            <a href="{{ url('manage/attributes/edit/'.$attr->id) }}">{{ $attr->type()->getName() }}</a>
                         </td>
                     </tr>
                 @endforeach
