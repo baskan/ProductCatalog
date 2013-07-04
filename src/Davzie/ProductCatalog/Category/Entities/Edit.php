@@ -30,6 +30,7 @@ class Edit extends Entity {
 
         // Default Data
         static::$defaultData['slug'] = Str::slug( Input::get('name') , '-' );
+        static::$defaultData['description'] = Input::get('description');
 
         parent::__construct();
     }

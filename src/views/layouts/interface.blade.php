@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="{{ asset('packages/Davzie/ProductCatalog/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('packages/Davzie/ProductCatalog/css/bootstrap-responsive.min.css') }}">
         <link rel="stylesheet/less" type="text/css" href="{{ asset( 'packages/Davzie/ProductCatalog/css/styles.less' ) }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset( 'packages/Davzie/ProductCatalog/css/redactor.css' ) }}">
     @show
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -95,6 +96,7 @@
         <script>window.jQuery || document.write('<script src="{{ asset('packages/Davzie/ProductCatalog/js/jquery.js') }}"><\/script>')</script>
         <script src="{{ asset('packages/Davzie/ProductCatalog/js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('packages/Davzie/ProductCatalog/js/less.js') }}"></script>
+        <script src="{{ asset('packages/Davzie/ProductCatalog/js/redactor.min.js') }}"></script>
     @show
 
   </body>

@@ -61,6 +61,14 @@
                 </div>
             </div>
 
+            <!-- Product Description -->
+            <div class="control-group">
+                <label class="control-label" for="inputURL">Category Description</label>
+                <div class="controls">
+                    {{ Form::textarea('description', Input::old( 'description' , $category->description ) , [ 'id'=>'category-description' , 'class'=>'interface-textarea' , 'placeholder'=>'Category Description' ] ) }}
+                </div>
+            </div>
+
             <!-- Submit -->
             <div class="control-group">
                 <div class="controls">
@@ -85,4 +93,13 @@
         @endif
     </div>
 
+@stop
+
+@section('scripts')
+    @parent
+    <script>
+        $(document).ready(function(){
+            $('#category-description').redactor();
+        });
+    </script>
 @stop

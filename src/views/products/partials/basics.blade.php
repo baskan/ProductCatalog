@@ -33,12 +33,21 @@
     </div>
 </div>
 
+<!-- Enabled Product -->
 <div class="control-group">
     <div class="controls">
         <label class="checkbox">
             {{ Form::checkbox('enabled', '1', Input::old( 'enabled' , $product->enabled ) ); }}
             Enabled
         </label>
+    </div>
+</div>
+
+<!-- Product Description -->
+<div class="control-group">
+    <label class="control-label" for="inputURL">Product Description</label>
+    <div class="controls">
+        {{ Form::textarea('description', Input::old( 'description' , $product->description ) , [ 'id'=>'product-description' , 'class'=>'interface-textarea' , 'placeholder'=>'Product Description' ] ) }}
     </div>
 </div>
 
@@ -51,6 +60,9 @@
                 $('#attributesNavTab').addClass('hidden');
                 $('#attributes').remove();
             });
+
+            $('#product-description').redactor();
+
         });
     </script>
 @stop

@@ -26,7 +26,7 @@ class Edit extends Entity {
 
         // Default Data
         static::$defaultData['slug'] = Str::slug( Input::get('title') , '-' );
-
+        static::$defaultData['description'] = Input::get('description');
 
         // If we have a 0 through on attribute set ID then we can assume the user has not chosen anything
         if( Input::get('attribute_set_id') == 0 ){
