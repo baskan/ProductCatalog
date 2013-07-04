@@ -18,4 +18,10 @@ interface Set {
      */
     public function products();
 
+    /**
+     * The relationship that associates the attributes to the set
+     * @return Eloquent
+     */
+    public function attributes();
+
 }

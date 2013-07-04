@@ -35,4 +35,12 @@ class Eloquent extends IEloquent implements Set {
         return $this->hasMany( 'Davzie\ProductCatalog\Product\Repositories\Eloquent' , 'attribute_set_id' );
     }
 
+    /**
+     * The relationship that associates the attributes to the set
+     * @return Eloquent
+     */
+    public function attributes(){
+        return $this->belongsToMany( 'Davzie\ProductCatalog\Attribute\Repositories\Eloquent' , 'attribute_attribute_sets' , 'attribute_set_id' , 'attribute_id'  );
+    }
+
 }

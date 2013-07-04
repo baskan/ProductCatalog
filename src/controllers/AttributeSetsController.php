@@ -74,7 +74,10 @@ class AttributeSetsController extends ManageBaseController {
         if( !$set )
             return Redirect::to('manage/attribute-sets');
 
+        $assignedAttributes = $set->attributes()->lists('key','key');
+
         return View::make('ProductCatalog::attribute_sets.edit')
+                    ->with( 'assignedAttributes' , $assignedAttributes )
                     ->with( 'attributes' , $this->attributes->getAll() )
                     ->with( 'set' , $set );
     }

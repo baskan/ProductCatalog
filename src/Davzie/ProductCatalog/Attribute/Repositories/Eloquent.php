@@ -46,4 +46,12 @@ class Eloquent extends IEloquent implements Attribute {
         return $typeTransformer->getType( $this->attribute_type_id );        
     }
 
+    /**
+     * The relationships to get the attribute sets associated with the attribute
+     * @return Eloquent
+     */
+    public function sets(){
+        return $this->belongsToMany( 'Davzie\ProductCatalog\Attribute\Set\Repositories\Eloquent' , 'attribute_attribute_sets' , 'attribute_set_id' , 'attribute_id' );
+    }
+
 }

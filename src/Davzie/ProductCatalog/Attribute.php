@@ -19,4 +19,16 @@ interface Attribute {
      */
     public function deleteById($id);
 
+    /**
+     * Return the type of attribute
+     * @return TypeInterface
+     */
+    public function type();
+
+    /**
+     * The relationships to get the attribute sets associated with the attribute
+     * @return Eloquent
+     */
+    public function sets();
+
 }

@@ -47,7 +47,8 @@
                             <!-- Loop The Categories And Tick Em' If Appropriate -->
                             @foreach( $attributes as $attr )
                                 <label class="checkbox">
-                                    {{ Form::checkbox('assigned_attributes['.$attr->id.']',  $attr->id ) }}
+                                    <?php $chk = in_array( $attr->id , Input::old('assigned_attributes' , [] ) ) ? true : in_array( $attr->key , $assignedAttributes ) ?>
+                                    {{ Form::checkbox('assigned_attributes['.$attr->id.']',  $attr->id , $chk ) }}
                                     {{ $attr->name }} <small>( {{ $attr->type()->getName() }} :: {{ $attr->key }} )</small>
                                 </label>
                             @endforeach
