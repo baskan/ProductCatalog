@@ -2,11 +2,18 @@
 namespace Davzie\ProductCatalog\Controllers;
 use View;
 use Redirect;
+use Davzie\ProductCatalog\Attribute;
 use Davzie\ProductCatalog\Attribute\Set;
 use Davzie\ProductCatalog\Attribute\Set\Entities\Create as AttributeSetNew;
 use Davzie\ProductCatalog\Attribute\Set\Entities\Edit as AttributeSetEdit;
 
 class AttributeSetsController extends ManageBaseController {
+
+    /**
+     * The attributes object
+     * @var Davzie\ProductCatalog\Attribute
+     */
+    protected $attributes;
 
     /**
      * The attribute sets object
@@ -25,7 +32,8 @@ class AttributeSetsController extends ManageBaseController {
     /**
      * Construct shit
      */
-    public function __construct( Set $attribute_sets ){
+    public function __construct( Set $attribute_sets , Attribute $attributes ){
+        $this->attributes = $attributes;
         $this->attribute_sets = $attribute_sets;
         parent::__construct();
     }
@@ -67,6 +75,7 @@ class AttributeSetsController extends ManageBaseController {
             return Redirect::to('manage/attribute-sets');
 
         return View::make('ProductCatalog::attribute_sets.edit')
+                    ->with( 'attributes' , $this->attributes->getAll() )
                     ->with( 'set' , $set );
     }
 

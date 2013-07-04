@@ -2,7 +2,7 @@
 <div class="control-group">
     <label class="control-label" for="inputTitle">Default Value</label>
     <div class="controls">
-        {{ Form::textarea('default_value', Input::old('default_value' , $attribute->default_value ) , [ 'id'=>'attribute-default-value' , 'placeholder'=>'Default Attribute Value' ] ) }}
+        {{ Form::textarea('default', Input::old('default' , $attribute->default ) , [ 'id'=>'attribute-default-value' , 'placeholder'=>'Default Attribute Value' ] ) }}
     </div>
 </div>
 

@@ -34,12 +34,32 @@
                 </div>
             </div>
 
-            <!-- Submit -->
-            <div class="control-group">
-                <div class="controls">
-                    <button type="submit" class="btn btn-primary"><span class="icon-plus icon-white"></span> Save Attribute Set</button>
+        </fieldset>
+        @if( !$attributes->isEmpty() )
+            <fieldset>
+                <legend>Assigned Attributes</legend>
+
+                <div class="control-group">
+                    <label class="control-label">Assigned Attributes</label>
+                    <div class="controls">
+                        <div class="well well-small">
+
+                            <!-- Loop The Categories And Tick Em' If Appropriate -->
+                            @foreach( $attributes as $attr )
+                                <label class="checkbox">
+                                    {{ Form::checkbox('assigned_attributes['.$attr->id.']',  $attr->id ) }}
+                                    {{ $attr->name }} <small>( {{ $attr->type()->getName() }} :: {{ $attr->key }} )</small>
+                                </label>
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
-            </div>
+
+            </fieldset>
+        @endif
+        <fieldset>
+            <!-- Submit -->
+            <button type="submit" class="btn btn-primary pull-right"><span class="icon-plus icon-white"></span> Save Attribute Set</button>
 
         </fieldset>
     {{ Form::close() }}

@@ -6,7 +6,7 @@ class Text extends Base implements TypeInterface{
     /**
      * The ID of this type in the database
      */
-    public static $id = 2;
+    public static $id = 1;
 
     /**
      * The name of the type of field

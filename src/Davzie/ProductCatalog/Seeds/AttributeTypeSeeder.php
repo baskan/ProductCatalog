@@ -10,11 +10,6 @@ class AttributeTypeSeeder extends Seeder {
 
         $types = [
             [
-                'id'            => \Davzie\ProductCatalog\Attribute\Type\Dropdown::$id,
-                'name'          => 'Dropdown',
-                'class'         => 'Dropdown'
-            ],
-            [
                 'id'            => \Davzie\ProductCatalog\Attribute\Type\Text::$id,
                 'name'          => 'Text',
                 'class'         => 'Text'

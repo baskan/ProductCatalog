@@ -6,7 +6,7 @@ class Dropdown extends Base implements TypeInterface{
     /**
      * The ID of this type in the database
      */
-    public static $id = 1;
+    public static $id = 3;
 
     /**
      * The name of the type of field

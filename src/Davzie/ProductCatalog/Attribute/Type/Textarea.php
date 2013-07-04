@@ -6,7 +6,7 @@ class Textarea extends Base implements TypeInterface{
     /**
      * The ID of this type in the database
      */
-    public static $id = 3;
+    public static $id = 2;
 
     /**
      * The name of the type of field

@@ -1,6 +1,7 @@
 <?php
 namespace Davzie\ProductCatalog\Attribute\Entities;
 use Davzie\ProductCatalog\Entity;
+use Input;
 
 class Edit extends Entity {
 
@@ -13,6 +14,7 @@ class Edit extends Entity {
 
         // Dynamic Rules
         static::$rules['name'] = 'required|max:255|unique:attributes,name,'.$currentId;
+        static::$defaultData['default'] = Input::get('default');
 
         parent::__construct();
     }
