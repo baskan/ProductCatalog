@@ -15,11 +15,7 @@
     "autoload": {
         "classmap": [
             "src/migrations",
-            "src/controllers",
-            "src/entities",
-            "src/models",
-            "src/models/repositories",
-            "src/models/interfaces"
+            "src/controllers"
         ],
         "psr-0": {
             "Davzie\\ProductCatalog": "src/"
