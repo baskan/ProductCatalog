@@ -1,10 +1,10 @@
 <?php
-namespace Davzie\ProductCatalog\Entities;
+namespace Davzie\ProductCatalog\Attribute\Entities;
 use Davzie\ProductCatalog\Entity;
 
-class AttributeNew extends Entity {
+class Create extends Entity {
 
-    protected static $model = 'Davzie\ProductCatalog\Models\Interfaces\AttributeRepository';
+    protected static $model = 'Davzie\ProductCatalog\Attribute';
 
     protected static $rules = [
         'attribute_type_id'     =>  'required|integer|exists:attribute_types,id',

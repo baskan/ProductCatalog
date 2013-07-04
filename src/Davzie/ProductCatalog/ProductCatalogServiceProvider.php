@@ -33,10 +33,10 @@ class ProductCatalogServiceProvider extends ServiceProvider {
 		$this->app->bind('Davzie\ProductCatalog\User','Davzie\ProductCatalog\User\Repositories\Eloquent');
 		$this->app->bind('Davzie\ProductCatalog\Product','Davzie\ProductCatalog\Product\Repositories\Eloquent');
 		$this->app->bind('Davzie\ProductCatalog\Category','Davzie\ProductCatalog\Category\Repositories\Eloquent');
-		$this->app->bind('Davzie\ProductCatalog\Models\Interfaces\UploadRepository','Davzie\ProductCatalog\Models\UploadEloquent');
-		$this->app->bind('Davzie\ProductCatalog\Models\Interfaces\AttributeSetRepository','Davzie\ProductCatalog\Models\AttributeSetEloquent');
-		$this->app->bind('Davzie\ProductCatalog\Models\Interfaces\AttributeTypeRepository','Davzie\ProductCatalog\Models\AttributeTypeEloquent');
-		$this->app->bind('Davzie\ProductCatalog\Models\Interfaces\AttributeRepository','Davzie\ProductCatalog\Models\AttributeEloquent');
+		$this->app->bind('Davzie\ProductCatalog\Upload','Davzie\ProductCatalog\Upload\Repositories\Eloquent');
+		$this->app->bind('Davzie\ProductCatalog\Attribute','Davzie\ProductCatalog\Attribute\Repositories\Eloquent');
+		$this->app->bind('Davzie\ProductCatalog\Attribute\Set','Davzie\ProductCatalog\Attribute\Set\Repositories\Eloquent');
+		$this->app->bind('Davzie\ProductCatalog\Attribute\Type','Davzie\ProductCatalog\Attribute\Type\Repositories\Eloquent');
 
 		// Register our clear cache commands etc
 		$this->app['command.productcatalog.clearcache'] = $this->app->share(function($app)

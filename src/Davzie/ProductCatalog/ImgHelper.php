@@ -1,6 +1,6 @@
 <?php
 namespace Davzie\ProductCatalog;
-use Davzie\ProductCatalog\Models\Interfaces\UploadRepository;
+use Davzie\ProductCatalog\Upload;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 
@@ -8,7 +8,7 @@ class ImgHelper {
 
     /**
      * The upload object to work with
-     * @var UploadRepository
+     * @var Upload
      */
     protected $uploadObject;
 
@@ -33,7 +33,7 @@ class ImgHelper {
     /** 
      * Construct something man!
      */
-    public function __construct( UploadRepository $uploadObject ){
+    public function __construct( Upload $uploadObject ){
         $this->uploadObject = $uploadObject;
     }
 

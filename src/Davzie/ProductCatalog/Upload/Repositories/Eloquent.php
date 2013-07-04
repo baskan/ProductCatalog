@@ -1,12 +1,13 @@
 <?php
-namespace Davzie\ProductCatalog\Models;
-use Eloquent;
+namespace Davzie\ProductCatalog\Upload\Repositories;
+use Davzie\ProductCatalog\ImgHelper;
+use Davzie\ProductCatalog\Upload;
+use Eloquent as IEloquent;
 use Config;
 use File;
 use Exception;
-use Davzie\ProductCatalog\Models\Interfaces\UploadRepository;
-use Davzie\ProductCatalog\ImgHelper;
-class UploadEloquent extends Eloquent implements UploadRepository {
+
+class Eloquent extends IEloquent implements Upload {
 
     /**
      * The database table used by the model.

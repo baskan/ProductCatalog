@@ -1,10 +1,10 @@
 <?php
-namespace Davzie\ProductCatalog\Entities;
+namespace Davzie\ProductCatalog\Attribute\Set\Entities;
 use Davzie\ProductCatalog\Entity;
 
-class AttributeSetEdit extends Entity {
+class Edit extends Entity {
 
-    protected static $model = 'Davzie\ProductCatalog\Models\Interfaces\AttributeSetRepository';
+    protected static $model = 'Davzie\ProductCatalog\Attribute\Set';
 
     protected static $rules = [];
 

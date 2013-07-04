@@ -1,9 +1,9 @@
 <?php
-namespace Davzie\ProductCatalog\Models;
-use Eloquent;
-use Davzie\ProductCatalog\Models\Interfaces\AttributeRepository;
+namespace Davzie\ProductCatalog\Attribute\Repositories;
+use Davzie\ProductCatalog\Attribute;
+use Eloquent as IEloquent;
 
-class AttributeEloquent extends Eloquent implements AttributeRepository {
+class Eloquent extends IEloquent implements Attribute {
 
     /**
      * The database table used by the model.

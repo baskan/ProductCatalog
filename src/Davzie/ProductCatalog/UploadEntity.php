@@ -46,7 +46,7 @@ class UploadEntity {
     protected $errors;
 
     public function __construct( $id ){
-        $this->uploads = App::make('Davzie\ProductCatalog\Models\Interfaces\UploadRepository');
+        $this->uploads = App::make('Davzie\ProductCatalog\Upload');
         $this->currentId = $id;
         $this->errors = new MessageBag();
     }

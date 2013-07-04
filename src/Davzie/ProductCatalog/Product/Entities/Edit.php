@@ -51,7 +51,7 @@ class Edit extends Entity {
         $productModel->setGalleryImages( Input::get('hideFromGallery') );
 
         // Ensure that the product images that need to be deleted get deleted
-        $uploadModel = App::make('Davzie\ProductCatalog\Models\Interfaces\UploadRepository');
+        $uploadModel = App::make('Davzie\ProductCatalog\Upload');
         $uploadModel->deleteById( Input::get('deleteImage') );
 
         return true;

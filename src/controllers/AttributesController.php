@@ -2,22 +2,22 @@
 namespace Davzie\ProductCatalog\Controllers;
 use View;
 use Redirect;
-use Davzie\ProductCatalog\Models\Interfaces\AttributeRepository;
-use Davzie\ProductCatalog\Models\Interfaces\AttributeTypeRepository;
-use Davzie\ProductCatalog\Entities\AttributeNew;
-use Davzie\ProductCatalog\Entities\AttributeEdit;
+use Davzie\ProductCatalog\Attribute;
+use Davzie\ProductCatalog\Attribute\Type as AttributeType;
+use Davzie\ProductCatalog\Attribute\Entities\Edit as AttributeEdit;
+use Davzie\ProductCatalog\Attribute\Entities\Create as AttributeNew;
 
 class AttributesController extends ManageBaseController {
 
     /**
      * The attribute object
-     * @var AttributeRepository
+     * @var Attribute
      */
     protected $attributes;
 
     /**
      * The attribute types available
-     * @var AttributeTypeRepository
+     * @var AttributeType
      */
     protected $attribute_types;
 
@@ -32,7 +32,7 @@ class AttributesController extends ManageBaseController {
     /**
      * Construct shit
      */
-    public function __construct( AttributeRepository $attributes , AttributeTypeRepository $attribute_types ){
+    public function __construct( Attribute $attributes , AttributeType $attribute_types ){
         $this->attributes = $attributes;
         $this->attribute_types = $attribute_types;
         parent::__construct();
@@ -96,7 +96,7 @@ class AttributesController extends ManageBaseController {
         
         // Hydrate it with data from the POST
         $id = $entity->hydrate();
-        return Redirect::to( 'manage/attributes/' )->with('success','Attribute Set Added');
+        return Redirect::to( 'manage/attributes/' )->with('success','Attribute Added');
     }
 
     /**
@@ -122,7 +122,7 @@ class AttributesController extends ManageBaseController {
 
         // Hydrate it with data from the POST
         $entity->hydrate();
-        return Redirect::to( 'manage/attributes/' )->with('success','Attribute Set Updated.');
+        return Redirect::to( 'manage/attributes/' )->with('success','Attribute Updated.');
     }
 
 }

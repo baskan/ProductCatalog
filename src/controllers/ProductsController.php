@@ -11,7 +11,7 @@ use Response;
 use App;
 use Davzie\ProductCatalog\Product;
 use Davzie\ProductCatalog\Category;
-use Davzie\ProductCatalog\Models\Interfaces\AttributeSetRepository;
+use Davzie\ProductCatalog\Attribute\Set as AttributeSet;
 use Davzie\ProductCatalog\Product\Entities\Create;
 use Davzie\ProductCatalog\Product\Entities\Edit;
 use Davzie\ProductCatalog\Product\Entities\Upload;
@@ -33,7 +33,7 @@ class ProductsController extends ManageBaseController {
 
     /**
      * The attribute sets object
-     * @var AttributeSetRepository
+     * @var Davzie\ProductCatalog\Attribute\Set
      */
     protected $attribute_sets;
 
@@ -48,7 +48,7 @@ class ProductsController extends ManageBaseController {
     /**
      * Construct shit
      */
-    public function __construct( Product $products , Category $categories , AttributeSetRepository $attribute_sets ){
+    public function __construct( Product $products , Category $categories , AttributeSet $attribute_sets ){
         $this->products = $products;
         $this->categories = $categories;
         $this->attribute_sets = $attribute_sets;
@@ -190,7 +190,7 @@ class ProductsController extends ManageBaseController {
             Response::json('error', 400);
 
         // Ensure that the product images that need to be deleted get deleted
-        $uploadModel = App::make('Davzie\ProductCatalog\Models\Interfaces\UploadRepository');
+        $uploadModel = App::make('Davzie\ProductCatalog\Upload');
         $uploadModel->setOrder( Input::get('data') );
 
         return Response::json('success', 200);

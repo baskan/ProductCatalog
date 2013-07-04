@@ -66,7 +66,7 @@ class Eloquent extends IEloquent implements Product {
      * @return Eloquent
      */
     public function media(){
-        return $this->morphMany( 'Davzie\ProductCatalog\Models\UploadEloquent' , 'link')->orderBy('order','asc');
+        return $this->morphMany( 'Davzie\ProductCatalog\Upload\Repositories\Eloquent' , 'link')->orderBy('order','asc');
     }
 
     /**
@@ -134,7 +134,7 @@ class Eloquent extends IEloquent implements Product {
     public function deleteById( $id ){
         $product = $this->find($id);
         // Ensure that the product images that need to be deleted get deleted
-        $uploadModel = App::make('Davzie\ProductCatalog\Models\Interfaces\UploadRepository');
+        $uploadModel = App::make('Davzie\ProductCatalog\Upload');
         $uploadModel->deleteByIdType( $product->id , 'products' );
 
         $product->delete();
@@ -146,7 +146,7 @@ class Eloquent extends IEloquent implements Product {
      * @return Eloquent
      */
     public function attributeSet(){
-        return $this->belongsTo( 'Davzie\ProductCatalog\Models\AttributeSetEloquent' );
+        return $this->belongsTo( 'Davzie\ProductCatalog\Attribute\Set\Repositories\Eloquent' );
     }
 
 }

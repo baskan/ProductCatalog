@@ -1,10 +1,10 @@
 <?php
-namespace Davzie\ProductCatalog\Models\Interfaces;
+namespace Davzie\ProductCatalog\Attribute;
 
 /**
  * Lets tell our interface what methods we want to ensure are on the class that implements this contract
  */
-interface AttributeRepository {
+interface Set {
 
     /**
      * Get all the stuffs in the system
@@ -13,10 +13,9 @@ interface AttributeRepository {
     public function getAll();
 
     /**
-     * Delete an attribute by its ID
-     * @param  integer $id The attribute ID
-     * @return boolean
+     * The reverse product relationship
+     * @return Eloquent
      */
-    public function deleteById($id);
+    public function products();
 
 }
