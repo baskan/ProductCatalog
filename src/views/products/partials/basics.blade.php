@@ -29,7 +29,7 @@
     <label class="control-label">Attribute Set</label>
     <div class="controls">
         {{ Form::select('attribute_set_id', $attribute_sets, Input::old('attribute_set_id' , $product->attribute_set_id ) , [ 'id'=>'attributeSetDropdown' ] ) }}
-        <span class="help-block hidden alert alert-warning" id="attributeSetHelpLabel"><strong>Note:</strong> You need to save the product in order to see the new attribute set changes.</span>
+        <span class="help-block hidden alert alert-danger" id="attributeSetHelpLabel"><strong>Warning:</strong> Saving the product with a new attribute set will remove all data in the current attributes. Please save to see the new attributes or refresh the page to cancel the change.</span>
     </div>
 </div>
 

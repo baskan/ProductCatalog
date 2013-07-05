@@ -2,6 +2,6 @@
 <div class="control-group">
     <label class="control-label">{{ $attribute->name }}</label>
     <div class="controls">
-        {{ Form::textarea('attributes['.$attribute->key.']', Input::old('attributes['.$attribute->key.']' , $value ) , [ 'class'=>'quick-editor' , 'placeholder'=>$attribute->name ] ) }}
+        {{ Form::textarea('attributes['.$attribute->id.']', $value , [ 'class'=>'quick-editor' , 'placeholder'=>$attribute->name ] ) }}
     </div>
 </div>

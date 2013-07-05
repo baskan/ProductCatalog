@@ -46,9 +46,10 @@ class Edit extends Entity {
         $productModel = App::make( static::$model )->find( $this->currentId );
         
         $productModel->categories()->sync( Input::get('categories', []) );
-        $productModel->setMainImage( Input::get('mainImage') );
-        $productModel->setThumbnailImage( Input::get('thumbnailImage') );
-        $productModel->setGalleryImages( Input::get('hideFromGallery') );
+        $productModel->setMainImage( Input::get( 'mainImage' ) );
+        $productModel->setThumbnailImage( Input::get( 'thumbnailImage' ) );
+        $productModel->setGalleryImages( Input::get( 'hideFromGallery' ) );
+        $productModel->addAttributeValues( Input::get( 'attributes' , [] ) );
 
         // Ensure that the product images that need to be deleted get deleted
         $uploadModel = App::make('Davzie\ProductCatalog\Upload');

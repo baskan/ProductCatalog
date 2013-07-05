@@ -97,7 +97,7 @@ interface Product {
     public function attributeSet();
 
     /**
-     * Get all the associated attributes via the set for the product
+     * Get all the associated attributes filled in for the product
      * @return Eloquent
      */
     public function attributes();
@@ -107,5 +107,17 @@ interface Product {
      * @return Eloquent
      */
     public function getAttrValue( $attributeId );
+
+    /**
+     * Add values to product attributes to the product
+     * @return boolean
+     */
+    public function addAttributeValues( Array $attributes );
+
+    /**
+     * Retrieve a list of the available attributes from the system
+     * @return Eloquent
+     */
+    public function getAvailableAttributes();
 
 }

@@ -154,10 +154,8 @@ class Eloquent extends IEloquent implements Product {
      * @return Eloquent
      */
     public function attributes(){
-        if( $this->attributeSet )
-            return $this->attributeSet->attributes();
-
-        return false;
+        return $this->belongsToMany( 'Davzie\ProductCatalog\Attribute\Repositories\Eloquent' , 'products_attributes' , 'product_id' , 'attribute_id' )
+                    ->withPivot('value');
     }
 
     /**
@@ -165,7 +163,36 @@ class Eloquent extends IEloquent implements Product {
      * @return Eloquent
      */
     public function getAttrValue( $attributeId ){
+        $attribute = $this->attributes()->where( 'attribute_id' , '=' , $attributeId )->first();
+
+        if($attribute)
+            return $attribute->pivot->value;
+
         return '';
     }
+
+    /**
+     * Add values to product attributes to the product
+     * @return boolean
+     */
+    public function addAttributeValues( Array $attributes ){
+        $syncArray = [];
+        foreach($attributes as $attrId=>$value)
+            $syncArray[$attrId] = [ 'value' => $value ];
+
+        $this->attributes()->sync( $syncArray );
+    }
+
+    /**
+     * Retrieve a list of the filled out attributes and their corresponding values
+     * @return Eloquent
+     */
+    public function getAvailableAttributes(){
+        if( $this->attributeSet )
+            return $this->attributeSet->attributes()->get();
+
+        return false;
+    }
+
 
 }

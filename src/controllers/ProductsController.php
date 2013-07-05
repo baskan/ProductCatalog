@@ -105,19 +105,24 @@ class ProductsController extends ManageBaseController {
 
         // We need to render the attribute views that we can edit for the product, lets see if our product actually has attributes first
         $attributeViews = [];
-        if( $product->attributes ){
+        if( !$product->getAvailableAttributes()->isEmpty() ){
+
+            // Setup our old data
+            $oldData = Input::old( 'attributes' , [] );
 
             // Loop through the attributes
-            foreach($product->attributes as $attribute){
+            foreach($product->getAvailableAttributes() as $attribute){
 
                 // Get the attribute object so we can access certain methods
                 $attr = $this->attributes->find( $attribute->id );
                 if($attr){
-                    $type = $attr->type(); // Get the type object specific to this type of attribute (text, dropdown etc)
-                    $value = $product->getAttrValue( $attribute->id ); // Get the value that the product currently has set for this attribute
 
+                    // Old data should override stored data, lets ensure that happens here
+                    $old = array_key_exists( $attribute->id , $oldData ) ? $oldData[ $attribute->id ] : null;
+                    $value = $old === null ? $product->getAttrValue( $attribute->id ) : $old ;
+                    
                     // Render the resulting view into an array that we eventually render
-                    $attributeViews[] = View::make( 'ProductCatalog::products.partials.attributes.'.$type->getViewName() )
+                    $attributeViews[] = View::make( 'ProductCatalog::products.partials.attributes.'.$attr->type()->getViewName() )
                                             ->with( 'attribute' , $attr )
                                             ->with( 'value'     , $value);
                 }
