@@ -11,6 +11,7 @@ use Response;
 use App;
 use Davzie\ProductCatalog\Product;
 use Davzie\ProductCatalog\Category;
+use Davzie\ProductCatalog\Attribute;
 use Davzie\ProductCatalog\Attribute\Set as AttributeSet;
 use Davzie\ProductCatalog\Product\Entities\Create;
 use Davzie\ProductCatalog\Product\Entities\Edit;
@@ -38,6 +39,12 @@ class ProductsController extends ManageBaseController {
     protected $attribute_sets;
 
     /**
+     * The attribute object
+     * @var Attribute
+     */
+    protected $attributes;
+
+    /**
      * Let's whitelist all the methods we want to allow guests to visit!
      *
      * @access   protected
@@ -48,9 +55,10 @@ class ProductsController extends ManageBaseController {
     /**
      * Construct shit
      */
-    public function __construct( Product $products , Category $categories , AttributeSet $attribute_sets ){
+    public function __construct( Product $products , Category $categories , AttributeSet $attribute_sets , Attribute $attributes ){
         $this->products = $products;
         $this->categories = $categories;
+        $this->attributes = $attributes;
         $this->attribute_sets = $attribute_sets;
         parent::__construct();
     }
@@ -86,20 +94,42 @@ class ProductsController extends ManageBaseController {
 
         // Setup the old data so it's easy to find
         $mainImage = Input::old('mainImage',false);
-        if( $mainImage === false )
-            if( $product->getMainImage() )
+        if( $mainImage === false and $product->getMainImage() )
                 $mainImage = $product->getMainImage()->id;
 
         // Setup the old data so it's easy to find
         $thumbnailImage = Input::old('thumbnailImage',false);
-        if( $thumbnailImage === false )
-            if( $product->getThumbnailImage() )
+        if( $thumbnailImage === false and $product->getThumbnailImage() )
                 $thumbnailImage = $product->getThumbnailImage()->id;
 
 
+        // We need to render the attribute views that we can edit for the product, lets see if our product actually has attributes first
+        $attributeViews = [];
+        if( $product->attributes ){
 
+            // Loop through the attributes
+            foreach($product->attributes as $attribute){
+
+                // Get the attribute object so we can access certain methods
+                $attr = $this->attributes->find( $attribute->id );
+                if($attr){
+                    $type = $attr->type(); // Get the type object specific to this type of attribute (text, dropdown etc)
+                    $value = $product->getAttrValue( $attribute->id ); // Get the value that the product currently has set for this attribute
+
+                    // Render the resulting view into an array that we eventually render
+                    $attributeViews[] = View::make( 'ProductCatalog::products.partials.attributes.'.$type->getViewName() )
+                                            ->with( 'attribute' , $attr )
+                                            ->with( 'value'     , $value);
+                }
+
+            }
+
+        }
+
+        // Make the end view, whoop!
         return View::make('ProductCatalog::products.edit')
                     ->with( 'product' , $product )
+                    ->with( 'attributeViews' , $attributeViews )
                     ->with( 'mainImageId' , $mainImage )
                     ->with( 'attribute_sets' , $attribute_sets )
                     ->with( 'thumbnailImageId' , $thumbnailImage )

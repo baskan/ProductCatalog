@@ -97,6 +97,11 @@
         <script src="{{ asset('packages/Davzie/ProductCatalog/js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('packages/Davzie/ProductCatalog/js/less.js') }}"></script>
         <script src="{{ asset('packages/Davzie/ProductCatalog/js/redactor.min.js') }}"></script>
+        <script>
+            $(document).ready(function(){
+                $('.quick-editor').redactor();
+            });
+        </script>
     @show
 
   </body>

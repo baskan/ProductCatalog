@@ -149,4 +149,23 @@ class Eloquent extends IEloquent implements Product {
         return $this->belongsTo( 'Davzie\ProductCatalog\Attribute\Set\Repositories\Eloquent' );
     }
 
+    /**
+     * Get all the associated attributes via the set for the product
+     * @return Eloquent
+     */
+    public function attributes(){
+        if( $this->attributeSet )
+            return $this->attributeSet->attributes();
+
+        return false;
+    }
+
+    /**
+     * Get the value that is set for the current product attribute
+     * @return Eloquent
+     */
+    public function getAttrValue( $attributeId ){
+        return '';
+    }
+
 }

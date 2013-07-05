@@ -96,4 +96,16 @@ interface Product {
      */
     public function attributeSet();
 
+    /**
+     * Get all the associated attributes via the set for the product
+     * @return Eloquent
+     */
+    public function attributes();
+
+    /**
+     * Get the value that is set for the current product attribute
+     * @return Eloquent
+     */
+    public function getAttrValue( $attributeId );
+
 }
