@@ -105,7 +105,7 @@ class ProductsController extends ManageBaseController {
 
         // We need to render the attribute views that we can edit for the product, lets see if our product actually has attributes first
         $attributeViews = [];
-        if( !$product->getAvailableAttributes()->isEmpty() ){
+        if( $product->getAvailableAttributes() ){
 
             // Setup our old data
             $oldData = Input::old( 'attributes' , [] );
