@@ -16,7 +16,7 @@
                         Thumbnail Image
                     </label>
                     <label class="checkbox">
-                        <?php $checkedArray = Input::old('hideFromGallery['.$upload->id.']', ( $upload->gallery === 1 ? [] : [ $upload->id ]  ) ); ?>
+                        <?php $checkedArray = Input::old('hideFromGallery', ( $upload->gallery === 1 ? [] : [ $upload->id ]  ) ); ?>
                         {{ Form::checkbox('hideFromGallery['.$upload->id.']', $upload->id, in_array( $upload->id, $checkedArray ) ) }}
                         Hide From Gallery
                     </label>
