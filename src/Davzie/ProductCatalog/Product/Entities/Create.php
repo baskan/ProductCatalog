@@ -1,8 +1,8 @@
 <?php
 namespace Davzie\ProductCatalog\Product\Entities;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Str;
-use Illuminate\Support\Facades\Input;
+use App;
+use Str;
+use Input;
 use Davzie\ProductCatalog\Entity;
 
 class Create extends Entity {
