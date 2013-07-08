@@ -43,11 +43,11 @@ Last Steps: Migrations, Seeds and Publishing Assets
 ------------------------------------
 In order to have our package work as-expected with all images, CSS and JS working we need to publish the assets to our public directory. Fortunately Laravel makes this extremely easy:
     
-    php artisan asset:publish 'Davzie/ProductCatalog'
+    php artisan asset:publish 'davzie/ProductCatalog'
 
 Let's also migrate and seed our database so that it has the required tables (ensure `app/config/database.php` is up-to-date):
 
-    php artisan migrate --package="Davzie/ProductCatalog"
+    php artisan migrate --package="davzie/ProductCatalog"
     php artisan db:seed --class="Davzie\\ProductCatalog\\Seeds\\DatabaseSeeder" 
 
     
