@@ -119,7 +119,17 @@ class ProductsController extends ManageBaseController {
 
                     // Old data should override stored data, lets ensure that happens here
                     $old = array_key_exists( $attribute->id , $oldData ) ? $oldData[ $attribute->id ] : null;
-                    $value = $old === null ? $product->getAttrValue( $attribute->id ) : $old ;
+                    if( $old === null ){
+                        $saved_value = $product->getAttrValue( $attribute->id );
+                        if( !$saved_value or $saved_value == '' ){
+                            $value = $attribute->default;
+                        }else{
+                            $value = $saved_value;
+                        }
+
+                    }else{
+                        $value = $old;
+                    }
                     
                     // Render the resulting view into an array that we eventually render
                     $attributeViews[] = View::make( 'ProductCatalog::products.partials.attributes.'.$attr->type()->getViewName() )
