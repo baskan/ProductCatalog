@@ -13,6 +13,13 @@ interface Product {
     public function getAll();
 
     /**
+     * Get a product by a URL key
+     * @param  string $url Get the product if the URL passed in matches it
+     * @return Eloquent
+     */
+    public function getByUrl( $url );
+
+    /**
      * Get the active products
      * @return Eloquent
      */

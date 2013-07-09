@@ -28,6 +28,15 @@ class Eloquent extends IEloquent implements Category {
     }
 
     /**
+     * Get a category by a URL key
+     * @param  string $url Get the category if the URL passed in matches it
+     * @return Eloquent
+     */
+    public function getByUrl( $url ){
+        return $this->where('url','=',$url)->first();
+    }
+
+    /**
      * Get the active categories
      * @return Eloquent
      */
