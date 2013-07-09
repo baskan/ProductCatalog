@@ -28,6 +28,15 @@ class Eloquent extends IEloquent implements Product {
     }
 
     /**
+     * Get a product by a URL key
+     * @param  string $url Get the product if the URL passed in matches it
+     * @return Eloquent
+     */
+    public function getByUrl( $url ){
+        return $this->where('url','=',$url)->first();
+    }
+
+    /**
      * Get the active products
      * @return Eloquent
      */
