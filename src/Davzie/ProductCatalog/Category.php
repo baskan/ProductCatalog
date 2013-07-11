@@ -23,7 +23,7 @@ interface Category {
      * Get the full URL of the category
      * @return string
      */
-    public function getFullUrl();
+    public function getFullUrlAttribute();
 
     /**
      * Get the active categories

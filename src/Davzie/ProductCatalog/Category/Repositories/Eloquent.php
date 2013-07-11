@@ -2,6 +2,7 @@
 namespace Davzie\ProductCatalog\Category\Repositories;
 use Eloquent as IEloquent;
 use Davzie\ProductCatalog\Category;
+use Config;
 
 class Eloquent extends IEloquent implements Category {
 
@@ -40,7 +41,7 @@ class Eloquent extends IEloquent implements Category {
      * Get the full URL of the category
      * @return string
      */
-    public function getFullUrl(){
+    public function getFullUrlAttribute(){
         $url = '';
         if( $this->parent )
             $url .= $this->parent->url.'/';
