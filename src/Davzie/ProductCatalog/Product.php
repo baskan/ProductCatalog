@@ -25,6 +25,11 @@ interface Product {
      */
     public function scopeactiveProducts($query);
 
+    /**
+     * Get the full URL of the category
+     * @return string
+     */
+    public function getFullUrl();
 
     /**
      * Get the full price of the product (delivery, tax and product cost)

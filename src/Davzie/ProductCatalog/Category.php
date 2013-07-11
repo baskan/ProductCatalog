@@ -20,6 +20,12 @@ interface Category {
     public function getByUrl( $url );
 
     /**
+     * Get the full URL of the category
+     * @return string
+     */
+    public function getFullUrl();
+
+    /**
      * Get the active categories
      * @return Eloquent
      */

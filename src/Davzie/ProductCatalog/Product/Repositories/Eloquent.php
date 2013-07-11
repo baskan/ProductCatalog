@@ -44,6 +44,14 @@ class Eloquent extends IEloquent implements Product {
         return $query->where('enabled', '=', true);
     }
 
+    /**
+     * Get the full URL of the category
+     * @return string
+     */
+    public function getFullUrl(){
+        $segment = Config::get('ProductCatalog::routing.product_segment');
+        return url( $segment.'/'.$this->url );
+    }
 
     /**
      * Get the full price of the product (delivery, tax and product cost)

@@ -37,6 +37,22 @@ class Eloquent extends IEloquent implements Category {
     }
 
     /**
+     * Get the full URL of the category
+     * @return string
+     */
+    public function getFullUrl(){
+        $url = '';
+        if( $this->parent )
+            $url .= $this->parent->url.'/';
+
+        $url .= $this->url;
+
+        $segment = Config::get('ProductCatalog::routing.category_segment');
+
+        return url( $segment.'/'.$url );
+    }
+
+    /**
      * Get the active categories
      * @return Eloquent
      */
