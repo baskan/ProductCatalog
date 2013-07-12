@@ -35,4 +35,18 @@ class Edit extends Entity {
         parent::__construct();
     }
 
+    /**
+     * Run our own hydration stuffs
+     * @return boolean
+     */
+    public function hydrate(){
+        parent::hydrate();
+
+        // Ensure that the product images that need to be deleted get deleted
+        $uploadModel = App::make('Davzie\ProductCatalog\Upload');
+        $uploadModel->deleteById( Input::get('deleteImage') );
+
+        return true;
+    }
+
 }

@@ -17,6 +17,7 @@
         <table class="table table-condensed">
             <thead>
                 <tr>
+                    <th>Thumbnail</th>
                     <th>Title</th>
                     <th>URL</th>
                     <th>Products</th>
@@ -27,6 +28,13 @@
                 <!-- Start That Loopin' -->
                 @foreach($categories as $category)
                     <tr class='highlighted'>
+                        <td>
+                            @if( $category->getThumbnailImage() )
+                                <a href="{{ url('manage/categories/edit/'.$category->id) }}">
+                                    <img src="{{ $category->getThumbnailImage()->sizeImg( 100 , 60 , false ) }}" />
+                                </a>
+                            @endif
+                        </td>
                         <td>
                             <a href="{{ url('manage/categories/edit/'.$category->id) }}">{{ $category->name }}</a>
                         </td>
@@ -43,6 +51,13 @@
                     @if ( $category->children()->count() > 0 )
                         @foreach( $category->children()->get() as $child )
                             <tr>
+                                <td>
+                                    @if( $child->getThumbnailImage() )
+                                        <a href="{{ url('manage/categories/edit/'.$child->id) }}">
+                                            <img src="{{ $child->getThumbnailImage()->sizeImg( 100 , 60 , false ) }}" />
+                                        </a>
+                                    @endif
+                                </td>
                                 <td>
                                     <a href="{{ url('manage/categories/edit/'.$child->id) }}">{{ $child->name }}</a>
                                 </td>

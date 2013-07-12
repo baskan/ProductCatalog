@@ -57,6 +57,19 @@ interface Category {
     public function products();
 
     /**
+     * Delete a category by its category ID
+     * @param  integer $id The Category ID
+     * @return boolean
+     */
+    public function deleteById( $id );
+
+    /**
+     * The media object to get the uploads available
+     * @return Eloquent
+     */
+    public function media();
+
+    /**
      * Get categories that do not have a parent category, ie. top level
      * @return Eloquent
      */
@@ -67,5 +80,11 @@ interface Category {
      * @return boolean True if it does, false if it doesn't
      */
     public function hasChildren();
+
+    /**
+     * Get the thumbnail image associated with this category
+     * @return Upload   The upload object
+     */
+    public function getThumbnailImage();
 
 }

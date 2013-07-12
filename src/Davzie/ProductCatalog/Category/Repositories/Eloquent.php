@@ -3,6 +3,7 @@ namespace Davzie\ProductCatalog\Category\Repositories;
 use Eloquent as IEloquent;
 use Davzie\ProductCatalog\Category;
 use Config;
+use App;
 
 class Eloquent extends IEloquent implements Category {
 
@@ -79,6 +80,21 @@ class Eloquent extends IEloquent implements Category {
     }
 
     /**
+     * Delete a category by its category ID
+     * @param  integer $id The Category ID
+     * @return boolean
+     */
+    public function deleteById( $id ){
+        $category = $this->find($id);
+        // Ensure that the category images that need to be deleted get deleted
+        $uploadModel = App::make('Davzie\ProductCatalog\Upload');
+        $uploadModel->deleteByIdType( $category->id , 'categories' );
+
+        $category->delete();
+        return true;
+    }
+
+    /**
      * Get the child categories if they exists
      * @return Eloquent
      */
@@ -119,6 +135,40 @@ class Eloquent extends IEloquent implements Category {
             return true;
         
         return false;
+    }
+
+    /**
+     * The media object to get the uploads available
+     * @return Eloquent
+     */
+    public function media(){
+        return $this->morphMany( 'Davzie\ProductCatalog\Upload\Repositories\Eloquent' , 'link')->orderBy('order','asc');
+    }
+
+    /**
+     * Get the thumbnail image associated with this category
+     * @return Upload   The upload object
+     */
+    public function getThumbnailImage(){
+        $associated_image = $this->media()->first();
+        if( $associated_image !== null )
+            return $associated_image;
+
+        $first_cat = $this->children()->first();
+        if( $first_cat and $first_cat->media()->first() )
+            return $first_cat->media()->first();
+
+        $first_product = $this->products()->first();
+        if( $first_product and $first_product->getThumbnailImage() )
+            return $first_product->getThumbnailImage();
+
+        if( $first_cat ){
+            $first_category_products = $first_cat->products()->first();
+            if( $first_category_products->getThumbnailImage() )
+                return $first_category_products->getThumbnailImage();
+        }
+
+        return null;
     }
 
 }

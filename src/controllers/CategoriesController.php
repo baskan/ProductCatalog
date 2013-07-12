@@ -2,9 +2,14 @@
 namespace Davzie\ProductCatalog\Controllers;
 use View;
 use Redirect;
+use Request;
+use Response;
+use Input;
+use App;
 use Davzie\ProductCatalog\Category;
 use Davzie\ProductCatalog\Category\Entities\Create as CategoryNew;
 use Davzie\ProductCatalog\Category\Entities\Edit as CategoryEdit;
+use Davzie\ProductCatalog\Category\Entities\Upload;
 
 class CategoriesController extends ManageBaseController {
 
@@ -36,8 +41,7 @@ class CategoriesController extends ManageBaseController {
      * @return Redirect
      */
     public function getDelete( $id ){
-        $this->categories->where('id','=',$id)->delete();
-        
+        $this->categories->deleteById( $id );
         return Redirect::to('manage/categories')->with('success','<strong>Category Deleted</strong> The category was properly removed.');
     }
 
@@ -116,6 +120,46 @@ class CategoriesController extends ManageBaseController {
         // Hydrate it with data from the POST
         $entity->hydrate();
         return Redirect::to( 'manage/categories/' )->with('success','Category Updated.');
+    }
+
+    /**
+     * Upload an image for this category ID
+     * @return Response
+     */
+    public function postUpload( $id ){
+        // This should only be accessible via AJAX you know...
+        if( !Request::ajax() )
+            Response::json('error', 400);
+
+        $entity = new Upload( $id );
+
+        if ( $entity->isValid() === false )
+            return Response::make( $entity->errors() , 400 );
+
+        // Hydrate it with data from the POST
+        $success = $entity->hydrate();
+
+        if( $success )
+            return Response::json('success', 200);
+        else
+            return Response::json('error', 400);
+
+    }
+
+    /**
+     * Set the order of the images
+     * @return Response
+     */
+    public function postOrderImages(){
+        // This should only be accessible via AJAX you know...
+        if( !Request::ajax() )
+            Response::json('error', 400);
+
+        // Ensure that the product images that need to be deleted get deleted
+        $uploadModel = App::make('Davzie\ProductCatalog\Upload');
+        $uploadModel->setOrder( Input::get('data') );
+
+        return Response::json('success', 200);
     }
 
 }

@@ -18,56 +18,30 @@
     @include('ProductCatalog::partials.messaging')
 
     <!-- Open Our Form Pointing To The Appropriate Place -->
-    {{ Form::open( [ 'url' => 'manage/categories/edit/'.$category->id , 'class' => 'form-horizontal' ] ) }}
+    {{ Form::open( [ 'url' => 'manage/categories/edit/'.$category->id , 'class' => 'form-horizontal' , 'id'=>'category-edit-form' ] ) }}
 
         <!-- Hidden Field To Pass The ID Through -->
         {{ Form::hidden('id', $category->id) }}
 
+        <!-- Tab Navigation Elements -->
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#basics" data-toggle="tab">Basic Information</a></li>
+          <li><a href="#media" data-toggle="tab">Media</a></li>
+        </ul>
+
+        <!-- Start Our Tabs -->
+        <div class="tab-content">
+            <!-- Basic Information -->
+            <fieldset class="tab-pane active" id="basics">
+                @include('ProductCatalog::categories.partials.basics')
+            </fieldset>
+
+            <!-- Media / Uploads -->
+            <fieldset class="tab-pane" id="media">
+                @include('ProductCatalog::categories.partials.existing-media')
+            </fieldset>
+        </div>
         <fieldset>
-            <legend>Basic Information</legend>
-
-            <!-- Title -->
-            <div class="control-group">
-                <label class="control-label">Name</label>
-                <div class="controls">
-                    {{ Form::text('name', Input::old('name' , $category->name ), [ 'placeholder'=>'Category Name' ] ) }}
-                </div>
-            </div>
-
-            <!-- Title -->
-            <div class="control-group">
-                <label class="control-label">URL</label>
-                <div class="controls">
-                    {{ Form::text('url', Input::old('url' , $category->url ), [ 'placeholder'=>'Category URL' ] ) }}
-                </div>
-            </div>
-
-            <!-- Parent Category -->
-            <div class="control-group">
-            <label class="control-label">Parent Category</label>
-                <div class="controls">
-                    {{ Form::select('parent_id', $top_level_categories, Input::old('parent_id' , $category->parent_id ) , $parentCatAttributes ) }}
-                    <span class="help-block"><strong>Note:</strong> You cannot change this if your category has sub-categories. First move those sub-categories to a new one.</span>
-                </div>
-            </div>
-
-            <!-- Enabled -->
-            <div class="control-group">
-                <div class="controls">
-                    <label class="checkbox">
-                        {{ Form::checkbox('enabled', '1', Input::old('enabled' , $category->enabled)  ); }}
-                        Enabled
-                    </label>
-                </div>
-            </div>
-
-            <!-- Product Description -->
-            <div class="control-group">
-                <label class="control-label" for="inputURL">Category Description</label>
-                <div class="controls">
-                    {{ Form::textarea('description', Input::old( 'description' , $category->description ) , [ 'id'=>'category-description' , 'class'=>'interface-textarea' , 'placeholder'=>'Category Description' ] ) }}
-                </div>
-            </div>
 
             <!-- Submit -->
             <div class="control-group">
@@ -84,6 +58,15 @@
 @section('sidebar')
 
     <div class="well well-small">
+        <h4>Upload Category Images</h4>
+        <p>Drag and drop images into the box below or simply click it to select files to upload</p>
+        <p><strong>Note: </strong>This will also save and refresh this category page.</p>
+        {{ Form::open( [ 'url' => 'manage/categories/upload/'.$category->id , 'class' => 'dropzone square' , 'id'=>'imageUploads' , 'files'=>true ] ) }}
+            <div class="fallback">
+                <input name="file" type="file" multiple />
+            </div>
+        {{ Form::close() }}
+
         <h4>Delete Category</h4>
         @if($hasSubCategories)
             <p>Deleting this category is not possible until you have removed all sub-categories associated with it.</p>
@@ -95,11 +78,40 @@
 
 @stop
 
+@section('css')
+    @parent
+    <link rel="stylesheet" href="{{ asset('packages/Davzie/ProductCatalog/js/dropzone/css/dropzone.css') }}">
+@stop
+
 @section('scripts')
     @parent
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="{{ asset('packages/Davzie/ProductCatalog/js/dropzone/dropzone.min.js') }}"></script>
     <script>
         $(document).ready(function(){
-            $('#category-description').redactor();
+
+            // Setup some options for our Dropzone
+            Dropzone.options.imageUploads = {
+                maxFilesize: 3,
+                init: function(){
+
+                    // When a file has completed uploading, check to see if others are queueing, if not then submit the form
+                    // which saves all changes and then gets us back to the edit page
+                    this.on("complete", function(file){
+
+                        if( this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0 ){
+                            // Submit dat form
+                            $('#category-edit-form').submit();
+                        }
+
+                    });
+                    this.on('sending',function(){
+                        $('div.dz-default.dz-message').remove();
+                    });
+
+                }
+            };
+
         });
     </script>
 @stop
