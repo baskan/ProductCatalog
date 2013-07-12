@@ -87,4 +87,10 @@ interface Category {
      */
     public function getThumbnailImage();
 
+    /**
+     * Get the main image of the category
+     * @return Eloquent
+     */
+    public function getMainImage();
+
 }

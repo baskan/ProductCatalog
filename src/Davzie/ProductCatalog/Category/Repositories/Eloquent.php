@@ -146,6 +146,14 @@ class Eloquent extends IEloquent implements Category {
     }
 
     /**
+     * Get the main image of the category
+     * @return Eloquent
+     */
+    public function getMainImage(){
+        return $this->media()->first();
+    }
+
+    /**
      * Get the thumbnail image associated with this category
      * @return Upload   The upload object
      */
