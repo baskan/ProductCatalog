@@ -132,4 +132,12 @@ interface Product {
      */
     public function getAvailableAttributes();
 
+    /**
+     * Get the available attributes and group them by their group name (groups are indicated by group-name.attribute_name)
+     * @param  string $groupName    To get only one group anem specify it ( for example, 'finance' )
+     * @param  string $excludeGroup To exclude a group name, specify it here
+     * @return Eloquent
+     */
+    public function getAvailableGroupedAttributes( $groupName = null , $excludeGroup = null );
+
 }

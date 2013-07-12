@@ -212,5 +212,43 @@ class Eloquent extends IEloquent implements Product {
         return false;
     }
 
+    /**
+     * Get the available attributes and group them by their group name (groups are indicated by group-name.attribute_name)
+     * @param  string $groupName    To get only one group anem specify it ( for example, 'finance' )
+     * @param  string $excludeGroup To exclude a group name, specify it here
+     * @return Eloquent
+     */
+    public function getAvailableGroupedAttributes( $groupName = null , $excludeGroup = null ){
+        $attributes = $this->getAvailableAttributes();
+        $attributes_grouped = [];
+        $transformName = function( $name ){
+            return ucwords( str_replace( ['-','_'] , [' ',' '] , $name ) );
+        };
+
+        if(!$attributes)
+            return [];
+
+        foreach($attributes as $attribute){
+
+            if( str_contains( $attribute->key , '.' ) ){
+                $segments = explode( '.' , $attribute->key , 2 );
+                $attributes_grouped[ $transformName( $segments[0] ) ][ $segments[1] ] = $attribute;
+            }else{
+                $attributes_grouped[0][] = $attribute;
+            }
+
+        }
+
+        if( $groupName !== null ){
+            $attributes_grouped = array_only( $attributes_grouped , $transformName( $groupName ) );
+            $attributes_grouped = reset( $attributes_grouped );
+        }
+
+        if( $excludeGroup !== null )
+            unset( $attributes_grouped[ $transformName( $excludeGroup ) ] );
+
+
+        return $attributes_grouped;
+    }
 
 }
