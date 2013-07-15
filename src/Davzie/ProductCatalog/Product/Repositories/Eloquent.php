@@ -177,6 +177,20 @@ class Eloquent extends IEloquent implements Product {
     }
 
     /**
+     * Get the value that is set for the current product attribute by the key
+     * @return Eloquent
+     */
+    public function getAttrValueByKey( $attributeKey )
+    {
+        $attribute = $this->attributes()->where( 'key' , '=' , $attributeKey )->first();
+
+        if($attribute)
+            return $attribute->pivot->value;
+
+        return '';
+    }
+
+    /**
      * Get the value that is set for the current product attribute
      * @return Eloquent
      */

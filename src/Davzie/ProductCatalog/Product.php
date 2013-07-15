@@ -121,6 +121,12 @@ interface Product {
     public function getAttrValue( $attributeId );
 
     /**
+     * Get the value that is set for the current product attribute by the key
+     * @return Eloquent
+     */
+    public function getAttrValueByKey( $attributeKey );
+
+    /**
      * Add values to product attributes to the product
      * @return boolean
      */
