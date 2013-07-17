@@ -172,7 +172,7 @@ class Eloquent extends IEloquent implements Category {
 
         if( $first_cat ){
             $first_category_products = $first_cat->products()->first();
-            if( $first_category_products->getThumbnailImage() )
+            if( $first_category_products and $first_category_products->getThumbnailImage() )
                 return $first_category_products->getThumbnailImage();
         }
 
