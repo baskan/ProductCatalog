@@ -20,6 +20,13 @@ interface Product {
     public function getByUrl( $url );
 
     /**
+     * Get a full URL from the category details passed in
+     * @param  Category $category The category object
+     * @return string
+     */
+    public function getFullUrlWithCategory( Category $category );
+
+    /**
      * Get the active products
      * @return Eloquent
      */

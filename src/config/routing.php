@@ -8,11 +8,11 @@ return array(
     /**
      * The first segment of the URL used to get categories
      */
-    'category_segment' => 'categories',
+    'category_segment' => '',
 
     /**
      * The first segment of the URL used to get products
      */
-    'product_segment' => 'products',
+    'product_segment' => '',
 
 );

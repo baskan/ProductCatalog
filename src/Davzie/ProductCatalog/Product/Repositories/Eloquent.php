@@ -3,6 +3,7 @@ namespace Davzie\ProductCatalog\Product\Repositories;
 use Eloquent as IEloquent;
 use Illuminate\Support\Facades\App;
 use Davzie\ProductCatalog\Product;
+use Davzie\ProductCatalog\Category;
 use Config;
 
 class Eloquent extends IEloquent implements Product {
@@ -52,6 +53,22 @@ class Eloquent extends IEloquent implements Product {
     public function getFullUrlAttribute(){
         $segment = Config::get('ProductCatalog::routing.product_segment');
         return url( $segment.'/'.$this->url );
+    }
+
+    /**
+     * Get a full URL from the category details passed in
+     * @param  Category $category The category object
+     * @return string
+     */
+    public function getFullUrlWithCategory( Category $category ){
+        $product_url = $this->url;
+        $segs = '';
+        if( $category->parent )
+            $segs .= $category->parent->url.'/';
+
+        $segs .= $category->url.'/';
+
+        return url( $segs.$product_url );
     }
 
     /**
