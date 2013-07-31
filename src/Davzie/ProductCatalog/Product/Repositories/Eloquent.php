@@ -26,7 +26,7 @@ class Eloquent extends IEloquent implements Product {
      * @return Eloquent
      */
     public function getAll(){
-        return $this->all();
+        return $this->where('enabled','=',1)->get();
     }
 
     /**
@@ -35,7 +35,7 @@ class Eloquent extends IEloquent implements Product {
      * @return Eloquent
      */
     public function getByUrl( $url ){
-        return $this->where('url','=',$url)->first();
+        return $this->where('enabled','=',1)->where('url','=',$url)->first();
     }
 
     /**
@@ -85,7 +85,7 @@ class Eloquent extends IEloquent implements Product {
      * @return Eloquent    The product found
      */
     public function getBySku( $sku ){
-        return $this->where('sku','=',$sku)->first();
+        return $this->where('enabled','=',1)->where('sku','=',$sku)->first();
     }
 
     /**

@@ -72,7 +72,7 @@ class ProductsController extends ManageBaseController {
     public function getIndex()
     {
         return View::make( 'ProductCatalog::products.dashboard' )
-                ->with( 'products' , $this->products->getAll() );
+                ->with( 'products' , $this->products->all() );
     }
 
     /**
