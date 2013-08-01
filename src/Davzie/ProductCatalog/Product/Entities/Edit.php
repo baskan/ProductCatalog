@@ -15,6 +15,7 @@ class Edit extends Entity {
         'price'                 => 'required|numeric',
         'attribute_set_id'      => 'integer|exists:attribute_sets,id',
         'enabled'               => 'integer',
+        'featured'               => 'integer',
     ];
 
     public function __construct( $currentId ){

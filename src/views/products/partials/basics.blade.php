@@ -43,6 +43,17 @@
     </div>
 </div>
 
+<!-- Featured Product -->
+<div class="control-group">
+    <div class="controls">
+        <label class="checkbox">
+            {{ Form::checkbox('featured', '1', Input::old( 'featured' , $product->featured ) ); }}
+            Featured (Shows On Homepage)
+        </label>
+    </div>
+</div>
+
+
 <!-- Product Description -->
 <div class="control-group">
     <label class="control-label" for="inputURL">Product Description</label>
