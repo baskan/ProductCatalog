@@ -80,13 +80,13 @@
 
 @section('css')
     @parent
-    <link rel="stylesheet" href="{{ asset('packages/Davzie/ProductCatalog/js/dropzone/css/dropzone.css') }}">
+    <link rel="stylesheet" href="{{ asset('packages/davzie/ProductCatalog/js/dropzone/css/dropzone.css') }}">
 @stop
 
 @section('scripts')
     @parent
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    <script src="{{ asset('packages/Davzie/ProductCatalog/js/dropzone/dropzone.min.js') }}"></script>
+    <script src="{{ asset('packages/davzie/ProductCatalog/js/dropzone/dropzone.min.js') }}"></script>
     <script>
         $(document).ready(function(){
 

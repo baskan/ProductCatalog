@@ -8,19 +8,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=1100px">
     @section('css')
-        <link rel="stylesheet" href="{{ asset('packages/Davzie/ProductCatalog/css/bootstrap.min.css') }}">
-        <link rel="stylesheet/less" type="text/css" href="{{ asset( 'packages/Davzie/ProductCatalog/css/styles.less' ) }}">
+        <link rel="stylesheet" href="{{ asset('packages/davzie/ProductCatalog/css/bootstrap.min.css') }}">
+        <link rel="stylesheet/less" type="text/css" href="{{ asset( 'packages/davzie/ProductCatalog/css/styles.less' ) }}">
     @show
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <link rel="shortcut icon" href="{{ asset('packages/Davzie/ProductCatalog/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('packages/davzie/ProductCatalog/favicon.ico') }}">
     <title>@yield('title')</title>
 </head>
 <body class="login-form">
     <section id="sign-in">
-        <img id="login-logo" src="{{ asset('packages/Davzie/ProductCatalog/img/eastwest-150-150.png') }}" />
+        <img id="login-logo" src="{{ asset('packages/davzie/ProductCatalog/img/eastwest-150-150.png') }}" />
         {{ Form::open( [ 'url'=>'manage/login', 'class'=>'form-inline' ] ) }}
             {{ Form::token() }}
             @include('ProductCatalog::partials.messaging')
@@ -40,8 +40,8 @@
 
     @section('scripts')
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="{{ asset('packages/Davzie/ProductCatalog/js/jquery.js') }}"><\/script>')</script>
-        <script src="{{ asset('packages/Davzie/ProductCatalog/js/less.js') }}"></script>
+        <script>window.jQuery || document.write('<script src="{{ asset('packages/davzie/ProductCatalog/js/jquery.js') }}"><\/script>')</script>
+        <script src="{{ asset('packages/davzie/ProductCatalog/js/less.js') }}"></script>
     @show
 </body>
 </html>

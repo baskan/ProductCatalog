@@ -6,19 +6,19 @@
     <meta name="author" content="David Thorpe <davzie@davzie.com>">
 
     @section('css')
-        <link rel="stylesheet" href="{{ asset('packages/Davzie/ProductCatalog/css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('packages/Davzie/ProductCatalog/css/bootstrap-responsive.min.css') }}">
-        <link rel="stylesheet/less" type="text/css" href="{{ asset( 'packages/Davzie/ProductCatalog/css/styles.less' ) }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset( 'packages/Davzie/ProductCatalog/css/redactor.css' ) }}">
+        <link rel="stylesheet" href="{{ asset('packages/davzie/ProductCatalog/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('packages/davzie/ProductCatalog/css/bootstrap-responsive.min.css') }}">
+        <link rel="stylesheet/less" type="text/css" href="{{ asset( 'packages/davzie/ProductCatalog/css/styles.less' ) }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset( 'packages/davzie/ProductCatalog/css/redactor.css' ) }}">
     @show
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-      <script src="{{ asset('packages/Davzie/ProductCatalog/js/html5shiv.js') }}"></script>
+      <script src="{{ asset('packages/davzie/ProductCatalog/js/html5shiv.js') }}"></script>
     <![endif]-->
 
     <!-- Fav and touch icons -->
-    <link rel="shortcut icon" href="{{ asset('packages/Davzie/ProductCatalog/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('packages/davzie/ProductCatalog/favicon.ico') }}">
     <title>{{ Config::get('ProductCatalog::app.name') }} &gt; @yield('title')</title>
   </head>
 
@@ -93,10 +93,10 @@
     <!-- Placed at the end of the document so the pages load faster -->
     @section('scripts')
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="{{ asset('packages/Davzie/ProductCatalog/js/jquery.js') }}"><\/script>')</script>
-        <script src="{{ asset('packages/Davzie/ProductCatalog/js/bootstrap.min.js') }}"></script>
-        <script src="{{ asset('packages/Davzie/ProductCatalog/js/less.js') }}"></script>
-        <script src="{{ asset('packages/Davzie/ProductCatalog/js/redactor.min.js') }}"></script>
+        <script>window.jQuery || document.write('<script src="{{ asset('packages/davzie/ProductCatalog/js/jquery.js') }}"><\/script>')</script>
+        <script src="{{ asset('packages/davzie/ProductCatalog/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('packages/davzie/ProductCatalog/js/less.js') }}"></script>
+        <script src="{{ asset('packages/davzie/ProductCatalog/js/redactor.min.js') }}"></script>
         <script>
             $(document).ready(function(){
                 $('.quick-editor').redactor();
