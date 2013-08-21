@@ -78,9 +78,9 @@ class ImgHelper {
 
         $img = Image::make($filename);
         if( $this->crop )
-            $img->grab( $this->width , $this->height )->save( $this->getPathFilename() );
+            $img->grab( $this->width , $this->height )->save( $this->getPathFilename() , 100 );
         else
-            $img->resize( $this->width , $this->height , true , true )->resizeCanvas( $this->width , $this->height , null , false , 'ffffff' )->save( $this->getPathFilename() );
+            $img->resize( $this->width , $this->height , true , true )->resizeCanvas( $this->width , $this->height , null , false , 'ffffff' )->save( $this->getPathFilename() , 100 );
 
         return true;
     }
