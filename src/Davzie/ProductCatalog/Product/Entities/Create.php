@@ -26,7 +26,7 @@ class Create extends Entity {
     public function __construct(){
         parent::__construct();
         // Default Data
-        static::$defaultData['slug'] = Str::slug( Input::get('title') , '-' );
+        static::$defaultData['slug'] = Str::slug( Input::get('sku') , '-' );
     }
 
 }
