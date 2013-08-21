@@ -26,7 +26,7 @@ class Edit extends Entity {
         static::$rules['url'] = 'required|alpha_dash|unique:products,url,'.$currentId;
 
         // Default Data
-        static::$defaultData['slug'] = Str::slug( Input::get('title') , '-' );
+        static::$defaultData['slug'] = Str::slug( Input::get('sku') , '-' );
         static::$defaultData['description'] = Input::get('description');
 
         // If we have a 0 through on attribute set ID then we can assume the user has not chosen anything
