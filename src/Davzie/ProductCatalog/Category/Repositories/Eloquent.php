@@ -188,4 +188,36 @@ class Eloquent extends IEloquent implements Category {
         return $this->filterable;
     }
 
+    /**
+     * Sometimes it may be necessary to retrieve all products including those in child categories, this should do that.
+     * @return Collection
+     */
+    public function getAllProductsIncludingChildren()
+    {
+        return $this->grabAllProducts( $this );
+    }
+
+    /**
+     * The function that actually goes and recursively collects all products from passed in category and children categories
+     * @param  Category $category The category to recursively check
+     * @return Array
+     */
+    private function grabAllProducts( Category $category )
+    {
+        $child_products = $products = array();
+
+        if( $category->products()->count() > 0 ){
+            foreach( $category->products as $product ){
+                $products[ $product->id ] = $product;
+            }
+        }
+
+        if( $category->children()->count() > 0 ){
+            foreach( $category->children as $child ){
+                $child_products[] = $this->grabAllProducts( $child );
+            }
+        }
+        return $products + $child_products;
+    }
+
 }

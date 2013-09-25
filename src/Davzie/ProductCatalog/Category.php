@@ -99,4 +99,10 @@ interface Category {
      */
     public function isFilterable();
 
+    /**
+     * Sometimes it may be necessary to retrieve all products including those in child categories, this should do that.
+     * @return Collection
+     */
+    public function getAllProductsIncludingChildren();
+
 }

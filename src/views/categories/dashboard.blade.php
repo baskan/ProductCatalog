@@ -42,7 +42,7 @@
                             <a href="{{ url('manage/categories/edit/'.$category->id) }}">{{ $category->url }}</a>
                         </td>
                         <td>
-                            <a href="{{ url('manage/categories/edit/'.$category->id) }}">{{ $category->products()->count() }}</a>
+                            <a href="{{ url('manage/categories/edit/'.$category->id) }}">{{ count( $category->getAllProductsIncludingChildren() ) }}</a>
                         </td>
                         <td>
                             <a href="{{ url('manage/categories/edit/'.$category->id) }}">{{ $category->enabled }}</a>
@@ -65,7 +65,7 @@
                                     <a href="{{ url('manage/categories/edit/'.$child->id) }}">{{ $child->url }}</a>
                                 </td>
                                 <td>
-                                    <a href="{{ url('manage/categories/edit/'.$child->id) }}">{{ $child->products()->count() }}</a>
+                                    <a href="{{ url('manage/categories/edit/'.$child->id) }}">{{ count( $child->getAllProductsIncludingChildren() ) }}</a>
                                 </td>
                                 <td>
                                     <a href="{{ url('manage/categories/edit/'.$child->id) }}">{{ $child->enabled }}</a>
