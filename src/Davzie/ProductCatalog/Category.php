@@ -93,4 +93,10 @@ interface Category {
      */
     public function getMainImage();
 
+    /**
+     * Determine whether or not this category should show filters only
+     * @return boolean True if the category is filterable
+     */
+    public function isFilterable();
+
 }

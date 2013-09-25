@@ -33,6 +33,16 @@
         </div>
     </div>
 
+    <!-- Filterable -->
+    <div class="control-group">
+        <div class="controls">
+            <label class="checkbox">
+                {{ Form::checkbox('filterable', '1', Input::old('filterable' , $category->isFilterable() )  ); }}
+                Filterable
+            </label>
+        </div>
+    </div>
+
     <!-- Product Description -->
     <div class="control-group">
         <label class="control-label" for="inputURL">Category Description</label>

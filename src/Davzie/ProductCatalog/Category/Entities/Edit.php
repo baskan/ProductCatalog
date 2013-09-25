@@ -12,7 +12,8 @@ class Edit extends Entity {
     protected static $rules = [
         'id'            =>  'required|integer|exists:categories,id',
         'name'          =>  'required|max:255',
-        'enabled'       =>  'integer'
+        'enabled'       =>  'integer',
+        'filterable'    =>  'integer'
     ];
 
     public function __construct( $currentId ){

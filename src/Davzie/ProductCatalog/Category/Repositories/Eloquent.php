@@ -179,4 +179,13 @@ class Eloquent extends IEloquent implements Category {
         return null;
     }
 
+    /**
+     * Determine whether or not this category should show filters only
+     * @return boolean True if the category is filterable
+     */
+    public function isFilterable()
+    {
+        return $this->filterable;
+    }
+
 }
