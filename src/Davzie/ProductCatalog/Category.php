@@ -105,4 +105,31 @@ interface Category {
      */
     public function getAllProductsIncludingChildren();
 
+    /**
+     * The numerical level of the category in heirachy. Level 0 is the highest
+     * @return integer
+     */
+    public function level();
+
+    /**
+     * Sometimes we want to indicate what level we're at in dropdowns or in the backend menu, this produces counts of characters and a final character
+     * to show this, similar to -> or ---> 
+     * @param  string $indicator The indicator (in the example above the dash)
+     * @param  string $final     The final arrow if required ( could be > as above )
+     * @return string
+     */
+    public function getLevelIndicator( $indicator = '-' , $final = '' );
+
+    /**
+     * Get the TRs for the admin area
+     * @return View
+     */
+    public function displayOrderedAdminHTML();
+
+    /**
+     * Get the list of flattened heirachial categories available to us
+     * @return array
+     */
+    public function getFlattenedCategories();
+
 }

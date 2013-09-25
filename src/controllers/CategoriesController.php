@@ -54,7 +54,8 @@ class CategoriesController extends ManageBaseController {
     public function getIndex()
     {
         return View::make( 'ProductCatalog::categories.dashboard' )
-                ->with( 'categories' , $this->categories->getTopLevel() );
+                ->with( 'orderedCategoriesHTML' , $this->categories->displayOrderedAdminHTML() )
+                ->with( 'orderedCategories' , $this->categories->all() );
     }
 
     /**
@@ -70,14 +71,12 @@ class CategoriesController extends ManageBaseController {
 
         // Determine if the category parent should be disabled or not
         $hasSubCategories = $category->hasChildren();
-        $parentCatAttributes = ( $hasSubCategories ? array('disabled'=>true) : array() );
-        $top_level_categories = [ 0 => 'None (Top Level)' ] + $this->categories->getTopLevel( $id )->lists('name','id');
+        $categoryDropdown = $this->getCategoriesDropdownHTML();
 
         return View::make('ProductCatalog::categories.edit')
                     ->with( 'category' , $category )
-                    ->with( 'top_level_categories' , $top_level_categories )
-                    ->with( 'hasSubCategories' , $hasSubCategories )
-                    ->with( 'parentCatAttributes' , $parentCatAttributes );
+                    ->with( 'categoryDropdown' , $categoryDropdown )
+                    ->with( 'hasSubCategories' , $hasSubCategories );
     }
 
     /**
@@ -101,10 +100,10 @@ class CategoriesController extends ManageBaseController {
      * @return View
      */
     public function getNew(){
-        $top_level_categories = ['0'=>'Choose A Parent Category'] + $this->categories->getTopLevel()->lists('name','id');
+        $categoryDropdown = $this->getCategoriesDropdownHTML();
 
         return View::make('ProductCatalog::categories.new')
-                    ->with( 'top_level_categories' , $top_level_categories );
+                    ->with( 'categoryDropdown' , $categoryDropdown );
     }
 
     /**
@@ -160,6 +159,18 @@ class CategoriesController extends ManageBaseController {
         $uploadModel->setOrder( Input::get('data') );
 
         return Response::json('success', 200);
+    }
+
+    /**
+     * Get the list of available options for use in the categories dropdown menu
+     * @return array
+     */
+    private function getCategoriesDropdownHTML(){
+        $list = array( 0 => 'None (Top Level)' );
+        foreach( $this->categories->getFlattenedCategories() as $category ){
+            $list[ $category->id ] = $category->getLevelIndicator('-') . ' ' . $category->name;
+        }
+        return $list;
     }
 
 }

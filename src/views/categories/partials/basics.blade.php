@@ -18,8 +18,7 @@
     <div class="control-group">
     <label class="control-label">Parent Category</label>
         <div class="controls">
-            {{ Form::select('parent_id', $top_level_categories, Input::old('parent_id' , $category->parent_id ) , $parentCatAttributes ) }}
-            <span class="help-block"><strong>Note:</strong> You cannot change this if your category has sub-categories. First move those sub-categories to a new one.</span>
+            {{ Form::select('parent_id', $categoryDropdown, Input::old('parent_id' , $category->parent_id ) ) }}
         </div>
     </div>
 
