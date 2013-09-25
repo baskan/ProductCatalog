@@ -40,7 +40,7 @@
                             <a href="{{ url('manage/products/edit/'.$product->id) }}">&pound;{{ $product->price }}</a>
                         </td>
                         <td>
-                            <a href="{{ url('manage/products/edit/'.$product->id) }}">categories</a>
+                            <a href="{{ url('manage/products/edit/'.$product->id) }}">{{ implode(', ', $product->categories()->lists( 'name' ) ) }}</a>
                         </td>
                     </tr>
                 @endforeach
