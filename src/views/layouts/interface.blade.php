@@ -32,6 +32,7 @@
             <ul class="nav">
               <li class="{{ Request::is('manage/products*') ? 'active' : '' }}"><a href="{{ url('manage/products') }}">Products</a></li>
               <li class="{{ Request::is('manage/categories*') ? 'active' : '' }}"><a href="{{ url('manage/categories') }}">Categories</a></li>
+              <li class="{{ Request::is('manage/collections*') ? 'active' : '' }}"><a href="{{ url('manage/collections') }}">Collections</a></li>
               <li class="{{ Request::is('manage/attributes*') ? 'active' : '' }}"><a href="{{ url('manage/attributes') }}">Attributes</a></li>
             </ul>
           </div><!--/.nav-collapse -->
@@ -60,6 +61,9 @@
               </li>
               <li class="{{ Request::is('manage/categories*') ? 'active' : '' }}">
                 <a href="{{ url('manage/categories') }}"><span class="icon-book"></span> Category Manager</a>
+              </li>
+              <li class="{{ Request::is('manage/collections*') ? 'active' : '' }}">
+                <a href="{{ url('manage/collections') }}"><span class="icon-book"></span> Collection Manager</a>
               </li>
               <li class="nav-header">Attributes</li>
               <li class="{{ Request::is('manage/attributes*') ? 'active' : '' }}">

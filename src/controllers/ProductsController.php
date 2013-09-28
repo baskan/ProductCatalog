@@ -12,6 +12,7 @@ use App;
 use Davzie\ProductCatalog\Product;
 use Davzie\ProductCatalog\Category;
 use Davzie\ProductCatalog\Attribute;
+use Davzie\ProductCatalog\Collection;
 use Davzie\ProductCatalog\Attribute\Set as AttributeSet;
 use Davzie\ProductCatalog\Product\Entities\Create;
 use Davzie\ProductCatalog\Product\Entities\Edit;
@@ -55,9 +56,10 @@ class ProductsController extends ManageBaseController {
     /**
      * Construct shit
      */
-    public function __construct( Product $products , Category $categories , AttributeSet $attribute_sets , Attribute $attributes ){
+    public function __construct( Product $products , Category $categories , AttributeSet $attribute_sets , Attribute $attributes , Collection $collections ){
         $this->products = $products;
         $this->categories = $categories;
+        $this->collections = $collections;
         $this->attributes = $attributes;
         $this->attribute_sets = $attribute_sets;
         parent::__construct();
@@ -91,6 +93,7 @@ class ProductsController extends ManageBaseController {
         // Get the top level categories only, we nest from the view itself
         $categories = $this->categories->getTopLevel();
         $attribute_sets = [ 0 => 'None' ] + $this->attribute_sets->getAll()->lists('name','id');
+        $collections = [ 0 => 'None' ] + $this->collections->getAll()->lists('name','id');
 
         // Setup the old data so it's easy to find
         $mainImage = Input::old('mainImage',false);
@@ -147,6 +150,7 @@ class ProductsController extends ManageBaseController {
                     ->with( 'attributeViews' , $attributeViews )
                     ->with( 'mainImageId' , $mainImage )
                     ->with( 'attribute_sets' , $attribute_sets )
+                    ->with( 'collections' , $collections )
                     ->with( 'thumbnailImageId' , $thumbnailImage )
                     ->with( 'categories' , $categories );
     }

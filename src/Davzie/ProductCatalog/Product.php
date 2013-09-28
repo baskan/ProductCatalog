@@ -82,6 +82,12 @@ interface Product {
     public function getGalleryImages();
 
     /**
+     * The collection relationship
+     * @return Eloquent
+     */
+    public function collection();
+
+    /**
      * Set the main image for this product to the upload ID passed in
      * @param   integer $uploadId The upload ID
      * @return  boolean

@@ -33,6 +33,14 @@
     </div>
 </div>
 
+<!-- Collection -->
+<div class="control-group">
+    <label class="control-label">Collection</label>
+    <div class="controls">
+        {{ Form::select('collection_id', $collections, Input::old('collection_id' , $product->collection_id ) ) }}
+    </div>
+</div>
+
 <!-- Enabled Product -->
 <div class="control-group">
     <div class="controls">

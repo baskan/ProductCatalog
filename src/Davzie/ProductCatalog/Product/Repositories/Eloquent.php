@@ -97,6 +97,15 @@ class Eloquent extends IEloquent implements Product {
     }
 
     /**
+     * The collection relationship
+     * @return Eloquent
+     */
+    public function collection()
+    {
+        return $this->hasOne( 'Davzie\ProductCatalog\Collection\Repositories\Eloquent' );
+    }
+
+    /**
      * The media object to get the uploads available
      * @return Eloquent
      */

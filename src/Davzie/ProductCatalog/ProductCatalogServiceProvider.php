@@ -33,6 +33,7 @@ class ProductCatalogServiceProvider extends ServiceProvider {
 		$this->app->bind('Davzie\ProductCatalog\User','Davzie\ProductCatalog\User\Repositories\Eloquent');
 		$this->app->bind('Davzie\ProductCatalog\Product','Davzie\ProductCatalog\Product\Repositories\Eloquent');
 		$this->app->bind('Davzie\ProductCatalog\Category','Davzie\ProductCatalog\Category\Repositories\Eloquent');
+		$this->app->bind('Davzie\ProductCatalog\Collection','Davzie\ProductCatalog\Collection\Repositories\Eloquent');
 		$this->app->bind('Davzie\ProductCatalog\Upload','Davzie\ProductCatalog\Upload\Repositories\Eloquent');
 		$this->app->bind('Davzie\ProductCatalog\Attribute','Davzie\ProductCatalog\Attribute\Repositories\Eloquent');
 		$this->app->bind('Davzie\ProductCatalog\Attribute\Set','Davzie\ProductCatalog\Attribute\Set\Repositories\Eloquent');

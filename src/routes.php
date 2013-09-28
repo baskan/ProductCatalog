@@ -7,5 +7,6 @@
     Route::controller( 'manage/attribute-sets' , 'Davzie\ProductCatalog\Controllers\AttributeSetsController' );
     Route::controller( 'manage/users' , 'Davzie\ProductCatalog\Controllers\UsersController' );
     Route::controller( 'manage/categories' , 'Davzie\ProductCatalog\Controllers\CategoriesController' );
+    Route::controller( 'manage/collections' , 'Davzie\ProductCatalog\Controllers\CollectionsController' );
     Route::controller( 'manage/products' , 'Davzie\ProductCatalog\Controllers\ProductsController' );
     Route::controller( 'manage' , 'Davzie\ProductCatalog\Controllers\ManageController' );

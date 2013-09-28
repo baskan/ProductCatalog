@@ -11,6 +11,11 @@ return array(
     'category_segment' => '',
 
     /**
+     * The first segment of the URL used to get categories
+     */
+    'collection_segment' => 'collections',
+
+    /**
      * The first segment of the URL used to get products
      */
     'product_segment' => '',

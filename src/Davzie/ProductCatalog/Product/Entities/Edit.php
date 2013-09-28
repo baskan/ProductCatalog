@@ -14,6 +14,7 @@ class Edit extends Entity {
         'title'                 => 'required|max:255',
         'price'                 => 'required|numeric',
         'attribute_set_id'      => 'integer|exists:attribute_sets,id',
+        'collection_id'         => 'integer|exists:collections,id',
         'enabled'               => 'integer',
         'featured'               => 'integer',
     ];
@@ -33,6 +34,10 @@ class Edit extends Entity {
         if( Input::get('attribute_set_id') == 0 ){
             unset( static::$rules['attribute_set_id'] );
             static::$defaultData['attribute_set_id'] = null;
+        }
+        if( Input::get('collection_id') == 0 ){
+            unset( static::$rules['collection_id'] );
+            static::$defaultData['collection_id'] = null;
         }
 
         parent::__construct();
