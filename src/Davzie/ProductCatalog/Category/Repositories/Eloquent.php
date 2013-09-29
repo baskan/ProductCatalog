@@ -296,7 +296,40 @@ class Eloquent extends IEloquent implements Category {
                 $child_products[] = $this->grabAllProducts( $child );
             }
         }
-        return $products + $child_products;
+
+        if($child_products){
+            foreach($child_products as $cp){
+                if($cp){
+                    foreach($cp as $prod){
+                        if( !isset($products[$prod->id]) ){
+                            $products[$prod->id] = $prod;
+                        }
+                    }
+                }
+            }
+        }
+
+        return $products;
+    }
+
+    /**
+     * Get all available collections in this category
+     * @return Collection
+     */
+    public function getCollections( Category $category )
+    {
+        $products = $this->grabAllProducts( $category );
+
+        if( !$products )
+            return null;
+
+        $ids = array();
+        foreach($products as $product){
+            if( !is_null($product->collection_id) )
+                $ids[$product->collection_id] = $product->collection_id;
+        }
+
+        return App::make('Davzie\ProductCatalog\Collection')->whereIn('id',$ids)->orderBy('name','asc')->get();
     }
 
 }

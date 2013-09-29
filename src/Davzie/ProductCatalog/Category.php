@@ -132,4 +132,10 @@ interface Category {
      */
     public function getFlattenedCategories();
 
+    /**
+     * Get all available collections in this category
+     * @return Collection
+     */
+    public function getCollections( Category $category );
+
 }

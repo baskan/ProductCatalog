@@ -2,6 +2,7 @@
 namespace Davzie\ProductCatalog\Collection\Repositories;
 use Eloquent as IEloquent;
 use Davzie\ProductCatalog\Collection;
+use Davzie\ProductCatalog\Category;
 use Config, App, View;
 
 class Eloquent extends IEloquent implements Collection {
@@ -139,23 +140,9 @@ class Eloquent extends IEloquent implements Collection {
      * @return Upload   The upload object
      */
     public function getThumbnailImage(){
-        $associated_image = $this->media()->first();
-        if( $associated_image !== null )
-            return $associated_image;
-
-        $first_cat = $this->children()->first();
-        if( $first_cat and $first_cat->media()->first() )
-            return $first_cat->media()->first();
-
         $first_product = $this->products()->first();
         if( $first_product and $first_product->getThumbnailImage() )
             return $first_product->getThumbnailImage();
-
-        if( $first_cat ){
-            $first_category_products = $first_cat->products()->first();
-            if( $first_category_products and $first_category_products->getThumbnailImage() )
-                return $first_category_products->getThumbnailImage();
-        }
 
         return null;
     }

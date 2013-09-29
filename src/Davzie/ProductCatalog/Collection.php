@@ -1,6 +1,6 @@
 <?php
 namespace Davzie\ProductCatalog;
-
+use Davzie\ProductCatalog\Category;
 /**
  * Lets tell our interface what methods we want to ensure are on the class that implements this contract
  */
