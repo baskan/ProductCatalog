@@ -3,7 +3,7 @@ namespace Davzie\ProductCatalog\Collection\Repositories;
 use Eloquent as IEloquent;
 use Davzie\ProductCatalog\Collection;
 use Davzie\ProductCatalog\Category;
-use Config, App, View;
+use Config, App, View, Request;
 
 class Eloquent extends IEloquent implements Collection {
 
@@ -43,13 +43,17 @@ class Eloquent extends IEloquent implements Collection {
      * @return string
      */
     public function getFullUrlAttribute(){
-        $url = '';
+        $url = $category = '';
 
         $url = $this->url;
 
         $segment = Config::get('ProductCatalog::routing.collection_segment');
+        $segments = Request::segments();
+        if( $segments[0] == Config::get('ProductCatalog::routing.category_segment') ){
+            $category = '/'.last($segments);
+        }
 
-        return url( $segment.'/'.$url );
+        return url( $segment.'/'.$url.$category );
     }
 
     /**

@@ -2,6 +2,7 @@
 namespace Davzie\ProductCatalog\Category\Repositories;
 use Eloquent as IEloquent;
 use Davzie\ProductCatalog\Category;
+use Davzie\ProductCatalog\Collection;
 use Config, App, View;
 
 class Eloquent extends IEloquent implements Category {
@@ -51,6 +52,22 @@ class Eloquent extends IEloquent implements Category {
         $segment = Config::get('ProductCatalog::routing.category_segment');
 
         return url( $segment.'/'.$url );
+    }
+
+    /**
+     * Get all products associated with a collection and category
+     * @return Eloquent
+     */
+    public function filterByCollection( Category $category , Collection $collection ){
+        $products = $this->grabAllProducts( $category );
+        $filtered = array();
+        if($products){
+            foreach($products as $product){
+                if( $product->collection_id == $collection->id )
+                    $filtered[$product->id] = $product;
+            }
+        }
+        return $filtered;
     }
 
     /**

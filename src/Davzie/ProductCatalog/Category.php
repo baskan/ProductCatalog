@@ -1,5 +1,7 @@
 <?php
 namespace Davzie\ProductCatalog;
+use Davzie\ProductCatalog\Collection;
+use Davzie\ProductCatalog\Category;
 
 /**
  * Lets tell our interface what methods we want to ensure are on the class that implements this contract
@@ -43,6 +45,12 @@ interface Category {
      * @return Eloquent
      */
     public function parent();
+
+    /**
+     * Get all products associated with a collection and category
+     * @return Eloquent
+     */
+    public function filterByCollection( Category $category , Collection $collection );
 
     /**
      * Get the child categories if they exists

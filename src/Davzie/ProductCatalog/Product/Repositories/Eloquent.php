@@ -4,7 +4,7 @@ use Eloquent as IEloquent;
 use Illuminate\Support\Facades\App;
 use Davzie\ProductCatalog\Product;
 use Davzie\ProductCatalog\Category;
-use Config;
+use Config, Request;
 
 class Eloquent extends IEloquent implements Product {
 
@@ -62,13 +62,34 @@ class Eloquent extends IEloquent implements Product {
      */
     public function getFullUrlWithCategory( Category $category ){
         $product_url = $this->url;
-        $segs = '';
+        $segs = Config::get('ProductCatalog::routing.product_segment').'/';
         if( $category->parent )
             $segs .= $category->parent->url.'/';
 
         $segs .= $category->url.'/';
 
         return url( $segs.$product_url );
+    }
+
+    /**
+     * Get the full URL regardless of where we are, parses current URL
+     * @return string
+     */
+    public function parseFullUrl()
+    {
+        $segments = Request::segments();
+        $categories = App::make('Davzie\ProductCatalog\Category');
+        if( $category = $categories->getByUrl( last($segments) ) ){
+            $product_url = $this->url;
+            $segs = Config::get('ProductCatalog::routing.product_segment').'/';
+            if( $category->parent )
+                $segs .= $category->parent->url.'/';
+
+            $segs .= $category->url.'/';
+
+            return url( $segs.$product_url );
+        }
+        return url( implode('/',$segments).'/'.$this->url);
     }
 
     /**
