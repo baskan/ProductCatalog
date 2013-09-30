@@ -73,8 +73,20 @@ class CategoriesController extends ManageBaseController {
         $hasSubCategories = $category->hasChildren();
         $categoryDropdown = $this->getCategoriesDropdownHTML();
 
+        // Setup the old data so it's easy to find
+        $mainImage = Input::old('mainImage',false);
+        if( $mainImage === false and $category->getMainImage() )
+                $mainImage = $category->getMainImage()->id;
+
+        // Setup the old data so it's easy to find
+        $thumbnailImage = Input::old('thumbnailImage',false);
+        if( $thumbnailImage === false and $category->getThumbnailImage() )
+                $thumbnailImage = $category->getThumbnailImage()->id;
+
         return View::make('ProductCatalog::categories.edit')
                     ->with( 'category' , $category )
+                    ->with( 'mainImageId' , $mainImage )
+                    ->with( 'thumbnailImageId' , $thumbnailImage )
                     ->with( 'categoryDropdown' , $categoryDropdown )
                     ->with( 'hasSubCategories' , $hasSubCategories );
     }

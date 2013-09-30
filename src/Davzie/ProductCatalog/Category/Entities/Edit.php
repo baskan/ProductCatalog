@@ -42,6 +42,10 @@ class Edit extends Entity {
      */
     public function hydrate(){
         parent::hydrate();
+        $categoryModel = App::make( static::$model )->find( $this->currentId );
+        $categoryModel->setMainImage( Input::get( 'mainImage' ) );
+        $categoryModel->setThumbnailImage( Input::get( 'thumbnailImage' ) );
+        $categoryModel->setGalleryImages( Input::get( 'hideFromGallery' ) );
 
         // Ensure that the product images that need to be deleted get deleted
         $uploadModel = App::make('Davzie\ProductCatalog\Upload');
