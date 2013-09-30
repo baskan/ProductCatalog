@@ -13,3 +13,13 @@
             {{ Form::text('url', Input::old('url' , $collection->url ), [ 'placeholder'=>'Collection URL' ] ) }}
         </div>
     </div>
+
+    <!-- Featured Product -->
+    <div class="control-group">
+        <div class="controls">
+            <label class="checkbox">
+                {{ Form::checkbox('featured', '1', Input::old( 'featured' , $collection->featured ) ); }}
+                Featured
+            </label>
+        </div>
+    </div>

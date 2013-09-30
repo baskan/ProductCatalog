@@ -272,4 +272,23 @@ class Eloquent extends IEloquent implements Collection {
         return $products + $child_products;
     }
 
+    /**
+     * Get all collections that are featured
+     * @return Eloquent
+     */
+    public function getFeatured()
+    {
+        $candidates = $this->where('featured','=',1)->get();
+        $filtered = array();
+        if(!$candidates)
+            return array();
+
+        foreach($candidates as $collection){
+            if( $collection->products()->count() > 0 )
+                $filtered[] = $collection;
+        }
+
+        return $filtered;
+    }
+
 }

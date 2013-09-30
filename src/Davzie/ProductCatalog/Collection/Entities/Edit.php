@@ -11,7 +11,8 @@ class Edit extends Entity {
 
     protected static $rules = [
         'id'            =>  'required|integer|exists:collections,id',
-        'name'          =>  'required|max:255'
+        'name'          =>  'required|max:255',
+        'featured'      =>  'integer',
     ];
 
     public function __construct( $currentId ){

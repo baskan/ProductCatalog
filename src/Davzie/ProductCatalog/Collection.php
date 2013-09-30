@@ -50,4 +50,10 @@ interface Collection {
      */
     public function getMainImage();
 
+    /**
+     * Get all collections that are featured
+     * @return Eloquent
+     */
+    public function getFeatured();
+
 }
