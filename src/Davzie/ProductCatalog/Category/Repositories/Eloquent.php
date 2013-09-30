@@ -241,6 +241,24 @@ class Eloquent extends IEloquent implements Category {
     }
 
     /**
+     * Ensure the collections get associated to uploads properly
+     * @param void
+     */
+    public function setCollectionImages( $uploadIds )
+    {
+        if( !is_array($uploadIds) )
+            return;
+
+        $this->media()->update( [ 'collection_id' => null ] );
+
+        foreach($uploadIds as $uploadId=>$collectionId){
+            if( $collectionId && $collectionId !== 0)
+                $this->media()->where('id','=',$uploadId )->update( [ 'collection_id' => $collectionId ] );    
+        }
+        $this->media()->whereIn('id',$uploadIds )->update( [ 'gallery' => false ] );
+    }
+
+    /**
      * Determine whether or not this category should show filters only
      * @return boolean True if the category is filterable
      */

@@ -144,8 +144,14 @@ class Eloquent extends IEloquent implements Collection {
      * Get the thumbnail image associated with this category
      * @return Upload   The upload object
      */
-    public function getThumbnailImage(){
+    public function getThumbnailImage( $category = null ){
+        if( $category instanceof Category ){
+            $img = $category->media()->where('collection_id','=',$this->id)->first();
+            if($img)
+                return $img;
+        }
         $first_product = $this->products()->first();
+
         if( $first_product and $first_product->getThumbnailImage() )
             return $first_product->getThumbnailImage();
 
@@ -279,17 +285,16 @@ class Eloquent extends IEloquent implements Collection {
      */
     public function getFeatured()
     {
-        $candidates = $this->where('featured','=',1)->get();
-        $filtered = array();
-        if(!$candidates)
-            return array();
+        return $this->has('products')->where('featured','=',1)->get();
+    }
 
-        foreach($candidates as $collection){
-            if( $collection->products()->count() > 0 )
-                $filtered[] = $collection;
-        }
-
-        return $filtered;
+    /**
+     * Return all collections that have products
+     * @return Eloquent
+     */
+    public function allWithProducts()
+    {
+        return $this->has('products')->get();
     }
 
 }

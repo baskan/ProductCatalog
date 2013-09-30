@@ -7,6 +7,7 @@ use Response;
 use Input;
 use App;
 use Davzie\ProductCatalog\Category;
+use Davzie\ProductCatalog\Collection;
 use Davzie\ProductCatalog\Category\Entities\Create as CategoryNew;
 use Davzie\ProductCatalog\Category\Entities\Edit as CategoryEdit;
 use Davzie\ProductCatalog\Category\Entities\Upload;
@@ -20,6 +21,12 @@ class CategoriesController extends ManageBaseController {
     protected $categories;
 
     /**
+     * The collections object
+     * @var Collection
+     */
+    protected $collections;
+
+    /**
      * Let's whitelist all the methods we want to allow guests to visit!
      *
      * @access   protected
@@ -30,8 +37,9 @@ class CategoriesController extends ManageBaseController {
     /**
      * Construct shit
      */
-    public function __construct( Category $categories ){
+    public function __construct( Category $categories , Collection $collections ){
         $this->categories = $categories;
+        $this->collections = $collections;
         parent::__construct();
     }
 
@@ -83,9 +91,15 @@ class CategoriesController extends ManageBaseController {
         if( $thumbnailImage === false and $category->getThumbnailImage() )
                 $thumbnailImage = $category->getThumbnailImage()->id;
 
+        // Get all collections that have products
+        $collections = $this->collections->allWithProducts();
+        $collections_lists = [ 0 => 'Assign Collection' ] + $collections->lists('name','id');
+
         return View::make('ProductCatalog::categories.edit')
                     ->with( 'category' , $category )
                     ->with( 'mainImageId' , $mainImage )
+                    ->with( 'collections' , $collections )
+                    ->with( 'collections_lists' , $collections_lists )
                     ->with( 'thumbnailImageId' , $thumbnailImage )
                     ->with( 'categoryDropdown' , $categoryDropdown )
                     ->with( 'hasSubCategories' , $hasSubCategories );

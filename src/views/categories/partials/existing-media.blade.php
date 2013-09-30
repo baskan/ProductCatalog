@@ -20,6 +20,7 @@
                         {{ Form::checkbox('hideFromGallery['.$upload->id.']', $upload->id, in_array( $upload->id, $checkedArray ) ) }}
                         Hide From Gallery
                     </label>
+                    {{ Form::select( 'collectionImages['.$upload->id.']' , $collections_lists , $upload->collection_id , [ 'style'=>'max-width:100%;' ] ) }}
                     <label class="checkbox">
                         <?php $checkedArray = Input::old('deleteImage', [] ); ?>
                         {{ Form::checkbox('deleteImage['.$upload->id.']', $upload->id, in_array( $upload->id, $checkedArray ) ) }}

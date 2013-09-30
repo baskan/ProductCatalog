@@ -46,6 +46,7 @@ class Edit extends Entity {
         $categoryModel->setMainImage( Input::get( 'mainImage' ) );
         $categoryModel->setThumbnailImage( Input::get( 'thumbnailImage' ) );
         $categoryModel->setGalleryImages( Input::get( 'hideFromGallery' ) );
+        $categoryModel->setCollectionImages( Input::get( 'collectionImages' ) );
 
         // Ensure that the product images that need to be deleted get deleted
         $uploadModel = App::make('Davzie\ProductCatalog\Upload');
