@@ -49,7 +49,8 @@ class Eloquent extends IEloquent implements Collection {
 
         $segment = Config::get('ProductCatalog::routing.collection_segment');
         $segments = Request::segments();
-        if( $segments[0] == Config::get('ProductCatalog::routing.category_segment') ){
+
+        if( isset($segments[0]) && $segments[0] == Config::get('ProductCatalog::routing.category_segment') ){
             $category = '/'.last($segments);
         }
 
