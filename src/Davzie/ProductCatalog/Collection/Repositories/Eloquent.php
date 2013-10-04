@@ -145,14 +145,25 @@ class Eloquent extends IEloquent implements Collection {
      * @return Upload   The upload object
      */
     public function getThumbnailImage( $category = null ){
-        if( $category instanceof Category ){
-            $img = $category->media()->where('collection_id','=',$this->id)->first();
-            if($img)
-                return $img;
-        }
-        $first_product = $this->products()->first();
+        
+        // Ensure we currently have no images
+        $img = null;
 
-        if( $first_product and $first_product->getThumbnailImage() )
+        // Check to see if a category is passed in, if so we should use images from that one
+        // otherwise if no category is passed in, see if we have any category images associated
+        // with the collection in order to show something more relevant than just a product image
+        if( $category instanceof Category )
+            $img = $category->media()->where('collection_id','=',$this->id)->first();
+        else
+            $img = App::make('Davzie\ProductCatalog\Upload')->where('collection_id','=',$this->id)->first();
+
+        // If the above works out we can return something, if no, just carry on
+        if($img)
+            return $img;
+
+        // Okay, maybe we have some products associated with this collection instead...
+        // if so use the first image from one of those
+        if( $first_product = $this->products()->first() and $first_product->getThumbnailImage() )
             return $first_product->getThumbnailImage();
 
         return null;
