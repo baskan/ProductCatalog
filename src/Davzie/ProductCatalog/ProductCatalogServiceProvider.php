@@ -38,6 +38,12 @@ class ProductCatalogServiceProvider extends ServiceProvider {
 		$this->app->bind('Davzie\ProductCatalog\Attribute','Davzie\ProductCatalog\Attribute\Repositories\Eloquent');
 		$this->app->bind('Davzie\ProductCatalog\Attribute\Set','Davzie\ProductCatalog\Attribute\Set\Repositories\Eloquent');
 		$this->app->bind('Davzie\ProductCatalog\Attribute\Type','Davzie\ProductCatalog\Attribute\Type\Repositories\Eloquent');
+		$this->app->bind('Davzie\ProductCatalog\RouteFinder',function(){
+			$products = $this->app->make('Davzie\ProductCatalog\Product');
+			$categories = $this->app->make('Davzie\ProductCatalog\Category');
+			$collections = $this->app->make('Davzie\ProductCatalog\Collection');
+			return new \Davzie\ProductCatalog\RouteFinder( $products , $categories , $collections );
+		});
 
 		// Register our clear cache commands etc
 		$this->app['command.productcatalog.clearcache'] = $this->app->share(function($app)
