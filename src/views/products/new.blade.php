@@ -33,6 +33,13 @@
                 </div>
             </div>
             <div class="control-group">
+                <label class="control-label" for="inputURL">URL</label>
+                <div class="controls">
+                    <input type="text" id="inputURL" name="url" placeholder="Product URL" value="{{ Input::old('url') }}" >
+                    <span class="help-block"><strong>Note:</strong> This must be unique.</span>
+                </div>
+            </div>
+            <div class="control-group">
                 <label class="control-label" for="inputSKU">SKU</label>
                 <div class="controls">
                     <input type="text" id="inputSKU" name="sku" placeholder="Product SKU" value="{{ Input::old('sku') }}" >
@@ -47,6 +54,25 @@
         </fieldset>
     {{ Form::close() }}
 
+@stop
+
+@section('scripts')
+    @parent
+    <script>
+        $(document).ready(function(){
+
+            // When the title of the new product is changed, also slugify it and change the URL / SKU to match
+            $('#inputTitle').bind('keyup',function(){
+                var str = $(this).val();
+                str = str.replace(/[^a-zA-Z0-9\s]/g,"");
+                str = str.toLowerCase();
+                str = str.replace(/\s/g,'-');
+                console.log(str);
+                $('#inputSKU,#inputURL').val(str);
+            });
+
+        });
+    </script>
 @stop
 
 @section('sidebar')

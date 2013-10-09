@@ -20,7 +20,8 @@ class Create extends Entity {
     protected static $rules = [
         'title'  => 'required|max:255',
         'price' => 'required|numeric',
-        'sku' => 'required|alpha_dash|unique:products,sku'
+        'sku' => 'required|alpha_dash|unique:products,sku',
+        'url' => 'required|alpha_dash|unique:products,url'
     ];
 
     public function __construct(){
