@@ -22,6 +22,12 @@ class RouteFinder
     protected $collection;
 
     /**
+     * Store whether the collection URL we just went through is filtered
+     * @var boolean
+     */
+    protected $collectionIsFiltered = false;
+
+    /**
      * Store those lovely dependancies into class variables
      * @param Product    $product    The Product Object
      * @param Category   $category   The Category Object
@@ -44,6 +50,16 @@ class RouteFinder
         if( !$segments )
             return false;
 
+        // Check if the last segment is a valid product url
+        if( $this->isProductUrl( last( $segments ) ) === false )
+            return false;
+
+        // The last segment is a valid product URL, lets eliminate that from error checking
+        array_pop($segments);
+
+        if( $this->isCollection( $segments ) )
+            return true;
+
         // Lets do some special checking if there is a key to check for 
         if( $firstSegmentConfig = \Config::get('ProductCatalog::routing.product_segment') ){
             if( head($segments) !== $firstSegmentConfig )
@@ -51,16 +67,6 @@ class RouteFinder
 
             array_shift($segments); // Remove the first element off our segments
         }
-
-        if( count($segments) === 0)
-            return false;
-
-        // Check if the last segment is a valid product url
-        if( $this->isProductUrl( last( $segments ) ) === false )
-            return false;
-
-        // The last segment is a valid product URL, lets eliminate that from error checking
-        array_pop($segments);
 
         // The first key is valid as well as the last and nothing is left, its a valid product
         if( count($segments) === 0)
@@ -118,10 +124,28 @@ class RouteFinder
         array_shift($segments);
 
         // If there's stuff left, it means that it's part of a category, lets see if they are valid
-        if( count($segments) > 0 )
+        if( count($segments) > 0 ){
+            $this->collectionIsFiltered = true;
             return $this->isValidCategoryHierarchy($segments);
+        }
+
+        $this->collectionIsFiltered = false;
 
         return true;
+    }
+
+    /**
+     * Determine if the collection URL is filtered with a category
+     * @return boolean
+     */
+    public function collectionIsFiltered( $segments )
+    {
+        $exists = $this->isCollection($segments);
+        
+        if(!$exists)
+            return false;
+
+        return $this->collectionIsFiltered;
     }
 
     /**
