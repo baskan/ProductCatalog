@@ -20,7 +20,7 @@ class CreateCategoriesTable extends Migration {
 			    $table->increments('id');
 
 			    $table->string('name' , 255);
-			    $table->string('slug' , 255);
+			    $table->string('slug' , 255)->nullable()->default(null);
 			    $table->text('description')->nullable()->default(null);;
 			    $table->string('url' , 255);
 			    $table->boolean('enabled')->default(true);

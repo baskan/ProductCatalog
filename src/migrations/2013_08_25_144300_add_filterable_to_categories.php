@@ -14,7 +14,7 @@ class AddFilterableToCategories extends Migration {
     {
         Schema::table('categories', function(Blueprint $table)
         {
-            $table->boolean('filterable')->default(false);
+            $table->boolean('filterable')->nullable()->default(null);
         });
     }
 

@@ -13,7 +13,7 @@ class AddDefaultDataColumnToAttributes extends Migration {
 	{
 		Schema::table('attributes', function(Blueprint $table)
 		{
-			$table->string('default' , 255);
+			$table->string('default' , 255)->nullable()->default(null);
 		});
 	}
 
