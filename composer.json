@@ -12,6 +12,10 @@
         "illuminate/support": "4.0.x",
         "intervention/image": "dev-master"
     },
+    "require-dev": {
+        "orchestra/testbench": "2.0.*",
+        "mockery/mockery": "dev-master@dev"
+    },
     "autoload": {
         "classmap": [
             "src/migrations",
