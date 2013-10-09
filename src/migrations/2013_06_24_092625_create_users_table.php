@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration {
 			    $table->string('first_name',255);
 			    $table->string('last_name',255);
 			    $table->boolean('is_admin')->default(false);
-			    $table->dateTime('last_login');
+			    $table->dateTime('last_login')->nullable()->default(null);
 			    $table->timestamps();
 
 			});

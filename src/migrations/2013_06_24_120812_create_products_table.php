@@ -20,11 +20,11 @@ class CreateProductsTable extends Migration {
 			    $table->increments('id');
 
 			    $table->string('title',255);
-			    $table->string('slug',255);
+			    $table->string('slug',255)->nullable()->default(null);
 			    $table->string('sku',255);
-			    $table->text('description');
+			    $table->text('description')->nullable()->default(null);
 			    $table->decimal('price',7,2);
-			    $table->string('url',255);
+			    $table->string('url',255)->nullable()->default(null);
 			    $table->boolean('enabled')->default(true);
 			    $table->timestamps();
 			    $table->unique('sku');
