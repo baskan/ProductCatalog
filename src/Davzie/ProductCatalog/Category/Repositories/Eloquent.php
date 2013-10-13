@@ -1,5 +1,6 @@
 <?php
 namespace Davzie\ProductCatalog\Category\Repositories;
+use Illuminate\Support\Collection as LaravelCollection;
 use Eloquent as IEloquent;
 use Davzie\ProductCatalog\Category;
 use Davzie\ProductCatalog\Collection;
@@ -27,6 +28,27 @@ class Eloquent extends IEloquent implements Category {
      */
     public function getAll(){
         return $this->all();
+    }
+
+    /**
+     * Get all subcategories, ie, everything in the second level (not top level)
+     * @return Collection
+     */
+    public function getAllSubcategories()
+    {
+        $collection = new LaravelCollection;
+        if( $top = $this->getTopLevel() ){
+            foreach($top as $cat){
+                if( $cat->children ){
+                    foreach($cat->children as $child){
+                        if( $child->products()->count() > 0 ){
+                            $collection->put($child->id,$child);
+                        }
+                    }
+                }
+            }
+        }
+        return $collection;
     }
 
     /**

@@ -22,6 +22,12 @@ interface Category {
     public function getByUrl( $url );
 
     /**
+     * Get all subcategories, ie, everything in the second level (not top level)
+     * @return Collection
+     */
+    public function getAllSubcategories();
+
+    /**
      * Get the full URL of the category
      * @return string
      */
