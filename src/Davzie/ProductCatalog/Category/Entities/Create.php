@@ -25,7 +25,7 @@ class Create extends Entity {
 
     public function __construct(){
         // Default Data
-        static::$defaultData['slug'] = Str::slug( Input::get('name') , '-' );
+        static::$defaultData['slug'] = Str::slug( Input::get('url') , '-' );
         
 
         // If we have a 0 through on parent ID then we can assume the user has not chosen anything
