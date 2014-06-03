@@ -1,6 +1,6 @@
 <?php
 namespace Davzie\ProductCatalog\Controllers;
-use \Illuminate\Routing\Controllers\Controller;
+use \Illuminate\Routing\Controller;
 use View;
 
 class ManageBaseController extends Controller{
