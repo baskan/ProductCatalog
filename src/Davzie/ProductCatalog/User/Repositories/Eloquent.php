@@ -72,28 +72,20 @@ class Eloquent extends IEloquent implements UserInterface, RemindableInterface, 
 		return $this->password;
 	}
 	
+public function getRememberToken()
+{
+    return $this->remember_token;
+}
 
-	/**
-	 * Get the token value for the "remember me" session.
-	 *
-	 * @return string
-	 */
-	public function getRememberToken();
+public function setRememberToken($value)
+{
+    $this->remember_token = $value;
+}
 
-	/**
-	 * Set the token value for the "remember me" session.
-	 *
-	 * @param  string  $value
-	 * @return void
-	 */
-	public function setRememberToken($value);
-
-	/**
-	 * Get the column name for the "remember me" token.
-	 *
-	 * @return string
-	 */
-	public function getRememberTokenName();
+public function getRememberTokenName()
+{
+    return 'remember_token';
+}
 	/**
 	 * Get the e-mail address where password reminders are sent.
 	 *
